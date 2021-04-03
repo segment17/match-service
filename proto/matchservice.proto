@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package standingsservice_package;
+package matchservice_package;
 
 message Boxer {
   int32 id = 1;
@@ -29,6 +29,13 @@ message GetMatchesOfBoxerRequest {
     int32 boxerId = 1;
 }
 
+message GetMatchesOfBoxerResponse {
+  int32 code = 1;
+  string message = 2;
+  Boxer boxer = 3;
+  repeated Match matches = 4;
+}
+
 message UpdateMatchRequest {
     int32 id = 1;
     int32 homeBoxerId = 2;
@@ -44,8 +51,11 @@ message UpdateMatchResponse {
     Match match = 3;
 }
 
+message Null {};
+
 service MatchService {
-  rpc GetAllMatches() returns (GetAllMatchesResponse);
-  rpc GetAllMatchesOfABoxer(GetMatchesOfBoxerRequest) returns (GetAllMatchesResponse);
+  rpc GetAllMatches(Null) returns (GetAllMatchesResponse);
+  rpc GetAllMatchesOfABoxer(GetMatchesOfBoxerRequest) returns (GetMatchesOfBoxerResponse);
   rpc UpdateMatch(UpdateMatchRequest) returns (UpdateMatchResponse);
+  rpc Mock(Null) returns (Null) {};
 }

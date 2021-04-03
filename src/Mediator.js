@@ -1,10 +1,10 @@
-const MatchServiceGateway = require('./Gateway/MatchServiceGateway');
-const MockMatchServiceGateway = require('./Gateway/Mock/MockMatchServiceGateway');
+const BoxerServiceGateway = require('./Gateway/BoxerServiceGateway');
+const MockBoxerServiceGateway = require('./Gateway/Mock/MockBoxerServiceGateway');
 
 class Mediator {
 
   constructor() {
-    this.matchServiceGateway = new MatchServiceGateway();
+    this.boxerServiceGateway = new BoxerServiceGateway();
   }
 
   // Endpoints
@@ -47,7 +47,7 @@ class Mediator {
   }
 
   async getStandingAndMatchesOfBoxer(id) {
-    const response = await this.matchServiceGateway.getMatchesOfBoxer(id);
+    const response = await this.boxerServiceGateway.getMatchesOfBoxer(id);
     const standing = this.calculateStandingOfBoxer(response.matches, response.boxer);
 
     return {
@@ -62,7 +62,7 @@ class Mediator {
   }
 
   async getAllStandings() {
-    const response = await this.matchServiceGateway.getAllMatches();
+    const response = await this.boxerServiceGateway.getAllMatches();
     const matches = response.matches;
     let boxers = this.extractBoxersFromMatches(matches);
     let standings = [];
@@ -79,7 +79,7 @@ class Mediator {
 
   // Mock everything.
   mock() {
-    this.matchServiceGateway = new MockMatchServiceGateway();
+    this.boxerServiceGateway = new MockBoxerServiceGateway();
   }
 
 }
