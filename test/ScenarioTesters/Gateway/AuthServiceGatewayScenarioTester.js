@@ -4,16 +4,16 @@ const TestFunctions = require('../../TestFunctions');
 const globalObjects = require('../../..');
 const assert = require('assert');
 
-class MatchServiceGatewayScenarioTester extends DefaultScenarioTester {
+class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
 
   unitFunctionIsInvokedWithData(functionName, dataSource) {
     if (functionName == "getMatchesOfBoxer") {
       const specifiedData = TestFunctions.extractSpecifiedObjectData(dataSource);
-      globalObjects.matchServiceGateway.getMatchesOfBoxer(specifiedData).then(result => {
+      globalObjects.boxerServiceGateway.getMatchesOfBoxer(specifiedData).then(result => {
         globalObjects.result = result;
       });
     } else if (functionName == "getAllMatches") {
-      globalObjects.matchServiceGateway.getAllMatches().then(result => {
+      globalObjects.boxerServiceGateway.getAllMatches().then(result => {
         globalObjects.result = result;
       });
     }
@@ -21,19 +21,19 @@ class MatchServiceGatewayScenarioTester extends DefaultScenarioTester {
 
   async thereAreMatchesSuchAs(dataSource) {
     const matches = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.matchServiceGateway.SetupAddMatches(matches);
+    await globalObjects.boxerServiceGateway.SetupAddMatches(matches);
     globalObjects.done = true;
   }
 
   async thereIsABoxerSuchAs(dataSource) {
     const specifiedBoxer = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.matchServiceGateway.SetupAddBoxer(specifiedBoxer);
+    await globalObjects.boxerServiceGateway.SetupAddBoxer(specifiedBoxer);
     globalObjects.done = true;
   }
 
   async thereAreBoxersSuchAs(dataSource) {
     const boxers = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.matchServiceGateway.SetupAddBoxers(boxers);
+    await globalObjects.boxerServiceGateway.SetupAddBoxers(boxers);
     globalObjects.done = true;
   }
 
@@ -51,4 +51,4 @@ class MatchServiceGatewayScenarioTester extends DefaultScenarioTester {
   }
 }
 
-module.exports = MatchServiceGatewayScenarioTester;
+module.exports = BoxerServiceGatewayScenarioTester;

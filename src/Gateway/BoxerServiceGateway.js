@@ -1,4 +1,4 @@
-class MatchServiceGateway {
+class BoxerServiceGateway {
 
   // Gateway exposed function
   async getMatchesOfBoxer(param) {
@@ -44,4 +44,4 @@ class MatchServiceGateway {
 
 }
 
-module.exports = MatchServiceGateway;
+module.exports = BoxerServiceGateway;

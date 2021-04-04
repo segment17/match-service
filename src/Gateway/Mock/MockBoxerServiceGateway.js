@@ -1,6 +1,6 @@
-const MatchServiceGateway = require('../MatchServiceGateway');
+const BoxerServiceGateway = require('../BoxerServiceGateway');
 
-class MockMatchServiceGateway extends MatchServiceGateway {
+class MockBoxerServiceGateway extends BoxerServiceGateway {
   
   constructor() {
     super();
@@ -67,4 +67,4 @@ class MockMatchServiceGateway extends MatchServiceGateway {
   }
 }
 
-module.exports = MockMatchServiceGateway;
+module.exports = MockBoxerServiceGateway;

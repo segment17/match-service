@@ -258,7 +258,7 @@ const emptyStanding = { boxer: null, winCount: 0, lossCount: 0, score: 0 };
 /* UNIT MATCH SERVICE GATEWAY SUCCESS SCENARIOS */
 
 // GetAllMatches
-var Unit_MatchServiceGateway_Scenario1 = {
+var Unit_BoxerServiceGateway_Scenario1 = {
   boxers: testBoxers,
   matches: testMatches,
   expected_data: {
@@ -269,7 +269,7 @@ var Unit_MatchServiceGateway_Scenario1 = {
 };
 
 // GetMatchesOfBoxer
-var Unit_MatchServiceGateway_Scenario2 = {
+var Unit_BoxerServiceGateway_Scenario2 = {
   boxers: testBoxers,
   matches: testMatches,
   boxer_id: 1,
@@ -284,7 +284,7 @@ var Unit_MatchServiceGateway_Scenario2 = {
 /* UNIT MATCH SERVICE GATEWAY FAIL SCENARIOS */
 
 // GetMatchesOfBoxer Fail
-var Unit_MatchServiceGateway_Scenario3_Fail1 = {
+var Unit_BoxerServiceGateway_Scenario3_Fail1 = {
   boxers: testBoxers,
   matches: testMatches,
   boxer_id: 2,
@@ -348,9 +348,9 @@ const B1_Scenario2_Fail1 = {
 };
 
 module.exports = {
-  Unit_MatchServiceGateway_Scenario1,
-  Unit_MatchServiceGateway_Scenario2,
-  Unit_MatchServiceGateway_Scenario3_Fail1,
+  Unit_BoxerServiceGateway_Scenario1,
+  Unit_BoxerServiceGateway_Scenario2,
+  Unit_BoxerServiceGateway_Scenario3_Fail1,
   H2_Scenario1_Variation1,
   B1_Scenario1_Variation1,
   B1_Scenario2_Fail1,

@@ -48,6 +48,18 @@ Given('there are matches such as {string}', function (matchesDataSource) {
   globalObjects.scenarioTester.thereAreMatchesSuchAs(matchesDataSource);
 });
 
+Given('there is a match such as {string}', function (matcheDataSource) {
+  globalObjects.scenarioTester.thereIsAMatchSuchAs(matcheDataSource);
+});
+
+Given('there is a token such as {string}', async function (tokenDataSource) {
+  globalObjects.done = false;
+  await globalObjects.scenarioTester.thereIsATokenSuchAs(tokenDataSource);
+  while (!globalObjects.done) {
+    await TestFunctions.sleep(100);
+  }
+});
+
 When('{string} is invoked with {string}', function (unitFunctionName, invocationDataSource) {
   globalObjects.scenarioTester.unitFunctionIsInvokedWithData(unitFunctionName, invocationDataSource);
 });
@@ -58,4 +70,12 @@ When('{string} is invoked', function (unitFunctionName) {
 
 Then('returned data is as {string}', async function (expectedDataSource) {
   await globalObjects.scenarioTester.returnedDataIsAs(expectedDataSource);
+});
+
+Then('DB has match such as {string}', async function (matchDataSource) {
+  await globalObjects.scenarioTester.dbHasMatchSuchAs(matchDataSource);
+});
+
+Then('DB does not have match such as {string}', async function (matchDataSource) {
+  await globalObjects.scenarioTester.dbHasNoMatchSuchAs(matchDataSource);
 });
