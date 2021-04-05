@@ -60,6 +60,11 @@ Given('there is a token such as {string}', async function (tokenDataSource) {
   }
 });
 
+Given('there is an admin such as {string}', function (string) {
+  // Write code here that turns the phrase above into concrete actions
+  return 'pending';
+});
+
 When('{string} is invoked with {string}', function (unitFunctionName, invocationDataSource) {
   globalObjects.scenarioTester.unitFunctionIsInvokedWithData(unitFunctionName, invocationDataSource);
 });
