@@ -82,4 +82,4 @@ Feature: Match Service Component Features
 
     Examples:
       | boxers                         | admin                         | endpoint | request_body                         | expected_response                          |
-      | M1_Scenario1_Variation1.boxers | M1_Scenario1_Variation1.admin | AddMatch | M1_Scenario1_Variation1.request_body | M1__Scenario1_Variation1.expected_response |
+      | M1_Scenario1_Variation1.boxers | M1_Scenario1_Variation1.admin | AddMatch | M1_Scenario1_Variation1.request_body | M1_Scenario1_Variation1.expected_response |
