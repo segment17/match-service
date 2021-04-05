@@ -17,6 +17,21 @@ class Mediator {
     return response;
   }
 
+  getErrorObject(validationResponse) {
+    return {
+      code: validationResponse.code,
+      message: validationResponse.message,
+      match: {
+        id: -1,
+        homeBoxerId: -1,
+        awayBoxerId: -1,
+        matchTime: -1,
+        isFinished: false,
+        winnerBoxerId: -1
+      }
+    };
+  }
+
   calculateStandingOfBoxer(matches, boxer) {
     let wins = 0;
     let losses = 0;
@@ -90,18 +105,8 @@ class Mediator {
     // Authentication validation
     const authValidation = await this.getAuthValidation(token);
     if(authValidation.code !== 200) {
-      return {
-        code: authValidation.code,
-        message: authValidation.message,
-        match: {
-          id: -1,
-          homeBoxerId: -1,
-          awayBoxerId: -1,
-          matchTime: -1,
-          isFinished: false,
-          winnerBoxerId: -1
-        }
-      }
+      return this.getErrorObject(authValidation);
+    }
     }
 
     // response = await this.repository.addMatchWithGivenData(fullName, birthDate, height, weight);
