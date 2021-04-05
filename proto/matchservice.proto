@@ -51,11 +51,57 @@ message UpdateMatchResponse {
     Match match = 3;
 }
 
-message Null {};
+message AddMatchRequest {
+  int32 homeBoxerId = 1;
+  int32 awayBoxerId = 2;
+  int64 matchTime = 3;
+  bool isFinished = 4;
+  optional int32 winnerBoxerId = 5;
+}
+
+message AddMatchResponse {
+  int32 code = 1;
+  string message = 2;
+  Match match = 3;
+}
+
+message RemoveMatchRequest {
+  int32 id = 1;
+}
+
+message RemoveMatchResponse {
+  int32 code = 1;
+  string message = 2;
+  Match match = 3;
+}
+
+message RemoveMatchesOfBoxerRequest {
+  int32 boxerId = 1;
+}
+
+message RemoveMatchesOfBoxerResponse {
+  int32 code = 1;
+  string message = 2;
+  repeated Match matches = 3;
+}
+
+message SetupAddBoxersRequest {
+  repeated Boxer boxer = 1;
+}
+
+message SetupAddBoxersResponse {
+  int32 code = 1;
+}
+
+message Empty {};
 
 service MatchService {
-  rpc GetAllMatches(Null) returns (GetAllMatchesResponse);
-  rpc GetAllMatchesOfABoxer(GetMatchesOfBoxerRequest) returns (GetMatchesOfBoxerResponse);
+  rpc AddMatch(AddMatchRequest) returns (AddMatchResponse);
+  rpc RemoveMatch(RemoveMatchRequest) returns (RemoveMatchResponse);
   rpc UpdateMatch(UpdateMatchRequest) returns (UpdateMatchResponse);
-  rpc Mock(Null) returns (Null) {};
+  rpc RemoveMatchesOfBoxer(RemoveMatchesOfBoxerRequest) returns (RemoveMatchesOfBoxerResponse);
+  rpc GetAllMatches(Empty) returns (GetAllMatchesResponse);
+  rpc GetAllMatchesOfBoxer(GetMatchesOfBoxerRequest) returns (GetAllMatchesResponse);
+  rpc SetupAddBoxers(SetupAddBoxersRequest) returns (SetupAddBoxersResponse);
+  rpc Mock(Empty) returns (Empty) {};
 }
