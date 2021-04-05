@@ -34,6 +34,16 @@ Feature: Match Repository Unit Feature
       | match                           | repository_function    | edit_body                           | expected_data                           | edited_boxer                                  |
       | Unit_Repository_Scenario3.match | editBoxerWithGivenData | Unit_Repository_Scenario3.edit_body | Unit_Repository_Scenario3.expected_data | Unit_Repository_Scenario2.expected_data.boxer |
 
+  @Unit_Repository_Scenario8
+  Scenario Outline: Get match by id
+    Given there is a match such as "<match>"
+    When "<repository_function>" is invoked with "<match_id>"
+    Then returned data is as "<expected_data>"
+
+    Examples:
+      | match                           | repository_function | match_id                           | expected_data                           |
+      | Unit_Repository_Scenario8.match | getMatchById        | Unit_Repository_Scenario8.match_id | Unit_Repository_Scenario8.expected_data |
+
   #FAIL SCENARIOS
 
   @Unit_Repository_Scenario4

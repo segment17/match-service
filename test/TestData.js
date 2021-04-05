@@ -256,6 +256,19 @@ const testStandings = [
     score: 1
   }
 ];
+const testMatch = {
+  id: 1,
+  homeBoxer: testBoxers[0], // 1
+  awayBoxer: testBoxers[1], // 4
+  matchTime: 157419968, // Timestamp,
+  isFinished: false,
+};
+const testMatch2 = {
+  homeBoxer: testBoxers[2], // 6
+  awayBoxer: testBoxers[3], // 8
+  matchTime: 157419968, // Timestamp,
+  isFinished: false,
+};
 const emptyBoxer = { id: 0, fullName: '', birthDate: '0', height: 0, weight: 0 };
 const emptyStanding = { boxer: null, winCount: 0, lossCount: 0, score: 0 };
 
@@ -364,13 +377,7 @@ const M1_Scenario1_Variation1 = {
   expected_response: {
     code: 201,
     message: 'created',
-    match: {
-      id: 1,
-      homeBoxer: testBoxers[0], // 1
-      awayBoxer: testBoxers[1], // 4
-      matchTime: 157419968, // Timestamp,
-      isFinished: false,
-    }
+    match: testMatch
   }
 }
 
@@ -396,6 +403,13 @@ const Unit_AuthServiceGateway_Scenario2_Fail1 = {
   }
 }
 
+
+const Unit_Repository_Scenario8 = {
+  match: testMatch,
+  match_id: 1,
+  expected_data: testMatch,
+}
+
 module.exports = {
   Unit_BoxerServiceGateway_Scenario1,
   Unit_BoxerServiceGateway_Scenario2,
@@ -405,5 +419,6 @@ module.exports = {
   B1_Scenario2_Fail1,
   M1_Scenario1_Variation1,
   Unit_AuthServiceGateway_Scenario1,
-  Unit_AuthServiceGateway_Scenario2_Fail1
+  Unit_AuthServiceGateway_Scenario2_Fail1,
+  Unit_Repository_Scenario8,
 };

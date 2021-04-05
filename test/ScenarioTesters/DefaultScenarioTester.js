@@ -94,6 +94,11 @@ class DefaultScenarioTester {
     });
   }
 
+  async thereIsAMatchSuchAs(dataSource) {
+    const match = TestFunctions.extractSpecifiedObjectData(dataSource);
+    await globalObjects.mediator.setupAddMatches([match]);
+  }
+
   async thereAreMatchesSuchAs(dataSource) {
     const matches = TestFunctions.extractSpecifiedObjectData(dataSource);
     await globalObjects.client.SetupAddMatches({matches: matches}, function (err, res) {
@@ -103,7 +108,7 @@ class DefaultScenarioTester {
 
   async thereIsABoxerSuchAs(dataSource) {
     const specifiedBoxer = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.client.SetupAddBoxer({boxer: specifiedBoxer}, function (err, res) {
+    await globalObjects.client.SetupAddBoxers({boxers: [specifiedBoxer]}, function (err, res) {
       globalObjects.done = true;
     });
   }
@@ -113,6 +118,16 @@ class DefaultScenarioTester {
     await globalObjects.client.SetupAddBoxers({boxers: boxers}, function (err, res) {
       globalObjects.done = true;
     });
+  }
+
+  assertionsForDBHasMatchSuchAs(expected, actual) {
+    assert(actual != null);
+    assert(expected.id == actual.id);
+    assert(expected.homeBoxerId == actual.homeBoxerId);
+    assert(expected.awayBoxerId == actual.awayBoxerId);
+    assert(expected.matchTime == actual.matchTime);
+    assert(expected.winnerBoxerId == actual.winnerBoxerId);
+    assert(expected.isFinished == actual.isFinished);
   }
 }
 

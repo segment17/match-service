@@ -1,5 +1,20 @@
 class MatchRepository {
 
+
+  async getMatchById(matchData) {
+    let queryResult = await this.runQueryForGetMatchById(matchData);
+    return queryResult;
+  }
+
+  async runQueryForGetMatchById(matchData) {
+    console.log("Real getMatchById query to DB with given data");
+    return {};
+  }
+
+  async SetupAddMatches(matches) {
+    console.log('matches: ', matches);
+  }
+
   /* async getBoxerWithId(id) {
     let queryResult = await this.runQueryForGetBoxerWithId(id);
     return queryResult;

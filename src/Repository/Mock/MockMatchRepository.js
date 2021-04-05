@@ -7,6 +7,26 @@ class MockMatchRepository extends MatchRepository {
     this.matches = [];
   }
 
+
+  async runQueryForGetMatchById(matchData) {
+    if (!matchData) {
+      throw Error("Can't find match data.");
+    }
+
+    const match = this.matches.filter(match => match.id === matchData);
+    if (!match || !match.length) {
+      throw Error("Can't find match data.");
+    }
+
+    return match[0];
+  }
+
+  async SetupAddMatches(matches) {
+    matches.forEach(match => {
+      this.matches.push(match);
+    });
+  }
+
   /* checkAttributes(fullName, birthDate, height, weight) {
     if(fullName === "") {
       return false;
