@@ -123,7 +123,25 @@ class Mediator {
       return this.getErrorObject(awayBoxerValidation);
     }
 
-    // response = await this.repository.addMatchWithGivenData(fullName, birthDate, height, weight);
+    // Add match to DB
+    try {
+      await this.matchRepository.addMatchWithGivenData({
+        awayBoxerId,
+        homeBoxerId,
+        isFinished,
+        matchTime,
+        winnerBoxerId,
+      });
+    } catch (error) {
+      return this.getErrorObject({
+        code: 500,
+        message: error.message,
+      });
+    }
+  }
+
+  async setupAddMatches(matches) {
+    await this.matchRepository.SetupAddMatches(matches);
   }
 
   // Mock everything.

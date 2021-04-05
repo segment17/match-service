@@ -87,3 +87,7 @@ Then('DB has match such as {string}', async function (matchDataSource) {
 Then('DB does not have match such as {string}', async function (matchDataSource) {
   await globalObjects.scenarioTester.dbHasNoMatchSuchAs(matchDataSource);
 });
+
+Given('the latest match in DB is such as {string}', async function (matchesDataSource) {
+  await globalObjects.scenarioTester.thereAreMatchesSuchAs(matchesDataSource);
+});

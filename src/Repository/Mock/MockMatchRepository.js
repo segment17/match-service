@@ -7,6 +7,12 @@ class MockMatchRepository extends MatchRepository {
     this.matches = [];
   }
 
+  async runQueryForAddMatchWithGivenData(matchData) {
+    if (!matchData) {
+      throw Error("Can't insert match data.");
+    }
+    this.matches.push(matchData);
+  }
 
   async runQueryForGetMatchById(matchData) {
     if (!matchData) {

@@ -34,6 +34,16 @@ Feature: Match Repository Unit Feature
       | match                           | repository_function    | edit_body                           | expected_data                           | edited_boxer                                  |
       | Unit_Repository_Scenario3.match | editBoxerWithGivenData | Unit_Repository_Scenario3.edit_body | Unit_Repository_Scenario3.expected_data | Unit_Repository_Scenario2.expected_data.boxer |
 
+  @Unit_Repository_Scenario7
+  Scenario Outline: Add a new match to DB
+    Given the latest match in DB is such as "<existing_match>"
+    When "<repository_function>" is invoked with "<data_chunk>"
+    Then DB has match such as "<new_match>"
+
+    Examples:
+      | existing_match                           | repository_function   | data_chunk                           | expected_data                           | new_match                                     |
+      | Unit_Repository_Scenario7.existing_match | addMatchWithGivenData | Unit_Repository_Scenario7.data_chunk | Unit_Repository_Scenario7.expected_data | Unit_Repository_Scenario7.expected_data.match |
+
   @Unit_Repository_Scenario8
   Scenario Outline: Get match by id
     Given there is a match such as "<match>"

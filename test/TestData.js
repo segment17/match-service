@@ -403,6 +403,11 @@ const Unit_AuthServiceGateway_Scenario2_Fail1 = {
   }
 }
 
+const Unit_Repository_Scenario7 = {
+  existing_match: [testMatch],
+  data_chunk: testMatch2,
+  match: testMatch2,
+}
 
 const Unit_Repository_Scenario8 = {
   match: testMatch,
@@ -420,5 +425,6 @@ module.exports = {
   M1_Scenario1_Variation1,
   Unit_AuthServiceGateway_Scenario1,
   Unit_AuthServiceGateway_Scenario2_Fail1,
+  Unit_Repository_Scenario7,
   Unit_Repository_Scenario8,
 };
