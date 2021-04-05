@@ -1,13 +1,21 @@
+const AuthServiceGateway = require('./Gateway/AuthServiceGateway');
 const BoxerServiceGateway = require('./Gateway/BoxerServiceGateway');
+const MockAuthServiceGateway = require('./Gateway/Mock/MockAuthServiceGateway');
 const MockBoxerServiceGateway = require('./Gateway/Mock/MockBoxerServiceGateway');
 
 class Mediator {
 
   constructor() {
     this.boxerServiceGateway = new BoxerServiceGateway();
+    this.authServiceGateway = new AuthServiceGateway();
   }
 
   // Endpoints
+
+  async getAuthValidation(token) {
+    const response = await this.authServiceGateway.getValidation(token);
+    return response;
+  }
 
   calculateStandingOfBoxer(matches, boxer) {
     let wins = 0;
@@ -78,25 +86,31 @@ class Mediator {
   }
 
   async addMatch(request) {
-    const { homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId } = request;
-    // const response = await this.boxerServiceGateway.getAllMatches();
-    // const matches = response.matches;
-    // let boxers = this.extractBoxersFromMatches(matches);
-    // let standings = [];
-    // for(let index in boxers) {
-    //   standings.push(this.calculateStandingOfBoxer(matches, boxers[index]));
-    // }
+    const { homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token } = request;
+    // Authentication validation
+    const authValidation = await this.getAuthValidation(token);
+    if(authValidation.code !== 200) {
+      return {
+        code: authValidation.code,
+        message: authValidation.message,
+        match: {
+          id: -1,
+          homeBoxerId: -1,
+          awayBoxerId: -1,
+          matchTime: -1,
+          isFinished: false,
+          winnerBoxerId: -1
+        }
+      }
+    }
 
-    // return {
-    //   code: response.code,
-    //   message: response.message,
-    //   standings: standings
-    // };
+    // response = await this.repository.addMatchWithGivenData(fullName, birthDate, height, weight);
   }
 
   // Mock everything.
   mock() {
     this.boxerServiceGateway = new MockBoxerServiceGateway();
+    this.authServiceGateway = new MockAuthServiceGateway();
   }
 
 }

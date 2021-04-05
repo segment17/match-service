@@ -57,6 +57,7 @@ message AddMatchRequest {
   int64 matchTime = 3;
   bool isFinished = 4;
   optional int32 winnerBoxerId = 5;
+  string token = 6;
 }
 
 message AddMatchResponse {
