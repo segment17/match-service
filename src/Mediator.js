@@ -77,6 +77,23 @@ class Mediator {
     };
   }
 
+  async addMatch(request) {
+    const { homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId } = request;
+    // const response = await this.boxerServiceGateway.getAllMatches();
+    // const matches = response.matches;
+    // let boxers = this.extractBoxersFromMatches(matches);
+    // let standings = [];
+    // for(let index in boxers) {
+    //   standings.push(this.calculateStandingOfBoxer(matches, boxers[index]));
+    // }
+
+    // return {
+    //   code: response.code,
+    //   message: response.message,
+    //   standings: standings
+    // };
+  }
+
   // Mock everything.
   mock() {
     this.boxerServiceGateway = new MockBoxerServiceGateway();

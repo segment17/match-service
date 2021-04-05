@@ -27,11 +27,12 @@ class DefaultScenarioTester {
     const requestBody = TestFunctions.extractSpecifiedObjectData(requestBodySource);
     assert(requestBody != undefined);
     assert(endpoint != undefined);
-    if (endpoint == "GetStandingAndMatchesOfBoxer") {
-      globalObjects.client.GetStandingAndMatchesOfBoxer(requestBody, function (err, res) {
+    if (endpoint == "GetStandingAndMatchesOfBoxer" || endpoint == 'AddMatch') {
+      globalObjects.client[endpoint](requestBody, function (err, res) {
         globalObjects.result = res;
       });
-    } else {
+    }
+    else {
       console.log("Endpoint not found!");
       assert(false);
     }

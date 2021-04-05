@@ -65,7 +65,7 @@ function main() {
   console.log("Server running...");
   server = new grpc.Server();
   server.addService(matchservice_package.MatchService.service, {
-    //AddMatch: bindAddMatch,
+    AddMatch: bindAddMatch,
     //RemoveMatch: bindRemoveMatch,
     UpdateMatch: bindUpdateMatch,
     //RemoveMatchesOfBoxer: bindRemoveMatchesOfBoxer,
