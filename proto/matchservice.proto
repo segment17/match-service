@@ -87,7 +87,7 @@ message RemoveMatchesOfBoxerResponse {
 }
 
 message SetupAddBoxersRequest {
-  repeated Boxer boxer = 1;
+  repeated Boxer boxers = 1;
 }
 
 message SetupAddBoxersResponse {
