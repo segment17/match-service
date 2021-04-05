@@ -1,3 +1,7 @@
+const testAdmin = {
+  username: "test-admin-other",
+  password_hash: "13019e4c76dbb79db5c2562ad0572f74"
+};
 const testBoxer = {
   id: 1,
   fullName: "Mike Tyson",
@@ -347,6 +351,28 @@ const B1_Scenario2_Fail1 = {
   },
 };
 
+const M1_Scenario1_Variation1 = {
+  boxers: testBoxers,
+  admin: testAdmin,
+  request_body: {
+    homeBoxerId: 1,
+    awayBoxerId: 4,
+    matchTime: 157419968, // Timestamp,
+    isFinished: false,
+  },
+  expected_response: {
+    code: 201,
+    message: 'created',
+    match: {
+      id: 1,
+      homeBoxer: testBoxers[0], // 1
+      awayBoxer: testBoxers[1], // 4
+      matchTime: 157419968, // Timestamp,
+      isFinished: false,
+    }
+  }
+}
+
 module.exports = {
   Unit_BoxerServiceGateway_Scenario1,
   Unit_BoxerServiceGateway_Scenario2,
@@ -354,4 +380,5 @@ module.exports = {
   H2_Scenario1_Variation1,
   B1_Scenario1_Variation1,
   B1_Scenario2_Fail1,
+  M1_Scenario1_Variation1,
 };
