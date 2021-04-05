@@ -93,6 +93,15 @@ message SetupAddBoxersResponse {
   int32 code = 1;
 }
 
+message SetupAddAdminRequest {
+  string username = 1;
+  string passwordHash = 2;
+}
+
+message SetupAddAdminResponse {
+  int32 code = 1;
+}
+
 message Empty {};
 
 service MatchService {
@@ -103,5 +112,6 @@ service MatchService {
   rpc GetAllMatches(Empty) returns (GetAllMatchesResponse);
   rpc GetAllMatchesOfBoxer(GetMatchesOfBoxerRequest) returns (GetAllMatchesResponse);
   rpc SetupAddBoxers(SetupAddBoxersRequest) returns (SetupAddBoxersResponse);
+  rpc SetupAddAdmin(SetupAddAdminRequest) returns (SetupAddAdminResponse);
   rpc Mock(Empty) returns (Empty) {};
 }

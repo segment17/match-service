@@ -83,6 +83,13 @@ class DefaultScenarioTester {
     }
   }
 
+  async thereIsAnAdminSuchAs(dataSource) {
+    const specified = TestFunctions.extractSpecifiedObjectData(dataSource);
+    await globalObjects.client.SetupAddAdmin({admin: specified}, function (err, res) {
+      globalObjects.done = true;
+    });
+  }
+
   async thereAreMatchesSuchAs(dataSource) {
     const matches = TestFunctions.extractSpecifiedObjectData(dataSource);
     await globalObjects.client.SetupAddMatches({matches: matches}, function (err, res) {

@@ -4,51 +4,25 @@ const TestFunctions = require('../../TestFunctions');
 const globalObjects = require('../../..');
 const assert = require('assert');
 
-class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
-
-  unitFunctionIsInvokedWithData(functionName, dataSource) {
-    if (functionName == "getMatchesOfBoxer") {
-      const specifiedData = TestFunctions.extractSpecifiedObjectData(dataSource);
-      globalObjects.boxerServiceGateway.getMatchesOfBoxer(specifiedData).then(result => {
-        globalObjects.result = result;
-      });
-    } else if (functionName == "getAllMatches") {
-      globalObjects.boxerServiceGateway.getAllMatches().then(result => {
-        globalObjects.result = result;
-      });
-    }
-  }
-
-  async thereAreMatchesSuchAs(dataSource) {
-    const matches = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.boxerServiceGateway.SetupAddMatches(matches);
+class AuthServiceGatewayScenarioTester extends DefaultScenarioTester {
+  async thereIsAnAdminSuchAs(dataSource) {
+    const specified = TestFunctions.extractSpecifiedObjectData(dataSource);
+    globalObjects.authServiceGateway.setupAddAdmin(specified);
     globalObjects.done = true;
   }
-
-  async thereIsABoxerSuchAs(dataSource) {
-    const specifiedBoxer = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.boxerServiceGateway.SetupAddBoxer(specifiedBoxer);
-    globalObjects.done = true;
+  
+  async unitFunctionIsInvokedWithData(functionName, dataSource) { 
+    const specified = TestFunctions.extractSpecifiedObjectData(dataSource);
+    globalObjects.authServiceGateway.getValidation(specified).then((data) => {
+      globalObjects.result = data;
+    });
   }
 
-  async thereAreBoxersSuchAs(dataSource) {
-    const boxers = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.boxerServiceGateway.SetupAddBoxers(boxers);
-    globalObjects.done = true;
-  }
-
-  async returnedDataIsAs(dataSource) {
-    const expectedData = TestFunctions.extractSpecifiedObjectData(dataSource);
+  async returnedDataIsAs(dataSource) { 
+    const specified = TestFunctions.extractSpecifiedObjectData(dataSource);
     await TestFunctions.waitUntilResult();
-    const result = globalObjects.result;
-    
-    assert(result.code === expectedData.code);
-    assert(result.message === expectedData.message);
-    if(expectedData.boxer) {
-      assert(JSON.stringify(result.boxer) === JSON.stringify(expectedData.boxer));
-    }
-    assert(JSON.stringify(result.matches.sort()) === JSON.stringify(expectedData.matches.sort()))
+    assert(JSON.stringify(specified) === JSON.stringify(globalObjects.result));
   }
 }
 
-module.exports = BoxerServiceGatewayScenarioTester;
+module.exports = AuthServiceGatewayScenarioTester;

@@ -373,6 +373,28 @@ const M1_Scenario1_Variation1 = {
   }
 }
 
+// UNIT AUTH SERVICE GATEWAY SUCCESS SCENARIOS
+
+const Unit_AuthServiceGateway_Scenario1 = {
+  admin: testAdmin,
+  data_chunk: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+  expected_data: {
+    code: 200,
+    message: "success"
+  }
+}
+
+// UNIT AUTH SERVICE GATEWAY FAIL SCENARIOS
+
+const Unit_AuthServiceGateway_Scenario2_Fail1 = {
+  admin: testAdmin,
+  data_chunk: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+  expected_data: {
+    code: 403,
+    message: "forbidden"
+  }
+}
+
 module.exports = {
   Unit_BoxerServiceGateway_Scenario1,
   Unit_BoxerServiceGateway_Scenario2,
@@ -381,4 +403,6 @@ module.exports = {
   B1_Scenario1_Variation1,
   B1_Scenario2_Fail1,
   M1_Scenario1_Variation1,
+  Unit_AuthServiceGateway_Scenario1,
+  Unit_AuthServiceGateway_Scenario2_Fail1
 };

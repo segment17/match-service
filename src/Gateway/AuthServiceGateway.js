@@ -18,6 +18,9 @@ class AuthServiceGateway {
     return null;
   }
 
+  async setupAddAdmin(obj) {
+    return null;
+  }
 }
 
 module.exports = AuthServiceGateway;
