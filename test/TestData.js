@@ -359,6 +359,7 @@ const M1_Scenario1_Variation1 = {
     awayBoxerId: 4,
     matchTime: 157419968, // Timestamp,
     isFinished: false,
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
   },
   expected_response: {
     code: 201,
