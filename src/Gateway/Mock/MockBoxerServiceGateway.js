@@ -7,6 +7,30 @@ class MockBoxerServiceGateway extends BoxerServiceGateway {
     this.matchesList = [];
     this.boxersList = [];
   }
+  
+  async doCallForGetBoxer(param) {
+    const notFoundObject = {
+      code: 404,
+      message: "boxer_not_found",
+      boxer: { id: 0, fullName: '', birthDate: '0', height: 0, weight: 0 },
+      standingAndMatches: []
+    };
+    if (!this.boxersList) {
+      return notFoundObject;
+    }
+
+    const boxer = this.boxersList.filter(boxer => boxer.id === param);
+    if (!boxer) {
+      return notFoundObject;
+    }
+
+    return {
+      code: 200,
+      message: 'success',
+      boxer,
+      standingAndMatches: []
+    } ;
+  }
 
   async doCallForGetMatchesOfBoxer(param) {
     let boxer = null;

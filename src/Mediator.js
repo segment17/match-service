@@ -107,6 +107,17 @@ class Mediator {
     if(authValidation.code !== 200) {
       return this.getErrorObject(authValidation);
     }
+
+    // Home boxer validation
+    const homeBoxerValidation = await this.boxerServiceGateway.getBoxer(homeBoxerId);
+    if (homeBoxerValidation.code !== 200) {
+      return this.getErrorObject(homeBoxerValidation);
+    }
+
+    // Away boxer validation
+    const awayBoxerValidation = await this.boxerServiceGateway.getBoxer(awayBoxerId);
+    if (awayBoxerValidation.code !== 200) {
+      return this.getErrorObject(awayBoxerValidation);
     }
 
     // response = await this.repository.addMatchWithGivenData(fullName, birthDate, height, weight);
