@@ -1,3 +1,7 @@
+const testAdmin = {
+  username: "test-admin-other",
+  password_hash: "13019e4c76dbb79db5c2562ad0572f74"
+};
 const testBoxer = {
   id: 1,
   fullName: "Mike Tyson",
@@ -252,6 +256,19 @@ const testStandings = [
     score: 1
   }
 ];
+const testMatch = {
+  id: 1,
+  homeBoxer: testBoxers[0], // 1
+  awayBoxer: testBoxers[1], // 4
+  matchTime: 157419968, // Timestamp,
+  isFinished: false,
+};
+const testMatch2 = {
+  homeBoxer: testBoxers[2], // 6
+  awayBoxer: testBoxers[3], // 8
+  matchTime: 157419968, // Timestamp,
+  isFinished: false,
+};
 const emptyBoxer = { id: 0, fullName: '', birthDate: '0', height: 0, weight: 0 };
 const emptyStanding = { boxer: null, winCount: 0, lossCount: 0, score: 0 };
 
@@ -347,6 +364,57 @@ const B1_Scenario2_Fail1 = {
   },
 };
 
+const M1_Scenario1_Variation1 = {
+  boxers: testBoxers,
+  admin: testAdmin,
+  request_body: {
+    homeBoxerId: 1,
+    awayBoxerId: 4,
+    matchTime: 157419968, // Timestamp,
+    isFinished: false,
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+  },
+  expected_response: {
+    code: 201,
+    message: 'created',
+    match: testMatch
+  }
+}
+
+// UNIT AUTH SERVICE GATEWAY SUCCESS SCENARIOS
+
+const Unit_AuthServiceGateway_Scenario1 = {
+  admin: testAdmin,
+  data_chunk: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+  expected_data: {
+    code: 200,
+    message: "success"
+  }
+}
+
+// UNIT AUTH SERVICE GATEWAY FAIL SCENARIOS
+
+const Unit_AuthServiceGateway_Scenario2_Fail1 = {
+  admin: testAdmin,
+  data_chunk: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+  expected_data: {
+    code: 403,
+    message: "forbidden"
+  }
+}
+
+const Unit_Repository_Scenario7 = {
+  existing_match: [testMatch],
+  data_chunk: testMatch2,
+  match: testMatch2,
+}
+
+const Unit_Repository_Scenario8 = {
+  match: testMatch,
+  match_id: 1,
+  expected_data: testMatch,
+}
+
 module.exports = {
   Unit_BoxerServiceGateway_Scenario1,
   Unit_BoxerServiceGateway_Scenario2,
@@ -354,4 +422,9 @@ module.exports = {
   H2_Scenario1_Variation1,
   B1_Scenario1_Variation1,
   B1_Scenario2_Fail1,
+  M1_Scenario1_Variation1,
+  Unit_AuthServiceGateway_Scenario1,
+  Unit_AuthServiceGateway_Scenario2_Fail1,
+  Unit_Repository_Scenario7,
+  Unit_Repository_Scenario8,
 };

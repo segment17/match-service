@@ -27,13 +27,17 @@ class DefaultScenarioTester {
     const requestBody = TestFunctions.extractSpecifiedObjectData(requestBodySource);
     assert(requestBody != undefined);
     assert(endpoint != undefined);
-    if (endpoint == "GetStandingAndMatchesOfBoxer") {
-      globalObjects.client.GetStandingAndMatchesOfBoxer(requestBody, function (err, res) {
-        globalObjects.result = res;
-      });
-    } else {
-      console.log("Endpoint not found!");
-      assert(false);
+    switch (endpoint) {
+      case 'GetStandingAndMatchesOfBoxer':
+      case 'AddMatch':
+        globalObjects.client[endpoint](requestBody, function (err, res) {
+          globalObjects.result = res;
+        });
+        break;
+      default:
+        console.log("Endpoint not found!");
+        assert(false);
+        break;
     }
   }
 
@@ -83,6 +87,18 @@ class DefaultScenarioTester {
     }
   }
 
+  async thereIsAnAdminSuchAs(dataSource) {
+    const specified = TestFunctions.extractSpecifiedObjectData(dataSource);
+    await globalObjects.client.SetupAddAdmin({admin: specified}, function (err, res) {
+      globalObjects.done = true;
+    });
+  }
+
+  async thereIsAMatchSuchAs(dataSource) {
+    const match = TestFunctions.extractSpecifiedObjectData(dataSource);
+    await globalObjects.mediator.setupAddMatches([match]);
+  }
+
   async thereAreMatchesSuchAs(dataSource) {
     const matches = TestFunctions.extractSpecifiedObjectData(dataSource);
     await globalObjects.client.SetupAddMatches({matches: matches}, function (err, res) {
@@ -92,7 +108,7 @@ class DefaultScenarioTester {
 
   async thereIsABoxerSuchAs(dataSource) {
     const specifiedBoxer = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.client.SetupAddBoxer({boxer: specifiedBoxer}, function (err, res) {
+    await globalObjects.client.SetupAddBoxers({boxers: [specifiedBoxer]}, function (err, res) {
       globalObjects.done = true;
     });
   }
@@ -102,6 +118,16 @@ class DefaultScenarioTester {
     await globalObjects.client.SetupAddBoxers({boxers: boxers}, function (err, res) {
       globalObjects.done = true;
     });
+  }
+
+  assertionsForDBHasMatchSuchAs(expected, actual) {
+    assert(actual != null);
+    assert(expected.id == actual.id);
+    assert(expected.homeBoxerId == actual.homeBoxerId);
+    assert(expected.awayBoxerId == actual.awayBoxerId);
+    assert(expected.matchTime == actual.matchTime);
+    assert(expected.winnerBoxerId == actual.winnerBoxerId);
+    assert(expected.isFinished == actual.isFinished);
   }
 }
 

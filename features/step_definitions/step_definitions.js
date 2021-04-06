@@ -60,6 +60,14 @@ Given('there is a token such as {string}', async function (tokenDataSource) {
   }
 });
 
+Given('there is an admin such as {string}', async function (adminDataSource) {
+  globalObjects.done = false;
+  await globalObjects.scenarioTester.thereIsAnAdminSuchAs(adminDataSource);
+  while (!globalObjects.done) {
+    await TestFunctions.sleep(100);
+  }
+});
+
 When('{string} is invoked with {string}', function (unitFunctionName, invocationDataSource) {
   globalObjects.scenarioTester.unitFunctionIsInvokedWithData(unitFunctionName, invocationDataSource);
 });
@@ -78,4 +86,8 @@ Then('DB has match such as {string}', async function (matchDataSource) {
 
 Then('DB does not have match such as {string}', async function (matchDataSource) {
   await globalObjects.scenarioTester.dbHasNoMatchSuchAs(matchDataSource);
+});
+
+Given('the latest match in DB is such as {string}', async function (matchesDataSource) {
+  await globalObjects.scenarioTester.thereAreMatchesSuchAs(matchesDataSource);
 });

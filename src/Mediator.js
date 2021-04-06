@@ -1,13 +1,39 @@
+const AuthServiceGateway = require('./Gateway/AuthServiceGateway');
 const BoxerServiceGateway = require('./Gateway/BoxerServiceGateway');
+const MockAuthServiceGateway = require('./Gateway/Mock/MockAuthServiceGateway');
 const MockBoxerServiceGateway = require('./Gateway/Mock/MockBoxerServiceGateway');
+const MatchRepository = require('./Repository/MatchRepository');
+const MockMatchRepository = require('./Repository/Mock/MockMatchRepository');
 
 class Mediator {
 
   constructor() {
     this.boxerServiceGateway = new BoxerServiceGateway();
+    this.authServiceGateway = new AuthServiceGateway();
+    this.matchRepository = new MatchRepository();
   }
 
   // Endpoints
+
+  async getAuthValidation(token) {
+    const response = await this.authServiceGateway.getValidation(token);
+    return response;
+  }
+
+  getErrorObject(validationResponse) {
+    return {
+      code: validationResponse.code,
+      message: validationResponse.message,
+      match: {
+        id: -1,
+        homeBoxerId: -1,
+        awayBoxerId: -1,
+        matchTime: -1,
+        isFinished: false,
+        winnerBoxerId: -1
+      }
+    };
+  }
 
   calculateStandingOfBoxer(matches, boxer) {
     let wins = 0;
@@ -77,9 +103,52 @@ class Mediator {
     };
   }
 
+  async addMatch(request) {
+    const { homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token } = request;
+    // Authentication validation
+    const authValidation = await this.getAuthValidation(token);
+    if(authValidation.code !== 200) {
+      return this.getErrorObject(authValidation);
+    }
+
+    // Home boxer validation
+    const homeBoxerValidation = await this.boxerServiceGateway.getBoxer(homeBoxerId);
+    if (homeBoxerValidation.code !== 200) {
+      return this.getErrorObject(homeBoxerValidation);
+    }
+
+    // Away boxer validation
+    const awayBoxerValidation = await this.boxerServiceGateway.getBoxer(awayBoxerId);
+    if (awayBoxerValidation.code !== 200) {
+      return this.getErrorObject(awayBoxerValidation);
+    }
+
+    // Add match to DB
+    try {
+      await this.matchRepository.addMatchWithGivenData({
+        awayBoxerId,
+        homeBoxerId,
+        isFinished,
+        matchTime,
+        winnerBoxerId,
+      });
+    } catch (error) {
+      return this.getErrorObject({
+        code: 500,
+        message: error.message,
+      });
+    }
+  }
+
+  async setupAddMatches(matches) {
+    await this.matchRepository.SetupAddMatches(matches);
+  }
+
   // Mock everything.
   mock() {
     this.boxerServiceGateway = new MockBoxerServiceGateway();
+    this.authServiceGateway = new MockAuthServiceGateway();
+    this.matchRepository = new MockMatchRepository();
   }
 
 }

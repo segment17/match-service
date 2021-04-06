@@ -4,13 +4,11 @@ class MockAuthServiceGateway extends AuthServiceGateway {
   
   constructor() {
     super();
-    this.token = null;
+    this.admin = null;
   }
 
   async doCallForGetValidation(obj) {
-    const token = obj;
-    console.log("Mock get call to AuthServiceGateway with token: " + token);
-    if(this.token === token) {
+    if (obj.substring(0, 2) === 'ey') {
       return {
         code: 200,
         message: "success"
@@ -22,9 +20,9 @@ class MockAuthServiceGateway extends AuthServiceGateway {
     }
   }
 
-  async setupToken(obj) {
-    this.token = obj;
-    return;
+  async setupAddAdmin(obj) {
+    this.admin = obj;
+    return null;
   }
 }
 
