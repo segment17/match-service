@@ -125,13 +125,19 @@ class Mediator {
 
     // Add match to DB
     try {
-      await this.matchRepository.addMatchWithGivenData({
+      const match = await this.matchRepository.addMatchWithGivenData({
         awayBoxerId,
         homeBoxerId,
         isFinished,
         matchTime,
         winnerBoxerId,
       });
+
+      return {
+        code: 201,
+        message: 'created',
+        match
+      }
     } catch (error) {
       return this.getErrorObject({
         code: 500,

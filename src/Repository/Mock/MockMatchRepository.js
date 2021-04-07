@@ -11,7 +11,9 @@ class MockMatchRepository extends MatchRepository {
     if (!matchData) {
       throw Error("Can't insert match data.");
     }
+    const index = this.matches.length || 0;
     this.matches.push(matchData);
+    return this.matches[index];
   }
 
   async runQueryForGetMatchById(matchData) {
