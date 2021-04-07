@@ -56,12 +56,10 @@ async function bindSetupAddBoxers(call, callback) {
   callback(null, {code: 200});
 }
 
-/*
-
 async function bindSetupAddMatches(call, callback) {
   await globalObjects.controller.mediator.boxerServiceGateway.SetupAddMatches(call.request.matches);
   callback(null, {code: 200});
-} */
+}
 
 function main() {
   console.log("Server running...");
@@ -75,8 +73,8 @@ function main() {
     GetMatchesOfBoxer: bindGetMatchesOfBoxer,
     Mock: bindMock,
     SetupAddBoxers: bindSetupAddBoxers,
-    /* SetupAddBoxer: bindSetupAddBoxer,
-    SetupAddMatches: bindSetupAddMatches */
+    // SetupAddBoxer: bindSetupAddBoxer,
+    SetupAddMatches: bindSetupAddMatches
   });
 
   if (process.env.MATCH_SERVICE_SERVICE_PORT != undefined) {

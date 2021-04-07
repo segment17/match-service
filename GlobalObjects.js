@@ -43,7 +43,7 @@ class GlobalObjects {
     this.boxerServiceGateway = new MockBoxerServiceGateway();
     this.authServiceGateway = new MockAuthServiceGateway();
     this.emailServiceGateway = new MockEmailServiceGateway();
-    this.matchRepository = new MockMatchRepository();
+    this.matchRepository = MockMatchRepository;
   }
 
   resetResult() {

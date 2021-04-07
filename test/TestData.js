@@ -264,6 +264,7 @@ const testMatch = {
   isFinished: false,
 };
 const testMatch2 = {
+  id: 2,
   homeBoxer: testBoxers[2], // 6
   awayBoxer: testBoxers[3], // 8
   matchTime: 157419968, // Timestamp,
@@ -403,7 +404,7 @@ const Unit_AuthServiceGateway_Scenario2_Fail1 = {
 const Unit_Repository_Scenario7 = {
   existing_match: [testMatch],
   data_chunk: testMatch2,
-  match: testMatch2,
+  new_match: testMatch2,
 }
 
 const Unit_Repository_Scenario8 = {

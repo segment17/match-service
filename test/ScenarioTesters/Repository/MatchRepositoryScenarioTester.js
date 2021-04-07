@@ -22,8 +22,9 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
 
   async dbHasMatchSuchAs(dataSource) {
     const expected = TestFunctions.extractSpecifiedObjectData(dataSource);
-    let response = await globalObjects.matchRepository.getMatchWithId(expected);
-    this.assertionsForDBHasBoxerSuchAs(expected, response.boxer);
+    const { id: matchId } = expected;
+    let response = await globalObjects.matchRepository.getMatchById(matchId);
+    this.assertionsForDBHasMatchSuchAs(expected, response);
   }
 
   async returnedDataIsAs(dataSource) {

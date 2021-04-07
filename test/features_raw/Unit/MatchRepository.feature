@@ -41,8 +41,8 @@ Feature: Match Repository Unit Feature
     Then DB has match such as "<new_match>"
 
     Examples:
-      | existing_match                           | repository_function   | data_chunk                           | expected_data                           | new_match                                     |
-      | Unit_Repository_Scenario7.existing_match | addMatchWithGivenData | Unit_Repository_Scenario7.data_chunk | Unit_Repository_Scenario7.expected_data | Unit_Repository_Scenario7.expected_data.match |
+      | existing_match                           | repository_function   | data_chunk                           | new_match                           |
+      | Unit_Repository_Scenario7.existing_match | addMatchWithGivenData | Unit_Repository_Scenario7.data_chunk | Unit_Repository_Scenario7.new_match |
 
   @Unit_Repository_Scenario8
   Scenario Outline: Get match by id
