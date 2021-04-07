@@ -25,8 +25,8 @@ class DefaultScenarioTester {
 
   endpointIsCalledWithRequestBody(endpoint, requestBodySource) {
     const requestBody = TestFunctions.extractSpecifiedObjectData(requestBodySource);
-    assert(requestBody != undefined);
-    assert(endpoint != undefined);
+    assert(requestBody !== undefined);
+    assert(endpoint !== undefined);
     switch (endpoint) {
       case 'GetStandingAndMatchesOfBoxer':
       case 'AddMatch':
