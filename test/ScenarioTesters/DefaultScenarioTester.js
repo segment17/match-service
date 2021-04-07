@@ -30,6 +30,7 @@ class DefaultScenarioTester {
     switch (endpoint) {
       case 'GetStandingAndMatchesOfBoxer':
       case 'AddMatch':
+      case 'RemoveMatch':
         globalObjects.client[endpoint](requestBody, function (err, res) {
           globalObjects.result = res;
         });
