@@ -68,6 +68,7 @@ message AddMatchResponse {
 
 message RemoveMatchRequest {
   int32 id = 1;
+  string token = 2;
 }
 
 message RemoveMatchResponse {
