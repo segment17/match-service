@@ -329,6 +329,20 @@ const M1_Scenario1_Variation1 = {
   }
 }
 
+const M2_Scenario1_Variation1 = {
+  matches: testMatches,
+  admin: testAdmin,
+  request_body: {
+    match_id: testMatches[0].id,
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+  },
+  expected_response: {
+    code: 200,
+    message: 'deleted',
+    match: testMatches[0]
+  }
+}
+
 // UNIT AUTH SERVICE GATEWAY SUCCESS SCENARIOS
 
 const Unit_AuthServiceGateway_Scenario1 = {
@@ -371,6 +385,7 @@ module.exports = {
   B1_Scenario1_Variation1,
   B1_Scenario2_Fail1,
   M1_Scenario1_Variation1,
+  M2_Scenario1_Variation1,
   Unit_AuthServiceGateway_Scenario1,
   Unit_AuthServiceGateway_Scenario2_Fail1,
   Unit_Repository_Scenario7,
