@@ -146,10 +146,6 @@ class Mediator {
     }
   }
 
-  async setupAddMatches(matches) {
-    await this.matchRepository.SetupAddMatches(matches);
-  }
-
   // Mock everything.
   mock() {
     this.boxerServiceGateway = new MockBoxerServiceGateway();
