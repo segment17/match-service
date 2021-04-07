@@ -57,7 +57,7 @@ async function bindSetupAddBoxers(call, callback) {
 }
 
 async function bindSetupAddMatches(call, callback) {
-  await globalObjects.controller.mediator.boxerServiceGateway.SetupAddMatches(call.request.matches);
+  await globalObjects.controller.mediator.matchRepository.SetupAddMatches(call.request.matches);
   callback(null, {code: 200});
 }
 
