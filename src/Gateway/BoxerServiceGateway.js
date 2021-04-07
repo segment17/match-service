@@ -11,12 +11,12 @@ class BoxerServiceGateway {
     return response;
   }
 
-  async getBoxer(boxerId) {
-    let response = await this.doCallForGetBoxer(boxerId);
+  async getBoxerWithStandingAndMatches(boxerId) {
+    let response = await this.doCallForGetBoxerWithStandingAndMatches(boxerId);
     return response;
   }
 
-  async doCallForGetBoxer(param) {
+  async doCallForGetBoxerWithStandingAndMatches(param) {
     console.log("Real get call to AnyService with param: " + param);
     return {}; //TODO
   }

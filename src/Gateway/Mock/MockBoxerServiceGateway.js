@@ -8,7 +8,7 @@ class MockBoxerServiceGateway extends BoxerServiceGateway {
     this.boxersList = [];
   }
   
-  async doCallForGetBoxer(param) {
+  async doCallForGetBoxerWithStandingAndMatches(param) {
     const notFoundObject = {
       code: 404,
       message: "boxer_not_found",

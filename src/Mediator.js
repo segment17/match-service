@@ -112,13 +112,13 @@ class Mediator {
     }
 
     // Home boxer validation
-    const homeBoxerValidation = await this.boxerServiceGateway.getBoxer(homeBoxerId);
+    const homeBoxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(homeBoxerId);
     if (homeBoxerValidation.code !== 200) {
       return this.getErrorObject(homeBoxerValidation);
     }
 
     // Away boxer validation
-    const awayBoxerValidation = await this.boxerServiceGateway.getBoxer(awayBoxerId);
+    const awayBoxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(awayBoxerId);
     if (awayBoxerValidation.code !== 200) {
       return this.getErrorObject(awayBoxerValidation);
     }
