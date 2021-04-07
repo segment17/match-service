@@ -274,27 +274,24 @@ const emptyStanding = { boxer: null, winCount: 0, lossCount: 0, score: 0 };
 
 /* UNIT MATCH SERVICE GATEWAY SUCCESS SCENARIOS */
 
-// GetAllMatches
+// Get boxer from Boxer Service Gateway
 var Unit_BoxerServiceGateway_Scenario1 = {
   boxers: testBoxers,
-  matches: testMatches,
-  expected_data: {
-    code: 200,
-    message: "success",
-    matches: testMatches
-  }
-};
-
-// GetMatchesOfBoxer
-var Unit_BoxerServiceGateway_Scenario2 = {
-  boxers: testBoxers,
-  matches: testMatches,
   boxer_id: 1,
   expected_data: {
     code: 200,
     message: "success",
-    boxer: testBoxer,
-    matches: testMatchesWithTestBoxer,
+    boxer: testBoxers[0]
+  }
+};
+
+// Get boxer from Boxer Service Gateway - faulty
+var Unit_BoxerServiceGateway_Scenario1_Fail = {
+  boxers: [],
+  boxer_id: 1,
+  expected_data: {
+    code: 404,
+    message: "boxer_not_found",
   },
 };
 
@@ -417,7 +414,7 @@ const Unit_Repository_Scenario8 = {
 
 module.exports = {
   Unit_BoxerServiceGateway_Scenario1,
-  Unit_BoxerServiceGateway_Scenario2,
+  Unit_BoxerServiceGateway_Scenario1_Fail,
   Unit_BoxerServiceGateway_Scenario3_Fail1,
   H2_Scenario1_Variation1,
   B1_Scenario1_Variation1,

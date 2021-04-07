@@ -20,7 +20,7 @@ class MockBoxerServiceGateway extends BoxerServiceGateway {
     }
 
     const boxer = this.boxersList.filter(boxer => boxer.id === param);
-    if (!boxer) {
+    if (boxer.length === 0) {
       return notFoundObject;
     }
 

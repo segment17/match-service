@@ -5,17 +5,18 @@ const globalObjects = require('../../..');
 const assert = require('assert');
 
 class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
-
   unitFunctionIsInvokedWithData(functionName, dataSource) {
-    if (functionName == "getMatchesOfBoxer") {
-      const specifiedData = TestFunctions.extractSpecifiedObjectData(dataSource);
-      globalObjects.boxerServiceGateway.getMatchesOfBoxer(specifiedData).then(result => {
-        globalObjects.result = result;
-      });
-    } else if (functionName == "getAllMatches") {
-      globalObjects.boxerServiceGateway.getAllMatches().then(result => {
-        globalObjects.result = result;
-      });
+    const specifiedData = TestFunctions.extractSpecifiedObjectData(dataSource);
+    switch (functionName) {
+      case 'getAllMatches':
+      case 'getBoxerWithStandingAndMatches':
+      case 'getMatchesOfBoxer':
+        globalObjects.boxerServiceGateway[functionName](specifiedData).then(r => {
+          globalObjects.result = r;
+        })
+        break;
+      default:
+        break;
     }
   }
 
@@ -40,14 +41,15 @@ class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
   async returnedDataIsAs(dataSource) {
     const expectedData = TestFunctions.extractSpecifiedObjectData(dataSource);
     await TestFunctions.waitUntilResult();
-    const result = globalObjects.result;
-    
-    assert(result.code === expectedData.code);
-    assert(result.message === expectedData.message);
-    if(expectedData.boxer) {
-      assert(JSON.stringify(result.boxer) === JSON.stringify(expectedData.boxer));
+
+    const { code: expectedCode, message: expectedMessage, boxer: expectedBoxer } = expectedData;
+    const { code: resultCode, message: resultMessage, boxer: resultBoxer } = globalObjects.result;
+
+    assert(expectedCode === resultCode);
+    assert(expectedMessage === resultMessage);
+    if(expectedBoxer) {
+      assert(JSON.stringify(expectedBoxer) === JSON.stringify(resultBoxer[0]));
     }
-    assert(JSON.stringify(result.matches.sort()) === JSON.stringify(expectedData.matches.sort()))
   }
 }
 
