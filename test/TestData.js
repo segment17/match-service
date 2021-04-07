@@ -333,7 +333,7 @@ const M2_Scenario1_Variation1 = {
   matches: testMatches,
   admin: testAdmin,
   request_body: {
-    match_id: testMatches[0].id,
+    id: testMatches[0].id,
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
   },
   expected_response: {
