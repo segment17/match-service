@@ -10,7 +10,7 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
     switch (unitFunctionName) {
       case 'addMatchWithGivenData':
       case 'getMatchById':
-        globalObjects.mediator.matchRepository[unitFunctionName](data).then(d => {
+        globalObjects.matchRepository[unitFunctionName](data).then(d => {
           globalObjects.result = d;
         });
         break;
@@ -43,6 +43,18 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
     assert.strictEqual(awayBoxerId, expectedData.awayBoxer.id);
     assert.strictEqual(matchTime, expectedData.matchTime);
     assert.strictEqual(isFinished, expectedData.isFinished);
+  }
+
+  async thereIsAMatchSuchAs(dataSource) {
+    const match = TestFunctions.extractSpecifiedObjectData(dataSource);
+    await globalObjects.matchRepository.SetupAddMatches([match]);
+  }
+
+  async thereAreMatchesSuchAs(dataSource) {
+    const matches = TestFunctions.extractSpecifiedObjectData(dataSource);
+    await globalObjects.matchRepository.SetupAddMatches(matches, function (err, res) {
+      globalObjects.done = true;
+    });
   }
 
   /* thereIsAnActiveStandingSpecifiedAsData(dataSource) {
