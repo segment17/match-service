@@ -29,6 +29,30 @@ class MockMatchRepository extends MatchRepository {
     return match[0];
   }
 
+  async runQueryForRemoveMatchById(matchData) {
+    if (!matchData || !this.matches || !this.matches.length) {
+      throw Error("Can't find match data.");
+    }
+
+    let removedMatch;
+    let filteredMatches = [];
+    for (let i = 0; i < this.matches.length; i++) {
+      const match = this.matches[i];
+      if (match.id === matchData) {
+        removedMatch = match;
+      } else {
+        filteredMatches.push(match);
+      }
+    }
+
+    if (removedMatch === undefined) {
+      throw Error("Can't find match data.");
+    }
+
+    this.matches = filteredMatches;
+    return removedMatch;
+  }
+
   async SetupAddMatches(matches) {
     matches.forEach(match => {
       this.matches.push(match);

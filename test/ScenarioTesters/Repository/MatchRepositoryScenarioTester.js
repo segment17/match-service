@@ -10,6 +10,7 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
     switch (unitFunctionName) {
       case 'addMatchWithGivenData':
       case 'getMatchById':
+      case 'removeMatchById':
         globalObjects.matchRepository[unitFunctionName](data).then(d => {
           globalObjects.result = d;
         });

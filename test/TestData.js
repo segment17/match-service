@@ -377,6 +377,12 @@ const Unit_Repository_Scenario8 = {
   expected_data: testMatch,
 }
 
+const Unit_Repository_Scenario9 = {
+  matches: testMatches,
+  match_id: testMatches[0].id,
+  expected_data: testMatches[0]
+}
+
 module.exports = {
   Unit_BoxerServiceGateway_Scenario1,
   Unit_BoxerServiceGateway_Scenario1_Fail,
@@ -390,4 +396,5 @@ module.exports = {
   Unit_AuthServiceGateway_Scenario2_Fail1,
   Unit_Repository_Scenario7,
   Unit_Repository_Scenario8,
+  Unit_Repository_Scenario9,
 };

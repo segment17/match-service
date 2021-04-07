@@ -10,12 +10,22 @@ class MatchRepository {
     return queryResult;
   }
 
+  async removeMatchById(matchData) {
+    let queryResult = await this.runQueryForRemoveMatchById(matchData);
+    return queryResult;
+  }
+
   async runQueryForAddMatchWithGivenData(matchData) {
     console.log("Real AddMatch query to DB with given data");
     return {};
   }
 
   async runQueryForGetMatchById(matchData) {
+    console.log("Real getMatchById query to DB with given data");
+    return {};
+  }
+
+  async runQueryForRemoveMatchById(matchData) {
     console.log("Real getMatchById query to DB with given data");
     return {};
   }

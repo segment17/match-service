@@ -146,6 +146,32 @@ class Mediator {
     }
   }
 
+  async removeMatch(request) {
+    const { id: matchId, token } = request;
+
+    // Authentication validation
+    const authValidation = await this.getAuthValidation(token);
+    if(authValidation.code !== 200) {
+      return this.getErrorObject(authValidation);
+    }
+
+    // Remove match from DB
+    try {
+      const match = await this.matchRepository.removeMatchById(matchId);
+
+      return {
+        code: 200,
+        message: 'deleted',
+        match
+      }
+    } catch (error) {
+      return this.getErrorObject({
+        code: 500,
+        message: error.message,
+      });
+    }
+  }
+
   // Mock everything.
   mock() {
     this.boxerServiceGateway = new MockBoxerServiceGateway();

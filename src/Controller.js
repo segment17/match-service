@@ -31,6 +31,15 @@ class Controller {
     return response;
   }
 
+  async guardRemoveMatch(request) {
+
+    // Do validation here
+
+    let response = await this.mediator.removeMatch(request);
+    // Do validation here
+    return response;
+  }
+
   // Mock
   mock() {
     // Assign to mediator to mock everything it has.
