@@ -53,6 +53,26 @@ class MockMatchRepository extends MatchRepository {
     return removedMatch;
   }
 
+  async runQueryForRemoveMatchesOfBoxer(boxerId) {
+    if (!boxerId || !this.matches || !this.matches.length) {
+      throw Error("Can't find match data.");
+    }
+
+    let removedMatches = [];
+    let filteredMatches = [];
+    for (let i = 0; i < this.matches.length; i++) {
+      const match = this.matches[i];
+      if (match.homeBoxer.id === boxerId || match.awayBoxer.id === boxerId) {
+        removedMatches.push(match);
+      } else {
+        filteredMatches.push(match);
+      }
+    }
+
+    this.matches = filteredMatches;
+    return removedMatches;
+  }
+
   async SetupAddMatches(matches) {
     matches.forEach(match => {
       this.matches.push(match);

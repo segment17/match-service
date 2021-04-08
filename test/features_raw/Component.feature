@@ -94,3 +94,14 @@ Feature: Match Service Component Features
     Examples:
       | matches                         | admin                         | endpoint    | request_body                         | expected_response                         |
       | M2_Scenario1_Variation1.matches | M2_Scenario1_Variation1.admin | RemoveMatch | M2_Scenario1_Variation1.request_body | M2_Scenario1_Variation1.expected_response |
+
+  @B4 @B4_Scenario1
+  Scenario Outline: Remove Matches of a Boxer
+    Given there are matches such as "<matches>"
+    And there is an admin such as "<admin>"
+    When "<endpoint>" is called with "<request_body>"
+    Then response is as "<expected_response>"
+
+    Examples:
+      | matches                         | admin                         | endpoint              | request_body                         | expected_response                         |
+      | B4_Scenario1_Variation1.matches | B4_Scenario1_Variation1.admin | RemoveMatchesOfBoxer | B4_Scenario1_Variation1.request_body | B4_Scenario1_Variation1.expected_response |

@@ -68,7 +68,7 @@ function main() {
     AddMatch: bindAddMatch,
     RemoveMatch: bindRemoveMatch,
     UpdateMatch: bindUpdateMatch,
-    //RemoveMatchesOfBoxer: bindRemoveMatchesOfBoxer,
+    RemoveMatchesOfBoxer: bindRemoveMatchesOfBoxer,
     GetAllMatches: bindGetAllMatches,
     GetMatchesOfBoxer: bindGetMatchesOfBoxer,
     Mock: bindMock,

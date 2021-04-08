@@ -171,58 +171,63 @@ const testMatch2 = {
   matchTime: 157419968, // Timestamp,
   isFinished: false,
 };
+const testMatch3 = {
+  id: 3,
+  awayBoxer: {
+    id: 1,
+    fullName: "Mike Tyson",
+    birthDate: 127419968, // Timestamp
+    height: 178,
+    weight: 100,
+  },
+  homeBoxer: {
+    id: 8,
+    fullName: 'Dwayne "The Rock" Johnson',
+    birthDate: 127419968, // Timestamp
+    height: 196,
+    weight: 118,
+  },
+  matchTime: 129419968,
+  isFinished: false,
+}
+const testMatch4 = {
+  id: 4,
+  awayBoxer: {
+    id: 4,
+    fullName: "Connor McGregor",
+    birthDate: 127419968, // Timestamp
+    height: 175,
+    weight: 80,
+  },
+  homeBoxer: {
+    id: 8,
+    fullName: 'Dwayne "The Rock" Johnson',
+    birthDate: 127419968, // Timestamp
+    height: 196,
+    weight: 118,
+  },
+  matchTime: 129419968,
+  isFinished: true,
+  winnerBoxer: {
+    id: 8,
+    fullName: 'Dwayne "The Rock" Johnson',
+    birthDate: 127419968, // Timestamp
+    height: 196,
+    weight: 118,
+  }
+};
 const testMatches = [
   testMatch,
   testMatch2,
-  {
-    id: 3,
-    awayBoxer: {
-      id: 1,
-      fullName: "Mike Tyson",
-      birthDate: 127419968, // Timestamp
-      height: 178,
-      weight: 100,
-    },
-    homeBoxer: {
-      id: 8,
-      fullName: 'Dwayne "The Rock" Johnson',
-      birthDate: 127419968, // Timestamp
-      height: 196,
-      weight: 118,
-    },
-    matchTime: 129419968,
-    isFinished: false,
-  },
-  {
-    id: 4,
-    awayBoxer: {
-      id: 4,
-      fullName: "Connor McGregor",
-      birthDate: 127419968, // Timestamp
-      height: 175,
-      weight: 80,
-    },
-    homeBoxer: {
-      id: 8,
-      fullName: 'Dwayne "The Rock" Johnson',
-      birthDate: 127419968, // Timestamp
-      height: 196,
-      weight: 118,
-    },
-    matchTime: 129419968,
-    isFinished: true,
-    winnerBoxer: {
-      id: 8,
-      fullName: 'Dwayne "The Rock" Johnson',
-      birthDate: 127419968, // Timestamp
-      height: 196,
-      weight: 118,
-    }
-  }
+  testMatch3,
+  testMatch4,
 ];
 const emptyBoxer = { id: 0, fullName: '', birthDate: '0', height: 0, weight: 0 };
 const emptyStanding = { boxer: null, winCount: 0, lossCount: 0, score: 0 };
-
+const testMatchesIncludingFirstBoxer = [
+  testMatch,
+  testMatch3
+];
 /* UNIT MATCH SERVICE GATEWAY SUCCESS SCENARIOS */
 
 // Get boxer from Boxer Service Gateway
@@ -289,6 +294,19 @@ const B1_Scenario1_Variation1 = {
       standing: testStandingOfTestBoxer,
       matches: testMatchesWithTestBoxer
     },
+  },
+};
+
+const B4_Scenario1_Variation1 = {
+  matches: testMatches,
+  request_body: {
+    boxerId: 1,
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+  },
+  expected_response: {
+    code: 200,
+    message: "deleted",
+    matches: testMatchesIncludingFirstBoxer
   },
 };
 
@@ -383,12 +401,19 @@ const Unit_Repository_Scenario9 = {
   expected_data: testMatches[0]
 }
 
+const Unit_Repository_Scenario10 = {
+  matches: testMatches,
+  boxer_id: testMatches[0].id,
+  expected_data: testMatchesIncludingFirstBoxer
+}
+
 module.exports = {
   Unit_BoxerServiceGateway_Scenario1,
   Unit_BoxerServiceGateway_Scenario1_Fail,
   Unit_BoxerServiceGateway_Scenario3_Fail1,
   H2_Scenario1_Variation1,
   B1_Scenario1_Variation1,
+  B4_Scenario1_Variation1,
   B1_Scenario2_Fail1,
   M1_Scenario1_Variation1,
   M2_Scenario1_Variation1,
@@ -397,4 +422,5 @@ module.exports = {
   Unit_Repository_Scenario7,
   Unit_Repository_Scenario8,
   Unit_Repository_Scenario9,
+  Unit_Repository_Scenario10,
 };

@@ -79,6 +79,7 @@ message RemoveMatchResponse {
 
 message RemoveMatchesOfBoxerRequest {
   int32 boxerId = 1;
+  string token = 2;
 }
 
 message RemoveMatchesOfBoxerResponse {
