@@ -77,7 +77,6 @@ class DefaultScenarioTester {
     await TestFunctions.waitUntilResult();
 
     const response = globalObjects.result;
-    console.log('response: ', response);
     assert(response.code === expectedResponse.code);
     assert(response.message === expectedResponse.message);
     if(expectedResponse.standings) {

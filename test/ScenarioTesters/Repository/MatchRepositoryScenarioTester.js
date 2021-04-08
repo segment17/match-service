@@ -33,13 +33,8 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
     const expectedData = TestFunctions.extractSpecifiedObjectData(dataSource);
     await TestFunctions.waitUntilResult();
     // Or separate checks
-    
-    const result = globalObjects.result;
-    if ("Unit_Repository_Scenario10.expected_data" === dataSource) {
-      console.log('result: ', result);
 
-      console.log('expectedData: ', expectedData);
-    }
+    const result = globalObjects.result;
     const isResultArray = Array.isArray(result);
     if (isResultArray) {
       for (let index = 0; index < result.length; index++) {

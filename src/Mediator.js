@@ -181,6 +181,12 @@ class Mediator {
       return this.getErrorObject(authValidation);
     }
 
+    // Home boxer validation
+    const boxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(boxerId);
+    if (boxerValidation.code !== 200) {
+      return this.getErrorObject(boxerValidation);
+    }
+
     // Remove match from DB
     try {
       const matches = await this.matchRepository.removeMatchesOfBoxer(boxerId);
