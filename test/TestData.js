@@ -416,31 +416,31 @@ const Unit_Repository_Scenario2 = {
   expected_data: testMatchesIncludingFirstBoxer,
 };
 
-const Unit_Repository_Scenario7 = {
+const Unit_Repository_Scenario3 = {
   existing_match: [testMatch],
   data_chunk: testMatch2,
   new_match: testMatch2,
 }
 
-const Unit_Repository_Scenario8 = {
+const Unit_Repository_Scenario4 = {
   match: testMatch,
   match_id: 1,
   expected_data: testMatch,
 }
 
-const Unit_Repository_Scenario9 = {
+const Unit_Repository_Scenario5 = {
   matches: testMatches,
   match_id: testMatches[0].id,
   expected_data: testMatches[0]
 }
 
-const Unit_Repository_Scenario10 = {
+const Unit_Repository_Scenario6 = {
   matches: testMatches,
   boxer_id: testMatches[0].id,
   expected_data: testMatchesIncludingFirstBoxer
 }
 
-const Unit_Repository_Scenario11 = {
+const Unit_Repository_Scenario7 = {
   matches: testMatches,
   match: {
     ...testMatches[0],
@@ -468,9 +468,9 @@ module.exports = {
   Unit_BoxerServiceGateway_Scenario3_Fail1,
   Unit_Repository_Scenario1,
   Unit_Repository_Scenario2,
+  Unit_Repository_Scenario3,
+  Unit_Repository_Scenario4,
+  Unit_Repository_Scenario5,
+  Unit_Repository_Scenario6,
   Unit_Repository_Scenario7,
-  Unit_Repository_Scenario8,
-  Unit_Repository_Scenario9,
-  Unit_Repository_Scenario10,
-  Unit_Repository_Scenario11,
 };
