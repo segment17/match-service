@@ -50,13 +50,15 @@ class DefaultScenarioTester {
 
   endpointIsCalled(endpoint) {
     assert(endpoint != undefined);
-    if (endpoint == "GetAllStandings") {
-      globalObjects.client.GetAllStandings(null, function (err, res) {
-        globalObjects.result = res;
-      });
-    } else {
-      console.log("Endpoint not found!");
-      assert(false);
+    switch (endpoint) {
+      case 'GetAllMatches':
+        globalObjects.client[endpoint](null, function (err, res) {
+          globalObjects.result = res;
+        });
+        break;
+      default:
+        console.log("Endpoint not found!");
+        assert(false);
     }
   }
 

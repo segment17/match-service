@@ -4,14 +4,14 @@ Feature: Match Repository Unit Feature
   #SUCCESS SCENARIOS
 
   @Unit_Repository_Scenario1
-  Scenario Outline: Get all matches from Match Repository
+  Scenario Outline: Get all matches
     Given there are matches such as "<matches>"
-    When "<repository_function>" is invoked with "<boxer_id>"
+    When "<repository_function>" is invoked
     Then returned data is as "<expected_data>"
 
     Examples:
-      | matches                           | repository_function | boxer_id                           | expected_data                           |
-      | Unit_Repository_Scenario1.matches | getBoxerWithId      | Unit_Repository_Scenario1.boxer_id | Unit_Repository_Scenario1.expected_data |
+      | matches                           | repository_function | expected_data                           |
+      | Unit_Repository_Scenario1.matches | getAllMatches       | Unit_Repository_Scenario1.expected_data |
 
   @Unit_Repository_Scenario2
   Scenario Outline: Get matches of boxer from Match Repository

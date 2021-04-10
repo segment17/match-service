@@ -9,14 +9,13 @@ Feature: Match Service E2E Features
 
   @H1 @H1_Scenario1
   Scenario Outline: Get All Matches
-    Given there are boxers such as "<boxers>"
-    And there are matches such as "<matches>"
+    Given there are matches such as "<matches>"
     When "<endpoint>" is called
     Then response is as "<expected_response>"
 
     Examples:
-      | boxers                         | matches                         | endpoint      | expected_response                         |
-      | H1_Scenario1_Variation1.boxers | H1_Scenario1_Variation1.matches | GetAllMatches | H1_Scenario1_Variation1.expected_response |
+      | matches                         | endpoint      | expected_response                         |
+      | H1_Scenario1_Variation1.matches | GetAllMatches | H1_Scenario1_Variation1.expected_response |
 
   @B1 @B1_Scenario1
   Scenario Outline: Get Matches Of Boxer
@@ -70,5 +69,5 @@ Feature: Match Service E2E Features
     Then response is as "<expected_response>"
 
     Examples:
-      | matches                         | admin                         | endpoint              | request_body                         | expected_response                         |
+      | matches                         | admin                         | endpoint             | request_body                         | expected_response                         |
       | B4_Scenario1_Variation1.matches | B4_Scenario1_Variation1.admin | RemoveMatchesOfBoxer | B4_Scenario1_Variation1.request_body | B4_Scenario1_Variation1.expected_response |

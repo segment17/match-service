@@ -268,6 +268,16 @@ var Unit_BoxerServiceGateway_Scenario3_Fail1 = {
 
 /* COMPONENT SUCCESS SCENARIOS */
 
+// GetAllMatches
+const H1_Scenario1_Variation1 = {
+  matches: testMatches,
+  expected_response: {
+    code: 200,
+    message: "success",
+    matches: testMatches,
+  },
+};
+
 // GetAllStandings
 const H2_Scenario1_Variation1 = {
   boxers: testBoxers,
@@ -402,6 +412,11 @@ const Unit_AuthServiceGateway_Scenario2_Fail1 = {
   }
 }
 
+const Unit_Repository_Scenario1 = {
+  matches: testMatches,
+  expected_data: testMatches,
+}
+
 const Unit_Repository_Scenario7 = {
   existing_match: [testMatch],
   data_chunk: testMatch2,
@@ -442,6 +457,7 @@ module.exports = {
   Unit_BoxerServiceGateway_Scenario1,
   Unit_BoxerServiceGateway_Scenario1_Fail,
   Unit_BoxerServiceGateway_Scenario3_Fail1,
+  H1_Scenario1_Variation1,
   H2_Scenario1_Variation1,
   B1_Scenario1_Variation1,
   B4_Scenario1_Variation1,
@@ -451,6 +467,7 @@ module.exports = {
   M3_Scenario1_Variation1,
   Unit_AuthServiceGateway_Scenario1,
   Unit_AuthServiceGateway_Scenario2_Fail1,
+  Unit_Repository_Scenario1,
   Unit_Repository_Scenario7,
   Unit_Repository_Scenario8,
   Unit_Repository_Scenario9,

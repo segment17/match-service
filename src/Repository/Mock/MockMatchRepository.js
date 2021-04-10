@@ -105,6 +105,14 @@ class MockMatchRepository extends MatchRepository {
     return _updatedMatch;
   }
 
+  async runQueryForGetAllMatches() {
+    if (!this.matches) {
+      throw Error("DB has gone away.");
+    }
+
+    return this.matches;
+  }
+
   async SetupAddMatches(matches) {
     matches.forEach(match => {
       this.matches.push(match);

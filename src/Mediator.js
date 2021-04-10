@@ -214,7 +214,7 @@ class Mediator {
       return this.getErrorObject(authValidation);
     }
 
-    // Remove match from DB
+    // Update match
     try {
       const match = await this.matchRepository.updateMatch(updatedMatch);
 
@@ -222,6 +222,24 @@ class Mediator {
         code: 200,
         message: 'updated',
         match
+      }
+    } catch (error) {
+      return this.getErrorObject({
+        code: 500,
+        message: error.message,
+      });
+    }
+  }
+
+  async getAllMatches(request) {
+    // Remove match from DB
+    try {
+      const matches = await this.matchRepository.getAllMatches();
+
+      return {
+        code: 200,
+        message: 'success',
+        matches
       }
     } catch (error) {
       return this.getErrorObject({
