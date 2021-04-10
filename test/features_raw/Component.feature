@@ -80,7 +80,7 @@ Feature: Match Service Component Features
     Then response is as "<expected_response>"
 
     Examples:
-      | boxers                    | matches                    | endpoint          | request_body                    | expected_response                    |
+      | boxers                   | matches                   | endpoint          | request_body                   | expected_response                   |
       | B1_Scenario2_Fail.boxers | B1_Scenario2_Fail.matches | GetMatchesOfBoxer | B1_Scenario2_Fail.request_body | B1_Scenario2_Fail.expected_response |
 
   @B4 @B4_Scenario2 @Fail
@@ -106,3 +106,36 @@ Feature: Match Service Component Features
     Examples:
       | matches                   | boxers                   | admin                   | endpoint             | request_body                   | expected_response                   |
       | B4_Scenario3_Fail.matches | B4_Scenario3_Fail.boxers | B4_Scenario3_Fail.admin | RemoveMatchesOfBoxer | B4_Scenario3_Fail.request_body | B4_Scenario3_Fail.expected_response |
+
+  @M1 @M1_Scenario2 @Fail
+  Scenario Outline: Add Match - Fail#1
+    Given there are boxers such as "<boxers>"
+    And there is an admin such as "<admin>"
+    When "<endpoint>" is called with "<request_body>"
+    Then response is as "<expected_response>"
+
+    Examples:
+      | boxers                   | admin                   | endpoint | request_body                   | expected_response                   |
+      | M1_Scenario2_Fail.boxers | M1_Scenario2_Fail.admin | AddMatch | M1_Scenario2_Fail.request_body | M1_Scenario2_Fail.expected_response |
+
+  @M1 @M1_Scenario3 @Fail
+  Scenario Outline: Add Match - Fail#2
+    Given there are boxers such as "<boxers>"
+    And there is an admin such as "<admin>"
+    When "<endpoint>" is called with "<request_body>"
+    Then response is as "<expected_response>"
+
+    Examples:
+      | boxers                   | admin                   | endpoint | request_body                   | expected_response                   |
+      | M1_Scenario3_Fail.boxers | M1_Scenario3_Fail.admin | AddMatch | M1_Scenario3_Fail.request_body | M1_Scenario3_Fail.expected_response |
+
+  @M1 @M1_Scenario4 @Fail
+  Scenario Outline: Add Match - Fail#3
+    Given there are boxers such as "<boxers>"
+    And there is an admin such as "<admin>"
+    When "<endpoint>" is called with "<request_body>"
+    Then response is as "<expected_response>"
+
+    Examples:
+      | boxers                   | admin                   | endpoint | request_body                   | expected_response                   |
+      | M1_Scenario4_Fail.boxers | M1_Scenario4_Fail.admin | AddMatch | M1_Scenario4_Fail.request_body | M1_Scenario4_Fail.expected_response |
