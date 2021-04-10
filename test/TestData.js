@@ -361,6 +361,20 @@ const B4_Scenario2_Fail = {
   },
 };
 
+// RemoveMatchesOfBoxer Fail - not valid boxer id
+const B4_Scenario3_Fail = {
+  matches: testMatches,
+  boxers: testBoxers,
+  request_body: {
+    boxerId: NOT_VALID_BOXER_ID,
+    token: TOKENS.VALID,
+  },
+  expected_response: {
+    code: 404,
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+  },
+};
+
 const M1_Scenario1_Variation1 = {
   boxers: testBoxers,
   admin: testAdmin,
@@ -485,6 +499,7 @@ module.exports = {
   B1_Scenario2_Fail,
   B4_Scenario1_Variation1,
   B4_Scenario2_Fail,
+  B4_Scenario3_Fail,
   H1_Scenario1_Variation1,
   H2_Scenario1_Variation1,
   M1_Scenario1_Variation1,

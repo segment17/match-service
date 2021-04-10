@@ -73,7 +73,7 @@ Feature: Match Service Component Features
   #FAIL SCENARIOS
 
   @B1 @B1_Scenario2 @Fail
-  Scenario Outline: Get Matches Of Boxer - Fail
+  Scenario Outline: Get Matches Of Boxer - Fail#1
     Given there are boxers such as "<boxers>"
     And there are matches such as "<matches>"
     When "<endpoint>" is called with "<request_body>"
@@ -84,7 +84,7 @@ Feature: Match Service Component Features
       | B1_Scenario2_Fail.boxers | B1_Scenario2_Fail.matches | GetMatchesOfBoxer | B1_Scenario2_Fail.request_body | B1_Scenario2_Fail.expected_response |
 
   @B4 @B4_Scenario2 @Fail
-  Scenario Outline: Remove Matches of a Boxer - Fail
+  Scenario Outline: Remove Matches of a Boxer - Fail#1
     Given there are matches such as "<matches>"
     And there are boxers such as "<boxers>"
     And there is an admin such as "<admin>"
@@ -94,3 +94,15 @@ Feature: Match Service Component Features
     Examples:
       | matches                   | boxers                   | admin                   | endpoint             | request_body                   | expected_response                   |
       | B4_Scenario2_Fail.matches | B4_Scenario2_Fail.boxers | B4_Scenario2_Fail.admin | RemoveMatchesOfBoxer | B4_Scenario2_Fail.request_body | B4_Scenario2_Fail.expected_response |
+
+  @B4 @B4_Scenario3 @Fail
+  Scenario Outline: Remove Matches of a Boxer - Fail#2
+    Given there are matches such as "<matches>"
+    And there are boxers such as "<boxers>"
+    And there is an admin such as "<admin>"
+    When "<endpoint>" is called with "<request_body>"
+    Then response is as "<expected_response>"
+
+    Examples:
+      | matches                   | boxers                   | admin                   | endpoint             | request_body                   | expected_response                   |
+      | B4_Scenario3_Fail.matches | B4_Scenario3_Fail.boxers | B4_Scenario3_Fail.admin | RemoveMatchesOfBoxer | B4_Scenario3_Fail.request_body | B4_Scenario3_Fail.expected_response |
