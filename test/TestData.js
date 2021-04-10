@@ -263,7 +263,7 @@ const B4_Scenario1_Variation1 = {
 /* COMPONENT FAIL SCENARIOS */
 
 // GetMatchesOfBoxer Fail - not valid boxer id
-const B1_Scenario2_Fail = {
+const B1_Scenario1_Fail2 = {
   boxers: testBoxers,
   matches: testMatches,
   request_body: {
@@ -276,7 +276,7 @@ const B1_Scenario2_Fail = {
 };
 
 // RemoveMatchesOfBoxer Fail - not valid admin token
-const B4_Scenario2_Fail = {
+const B4_Scenario1_Fail1 = {
   matches: testMatches,
   boxers: testBoxers,
   request_body: {
@@ -290,7 +290,7 @@ const B4_Scenario2_Fail = {
 };
 
 // RemoveMatchesOfBoxer Fail - not valid boxer id
-const B4_Scenario3_Fail = {
+const B4_Scenario1_Fail2 = {
   matches: testMatches,
   boxers: testBoxers,
   request_body: {
@@ -304,7 +304,7 @@ const B4_Scenario3_Fail = {
 };
 
 // AddMatch Fail - not valid admin token
-const M1_Scenario2_Fail = {
+const M1_Scenario1_Fail1 = {
   boxers: testBoxers,
   admin: testAdmin,
   request_body: {
@@ -321,7 +321,7 @@ const M1_Scenario2_Fail = {
 }
 
 // AddMatch Fail - not valid match data
-const M1_Scenario3_Fail = {
+const M1_Scenario1_Fail2 = {
   boxers: testBoxers,
   admin: testAdmin,
   request_body: {
@@ -339,7 +339,7 @@ const M1_Scenario3_Fail = {
 }
 
 // AddMatch Fail - not valid boxer id in one of the matches
-const M1_Scenario4_Fail = {
+const M1_Scenario1_Fail3 = {
   boxers: testBoxers,
   admin: testAdmin,
   request_body: {
@@ -477,16 +477,16 @@ const Unit_Repository_Scenario7 = {
 
 module.exports = {
   B1_Scenario1_Variation1,
-  B1_Scenario2_Fail,
+  B1_Scenario1_Fail2,
   B4_Scenario1_Variation1,
-  B4_Scenario2_Fail,
-  B4_Scenario3_Fail,
+  B4_Scenario1_Fail1,
+  B4_Scenario1_Fail2,
   H1_Scenario1_Variation1,
   H2_Scenario1_Variation1,
   M1_Scenario1_Variation1,
-  M1_Scenario2_Fail,
-  M1_Scenario3_Fail,
-  M1_Scenario4_Fail,
+  M1_Scenario1_Fail1,
+  M1_Scenario1_Fail2,
+  M1_Scenario1_Fail3,
   M2_Scenario1_Variation1,
   M3_Scenario1_Variation1,
   Unit_AuthServiceGateway_Scenario1,
