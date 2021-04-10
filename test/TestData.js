@@ -1,3 +1,16 @@
+const REQUEST_STATUSES = {
+  BOXER_NOT_FOUND: 'boxer_not_found',
+  CREATED: 'created',
+  DELETED: 'deleted',
+  FORBIDDEN: 'forbidden',
+  SUCCESS: 'success',
+  UPDATED: 'updated',
+}
+const TOKENS = {
+  VALID: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0',
+  INVALID: 'not_valid_token'
+}
+const NOT_VALID_BOXER_ID = -1;
 const testAdmin = {
   username: "test-admin-other",
   password_hash: "13019e4c76dbb79db5c2562ad0572f74"
@@ -236,7 +249,7 @@ var Unit_BoxerServiceGateway_Scenario1 = {
   boxer_id: 1,
   expected_data: {
     code: 200,
-    message: "success",
+    message: REQUEST_STATUSES.SUCCESS,
     boxer: testBoxers[0]
   }
 };
@@ -247,7 +260,7 @@ var Unit_BoxerServiceGateway_Scenario1_Fail = {
   boxer_id: 1,
   expected_data: {
     code: 404,
-    message: "boxer_not_found",
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
   },
 };
 
@@ -273,7 +286,7 @@ const H1_Scenario1_Variation1 = {
   matches: testMatches,
   expected_response: {
     code: 200,
-    message: "success",
+    message: REQUEST_STATUSES.SUCCESS,
     matches: testMatches,
   },
 };
@@ -284,7 +297,7 @@ const H2_Scenario1_Variation1 = {
   matches: testMatches,
   expected_response: {
     code: 200,
-    message: "success",
+    message: REQUEST_STATUSES.SUCCESS,
     standings: testStandings,
   },
 };
@@ -298,7 +311,7 @@ const B1_Scenario1_Variation1 = {
   },
   expected_response: {
     code: 200,
-    message: "success",
+    message: REQUEST_STATUSES.SUCCESS,
     boxer: testBoxers[0],
     matches: testMatchesIncludingFirstBoxer,
   },
@@ -310,11 +323,11 @@ const B4_Scenario1_Variation1 = {
   boxers: testBoxers,
   request_body: {
     boxerId: testMatches[0].id,
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+    token: TOKENS.VALID,
   },
   expected_response: {
     code: 200,
-    message: "deleted",
+    message: REQUEST_STATUSES.DELETED,
     matches: testMatchesIncludingFirstBoxer
   },
 };
@@ -330,7 +343,7 @@ const B1_Scenario2_Fail = {
   },
   expected_response: {
     code: 404,
-    message: "boxer_not_found",
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
   },
 };
 
@@ -340,11 +353,11 @@ const B4_Scenario2_Fail = {
   boxers: testBoxers,
   request_body: {
     boxerId: testMatches[0].id,
-    token: "not_valid_token",
+    token: TOKENS.INVALID,
   },
   expected_response: {
     code: 403,
-    message: "forbidden",
+    message: REQUEST_STATUSES.FORBIDDEN,
   },
 };
 
@@ -356,11 +369,11 @@ const M1_Scenario1_Variation1 = {
     awayBoxerId: 4,
     matchTime: 157419968, // Timestamp,
     isFinished: false,
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+    token: TOKENS.VALID,
   },
   expected_response: {
     code: 201,
-    message: 'created',
+    message: REQUEST_STATUSES.CREATED,
     match: testMatch
   }
 }
@@ -370,11 +383,11 @@ const M2_Scenario1_Variation1 = {
   admin: testAdmin,
   request_body: {
     id: testMatches[0].id,
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+    token: TOKENS.VALID,
   },
   expected_response: {
     code: 200,
-    message: 'deleted',
+    message: REQUEST_STATUSES.DELETED,
     match: testMatches[0]
   }
 }
@@ -385,11 +398,11 @@ const M3_Scenario1_Variation1 = {
   request_body: {
     ...testMatches[0],
     matchTime: 129419968,
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+    token: TOKENS.VALID,
   },
   expected_response: {
     code: 200,
-    message: 'updated',
+    message: REQUEST_STATUSES.UPDATED,
     match: {
       ...testMatches[0],
       matchTime: 129419968
@@ -401,10 +414,10 @@ const M3_Scenario1_Variation1 = {
 
 const Unit_AuthServiceGateway_Scenario1 = {
   admin: testAdmin,
-  data_chunk: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+  data_chunk: TOKENS.VALID,
   expected_data: {
     code: 200,
-    message: "success"
+    message: REQUEST_STATUSES.SUCCESS
   }
 }
 
@@ -412,10 +425,10 @@ const Unit_AuthServiceGateway_Scenario1 = {
 
 const Unit_AuthServiceGateway_Scenario2_Fail1 = {
   admin: testAdmin,
-  data_chunk: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QtYWRtaW4ifQ.Ie8nanpMvN_aNxqEDDL6_2nvcDzbh0yBL2p_VrSY4r0",
+  data_chunk: TOKENS.VALID,
   expected_data: {
     code: 403,
-    message: "forbidden"
+    message: REQUEST_STATUSES.FORBIDDEN
   }
 }
 
