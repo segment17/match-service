@@ -304,6 +304,7 @@ const B1_Scenario1_Variation1 = {
   },
 };
 
+// Remova matches of a boxer
 const B4_Scenario1_Variation1 = {
   matches: testMatches,
   boxers: testBoxers,
@@ -320,8 +321,8 @@ const B4_Scenario1_Variation1 = {
 
 /* COMPONENT FAIL SCENARIOS */
 
-// GetMatchesOfBoxer Fail
-const B1_Scenario2_Fail1 = {
+// GetMatchesOfBoxer Fail - not valid boxer id
+const B1_Scenario2_Fail = {
   boxers: testBoxers,
   matches: testMatches,
   request_body: {
@@ -468,7 +469,7 @@ const Unit_Repository_Scenario7 = {
 
 module.exports = {
   B1_Scenario1_Variation1,
-  B1_Scenario2_Fail1,
+  B1_Scenario2_Fail,
   B4_Scenario1_Variation1,
   B4_Scenario2_Fail,
   H1_Scenario1_Variation1,
