@@ -82,3 +82,15 @@ Feature: Match Service Component Features
     Examples:
       | boxers                    | matches                    | endpoint          | request_body                    | expected_response                    |
       | B1_Scenario2_Fail1.boxers | B1_Scenario2_Fail1.matches | GetMatchesOfBoxer | B1_Scenario2_Fail1.request_body | B1_Scenario2_Fail1.expected_response |
+
+  @B4 @B4_Scenario2 @Fail
+  Scenario Outline: Remove Matches of a Boxer - Fail
+    Given there are matches such as "<matches>"
+    And there are boxers such as "<boxers>"
+    And there is an admin such as "<admin>"
+    When "<endpoint>" is called with "<request_body>"
+    Then response is as "<expected_response>"
+
+    Examples:
+      | matches                   | boxers                   | admin                   | endpoint             | request_body                   | expected_response                   |
+      | B4_Scenario2_Fail.matches | B4_Scenario2_Fail.boxers | B4_Scenario2_Fail.admin | RemoveMatchesOfBoxer | B4_Scenario2_Fail.request_body | B4_Scenario2_Fail.expected_response |

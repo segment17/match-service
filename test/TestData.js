@@ -333,6 +333,20 @@ const B1_Scenario2_Fail1 = {
   },
 };
 
+// RemoveMatchesOfBoxer Fail - not valid admin token
+const B4_Scenario2_Fail = {
+  matches: testMatches,
+  boxers: testBoxers,
+  request_body: {
+    boxerId: testMatches[0].id,
+    token: "not_valid_token",
+  },
+  expected_response: {
+    code: 403,
+    message: "forbidden",
+  },
+};
+
 const M1_Scenario1_Variation1 = {
   boxers: testBoxers,
   admin: testAdmin,
@@ -456,6 +470,7 @@ module.exports = {
   B1_Scenario1_Variation1,
   B1_Scenario2_Fail1,
   B4_Scenario1_Variation1,
+  B4_Scenario2_Fail,
   H1_Scenario1_Variation1,
   H2_Scenario1_Variation1,
   M1_Scenario1_Variation1,
