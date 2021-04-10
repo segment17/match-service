@@ -65,7 +65,7 @@ Feature: Match Repository Unit Feature
       | Unit_Repository_Scenario9.matches | removeMatchById     | Unit_Repository_Scenario9.match_id | Unit_Repository_Scenario9.expected_data |
 
   @Unit_Repository_Scenario10
-  Scenario Outline: Remove match by id
+  Scenario Outline: Remove matches of boxer
     Given there are matches such as "<matches>"
     When "<repository_function>" is invoked with "<boxer_id>"
     Then returned data is as "<expected_data>"
@@ -73,6 +73,16 @@ Feature: Match Repository Unit Feature
     Examples:
       | matches                            | repository_function  | boxer_id                            | expected_data                            |
       | Unit_Repository_Scenario10.matches | removeMatchesOfBoxer | Unit_Repository_Scenario10.boxer_id | Unit_Repository_Scenario10.expected_data |
+
+  @Unit_Repository_Scenario11
+  Scenario Outline: Update match
+    Given there are matches such as "<matches>"
+    When "<repository_function>" is invoked with "<match>"
+    Then returned data is as "<expected_data>"
+
+    Examples:
+      | matches                            | repository_function | match                            | expected_data                            |
+      | Unit_Repository_Scenario11.matches | updateMatch         | Unit_Repository_Scenario11.match | Unit_Repository_Scenario11.expected_data |
 
   #FAIL SCENARIOS
 

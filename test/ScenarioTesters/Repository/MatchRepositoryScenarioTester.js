@@ -12,6 +12,7 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
       case 'getMatchById':
       case 'removeMatchById':
       case 'removeMatchesOfBoxer':
+      case 'updateMatch':
         globalObjects.matchRepository[unitFunctionName](data).then(d => {
           globalObjects.result = d;
         });

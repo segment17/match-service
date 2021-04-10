@@ -20,6 +20,11 @@ class MatchRepository {
     return queryResult;
   }
 
+  async updateMatch(match) {
+    let queryResult = await this.runQueryForUpdateMatch(match);
+    return queryResult;
+  }
+
   async runQueryForAddMatchWithGivenData(matchData) {
     console.log("Real AddMatch query to DB with given data");
     return {};
@@ -36,6 +41,11 @@ class MatchRepository {
   }
 
   async runQueryForRemoveMatchesOfBoxer(matchData) {
+    console.log("Real getMatchById query to DB with given data");
+    return {};
+  }
+
+  async runQueryForUpdateMatch(matchData) {
     console.log("Real getMatchById query to DB with given data");
     return {};
   }

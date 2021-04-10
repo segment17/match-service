@@ -73,6 +73,38 @@ class MockMatchRepository extends MatchRepository {
     return removedMatches;
   }
 
+  async runQueryForUpdateMatch(updatedMatch) {
+    if (!updatedMatch) {
+      throw Error("Bad operation.");
+    }
+
+    if (!this.matches) {
+      throw Error("DB has gone away.");
+    }
+
+    if (!this.matches.length) {
+      throw Error("Match not found.");
+    }
+
+    let _updatedMatch;
+    let _matches = [];
+    for (let i = 0; i < this.matches.length; i++) {
+      let match = this.matches[i];
+      if (match.id === updatedMatch.id) {
+        _updatedMatch = {
+          ...match,
+          ...updatedMatch
+        }
+        match = _updatedMatch;
+      }
+
+      _matches.push(match);
+    }
+
+    this.matches = _matches;
+    return _updatedMatch;
+  }
+
   async SetupAddMatches(matches) {
     matches.forEach(match => {
       this.matches.push(match);

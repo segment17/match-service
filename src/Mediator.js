@@ -204,6 +204,33 @@ class Mediator {
     }
   }
 
+  async updateMatch(request) {
+    const { id, homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token} = request;
+    const updatedMatch = { id, homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId };
+
+    // Authentication validation
+    const authValidation = await this.getAuthValidation(token);
+    if(authValidation.code !== 200) {
+      return this.getErrorObject(authValidation);
+    }
+
+    // Remove match from DB
+    try {
+      const match = await this.matchRepository.updateMatch(updatedMatch);
+
+      return {
+        code: 200,
+        message: 'updated',
+        match
+      }
+    } catch (error) {
+      return this.getErrorObject({
+        code: 500,
+        message: error.message,
+      });
+    }
+  }
+
   // Mock everything.
   mock() {
     this.boxerServiceGateway = new MockBoxerServiceGateway();

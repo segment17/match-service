@@ -46,10 +46,6 @@ class GlobalObjects {
     this.matchRepository = MockMatchRepository;
   }
 
-  resetResult() {
-    this.result = null;
-  }
-
   setScenario(scenario) {
     this.scenario = scenario;
   }

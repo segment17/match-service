@@ -8,17 +8,21 @@ class DefaultScenarioTester {
     this.scenario = scenario;
   }
 
+  get shouldMock () {
+    return !TestFunctions.isScenarioE2E(this.scenario) && !TestFunctions.isScenarioIntegration(this.scenario);
+  }
+
   // Special Before Scenario Function
   before() {
-    globalObjects.resetResult();
     globalObjects.setScenario(this.scenario);
-    if (!TestFunctions.isScenarioE2E(this.scenario) && !TestFunctions.isScenarioIntegration(this.scenario)) {
+    if (this.shouldMock) {
       // If it's not E2E or Integration, it means everything is mocked.
       globalObjects.mock();
       globalObjects.client.Mock({}, (err, res) => {
         globalObjects.done = true;
       });
     } else {
+      globalObjects.reset();
       globalObjects.done = true;
     }
   }
@@ -32,6 +36,7 @@ class DefaultScenarioTester {
       case 'AddMatch':
       case 'RemoveMatch':
       case 'RemoveMatchesOfBoxer':
+      case 'UpdateMatch':
         globalObjects.client[endpoint](requestBody, function (err, res) {
           globalObjects.result = res;
         });
