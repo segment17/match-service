@@ -67,6 +67,15 @@ class Controller {
     return response;
   }
 
+  async guardGetMatchesOfBoxer(request) {
+
+    // Do validation here
+
+    let response = await this.mediator.getMatchesOfBoxer(request);
+    // Do validation here
+    return response;
+  }
+
   // Mock
   mock() {
     // Assign to mediator to mock everything it has.

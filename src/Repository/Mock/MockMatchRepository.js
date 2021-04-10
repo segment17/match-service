@@ -113,6 +113,23 @@ class MockMatchRepository extends MatchRepository {
     return this.matches;
   }
 
+  async runQueryForGetMatchesOfBoxer(boxerId) {
+    if (!this.matches) {
+      throw Error("DB has gone away.");
+    }
+
+    let filteredMatches = [];
+
+    for (let i = 0; i < this.matches.length; i++) {
+      const match = this.matches[i];
+      if (match.homeBoxer.id === boxerId || match.awayBoxer.id === boxerId) {
+        filteredMatches.push(match);
+      }
+    }
+
+    return filteredMatches;
+  }
+
   async SetupAddMatches(matches) {
     matches.forEach(match => {
       this.matches.push(match);

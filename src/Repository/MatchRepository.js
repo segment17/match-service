@@ -30,34 +30,44 @@ class MatchRepository {
     return queryResult;
   }
 
+  async getMatchesOfBoxer(boxerId) {
+    let queryResult = await this.runQueryForGetMatchesOfBoxer(boxerId);
+    return queryResult;
+  }
+
   async runQueryForAddMatchWithGivenData(matchData) {
     console.log("Real AddMatch query to DB with given data");
     return {};
   }
 
   async runQueryForGetMatchById(matchData) {
-    console.log("Real getMatchById query to DB with given data");
+    console.log("Real GetMatchById query to DB with given data");
     return {};
   }
 
   async runQueryForRemoveMatchById(matchData) {
-    console.log("Real getMatchById query to DB with given data");
+    console.log("Real RemoveMatchById query to DB with given data");
     return {};
   }
 
   async runQueryForRemoveMatchesOfBoxer(matchData) {
-    console.log("Real getMatchById query to DB with given data");
+    console.log("Real RemoveMatchesOfBoxer query to DB with given data");
     return {};
   }
 
   async runQueryForUpdateMatch(matchData) {
-    console.log("Real getMatchById query to DB with given data");
+    console.log("Real UpdateMatch query to DB with given data");
     return {};
   }
 
   async runQueryForGetAllMatches() {
     console.log("Real GetAllMatches query to DB with given data");
-    return {};
+    return [];
+  }
+
+  async runQueryForGetMatchesOfBoxer() {
+    console.log("Real GetMatchesOfBoxer query to DB with given data");
+    return [];
   }
 
   async SetupAddMatches(matches) {

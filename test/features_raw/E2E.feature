@@ -21,7 +21,7 @@ Feature: Match Service E2E Features
   Scenario Outline: Get Matches Of Boxer
     Given there are boxers such as "<boxers>"
     And there are matches such as "<matches>"
-    When "<endpoint>" is called
+    When "<endpoint>" is called with "<request_body>"
     Then response is as "<expected_response>"
 
     Examples:

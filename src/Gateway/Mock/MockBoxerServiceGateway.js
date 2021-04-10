@@ -19,15 +19,15 @@ class MockBoxerServiceGateway extends BoxerServiceGateway {
       return notFoundObject;
     }
 
-    const boxer = this.boxersList.filter(boxer => boxer.id === param);
-    if (boxer.length === 0) {
+    const boxers = this.boxersList.filter(boxer => boxer.id === param);
+    if (boxers.length === 0) {
       return notFoundObject;
     }
 
     return {
       code: 200,
       message: 'success',
-      boxer,
+      boxer: boxers[0],
       standingAndMatches: []
     } ;
   }

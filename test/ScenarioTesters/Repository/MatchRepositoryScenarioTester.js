@@ -9,11 +9,12 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
     const data = invocationDataSource ? TestFunctions.extractSpecifiedObjectData(invocationDataSource) : null;
     switch (unitFunctionName) {
       case 'addMatchWithGivenData':
+      case 'getAllMatches':
       case 'getMatchById':
+      case 'getMatchesOfBoxer':
       case 'removeMatchById':
       case 'removeMatchesOfBoxer':
       case 'updateMatch':
-      case 'getAllMatches':
         globalObjects.matchRepository[unitFunctionName](data).then(d => {
           globalObjects.result = d;
         });
@@ -32,7 +33,6 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
   }
 
   async returnedDataIsAs(dataSource) {
-    console.log('dataSource: ', dataSource);
     const expectedData = TestFunctions.extractSpecifiedObjectData(dataSource);
     await TestFunctions.waitUntilResult();
     // Or separate checks

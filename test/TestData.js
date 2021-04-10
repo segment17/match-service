@@ -289,21 +289,18 @@ const H2_Scenario1_Variation1 = {
   },
 };
 
-// GetStandingAndMatchesOfBoxer
+// GetMatchesOfBoxer
 const B1_Scenario1_Variation1 = {
-  boxer: testBoxer,
+  boxers: testBoxers,
   matches: testMatches,
   request_body: {
-    boxerId: 1,
+    boxerId: testBoxers[0].id,
   },
   expected_response: {
     code: 200,
     message: "success",
-    boxer: testBoxer,
-    standingAndMatches: {
-      standing: testStandingOfTestBoxer,
-      matches: testMatchesWithTestBoxer
-    },
+    boxer: testBoxers[0],
+    matches: testMatchesIncludingFirstBoxer,
   },
 };
 
@@ -417,6 +414,13 @@ const Unit_Repository_Scenario1 = {
   expected_data: testMatches,
 }
 
+// GetMatchesOfBoxer
+const Unit_Repository_Scenario2 = {
+  matches: testMatches,
+  boxer_id: testBoxers[0].id,
+  expected_data: testMatchesIncludingFirstBoxer,
+};
+
 const Unit_Repository_Scenario7 = {
   existing_match: [testMatch],
   data_chunk: testMatch2,
@@ -454,20 +458,21 @@ const Unit_Repository_Scenario11 = {
 }
 
 module.exports = {
-  Unit_BoxerServiceGateway_Scenario1,
-  Unit_BoxerServiceGateway_Scenario1_Fail,
-  Unit_BoxerServiceGateway_Scenario3_Fail1,
+  B1_Scenario1_Variation1,
+  B1_Scenario2_Fail1,
+  B4_Scenario1_Variation1,
   H1_Scenario1_Variation1,
   H2_Scenario1_Variation1,
-  B1_Scenario1_Variation1,
-  B4_Scenario1_Variation1,
-  B1_Scenario2_Fail1,
   M1_Scenario1_Variation1,
   M2_Scenario1_Variation1,
   M3_Scenario1_Variation1,
   Unit_AuthServiceGateway_Scenario1,
   Unit_AuthServiceGateway_Scenario2_Fail1,
+  Unit_BoxerServiceGateway_Scenario1,
+  Unit_BoxerServiceGateway_Scenario1_Fail,
+  Unit_BoxerServiceGateway_Scenario3_Fail1,
   Unit_Repository_Scenario1,
+  Unit_Repository_Scenario2,
   Unit_Repository_Scenario7,
   Unit_Repository_Scenario8,
   Unit_Repository_Scenario9,

@@ -122,7 +122,7 @@ service MatchService {
   rpc UpdateMatch(UpdateMatchRequest) returns (UpdateMatchResponse);
   rpc RemoveMatchesOfBoxer(RemoveMatchesOfBoxerRequest) returns (RemoveMatchesOfBoxerResponse);
   rpc GetAllMatches(Empty) returns (GetAllMatchesResponse);
-  rpc GetAllMatchesOfBoxer(GetMatchesOfBoxerRequest) returns (GetAllMatchesResponse);
+  rpc GetMatchesOfBoxer(GetMatchesOfBoxerRequest) returns (GetMatchesOfBoxerResponse);
   rpc SetupAddBoxers(SetupAddBoxersRequest) returns (SetupAddBoxersResponse);
   rpc SetupAddMatches(SetupAddMatchesRequest) returns (SetupAddMatchesResponse);
   rpc SetupAddAdmin(SetupAddAdminRequest) returns (SetupAddAdminResponse);

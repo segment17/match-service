@@ -33,6 +33,7 @@ class DefaultScenarioTester {
     assert(endpoint !== undefined);
     switch (endpoint) {
       case 'GetStandingAndMatchesOfBoxer':
+      case 'GetMatchesOfBoxer':
       case 'AddMatch':
       case 'RemoveMatch':
       case 'RemoveMatchesOfBoxer':
@@ -79,6 +80,17 @@ class DefaultScenarioTester {
     }
   }
 
+  compareMatches(actual, expected) {
+    for(let index in expected) {
+      this.compareBoxers(actual[index].homeBoxer, actual[index].homeBoxer);
+      this.compareBoxers(actual[index].awayBoxer, actual[index].awayBoxer);
+      assert(actual[index].id === expected[index].id);
+      assert(actual[index].matchTime == expected[index].matchTime);
+      assert(actual[index].isFinished === expected[index].isFinished);
+      assert(actual[index].height === expected[index].height);
+    }
+  }
+
   async responseIsAs(expectedResponseSource) {
     const expectedResponse = TestFunctions.extractSpecifiedObjectData(expectedResponseSource);
     await TestFunctions.waitUntilResult();
@@ -91,7 +103,12 @@ class DefaultScenarioTester {
     }
     if(expectedResponse.boxer) {
       this.compareBoxers(response.boxer, expectedResponse.boxer);
-      assert(JSON.stringify(response.standingAndMatches.matches.sort()) == JSON.stringify(response.standingAndMatches.matches.sort()));
+    }
+    if (expectedResponse.matches) {
+      this.compareMatches(response.matches, expectedResponse.matches);
+    }
+    if (expectedResponse.standingAndMatches) {
+      assert(JSON.stringify(response.standingAndMatches.matches.sort()) == JSON.stringify(expectedResponse.standingAndMatches.matches.sort()));
       assert(JSON.stringify(response.standingAndMatches.standing) == JSON.stringify(response.standingAndMatches.standing));
     }
   }

@@ -172,6 +172,33 @@ class Mediator {
     }
   }
 
+  async getMatchesOfBoxer(request) {
+    const { boxerId } = request;
+
+    // Home boxer validation
+    const boxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(boxerId);
+    if (boxerValidation.code !== 200) {
+      return this.getErrorObject(boxerValidation);
+    }
+
+    // Remove match from DB
+    try {
+      const matches = await this.matchRepository.getMatchesOfBoxer(boxerId);
+
+      return {
+        code: 200,
+        message: 'success',
+        matches,
+        boxer: boxerValidation.boxer,
+      }
+    } catch (error) {
+      return this.getErrorObject({
+        code: 500,
+        message: error.message,
+      });
+    }
+  }
+
   async removeMatchesOfBoxer(request) {
     const { boxerId, token } = request;
 
