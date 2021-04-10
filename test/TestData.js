@@ -320,21 +320,16 @@ const B4_Scenario1_Variation1 = {
 
 /* COMPONENT FAIL SCENARIOS */
 
-// GetStandingAndMatchesOfBoxer Fail
+// GetMatchesOfBoxer Fail
 const B1_Scenario2_Fail1 = {
-  boxer: testBoxer,
+  boxers: testBoxers,
   matches: testMatches,
   request_body: {
-    boxerId: 2,
+    boxerId: 99999,
   },
   expected_response: {
     code: 404,
-    message: "not_found",
-    boxer: emptyBoxer,
-    standingAndMatches: {
-      standing: emptyStanding,
-      matches: []
-    }
+    message: "boxer_not_found",
   },
 };
 
