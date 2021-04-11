@@ -71,6 +71,10 @@ class GlobalObjects {
     }
   }
 
+  async cleanUp() {
+    await this.matchRepository.cleanUp();
+  }
+
 }
 
 module.exports = GlobalObjects;

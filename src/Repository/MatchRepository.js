@@ -1,6 +1,38 @@
 const { NotFound, InvalidArgument } = require("../common/Errors");
+const { connection } = require('./DB');
 
 class MatchRepository {
+
+  constructor() {
+    this.tableName = 'matches';
+    this.runQuery(this.createTableQuery);
+  }
+
+  get createTableQuery() {
+    return `CREATE TABLE IF NOT EXISTS ${this.tableName} (
+      id INT NOT NULL AUTO_INCREMENT,
+      homeBoxerId INT NOT NULL,
+      awayBoxerId INT NOT NULL,
+      matchTime BIGINT NOT NULL,
+      isFinished INT NOT NULL,
+      winnerBoxerId INT,
+      PRIMARY KEY (id)
+    );`;
+  }
+  
+  get cleanUpQuery() {
+    return `DROP TABLE IF EXISTS ${this.tableName};`;
+  }
+
+  async enterIntegratedTestingEnvironment() {
+    this.tableName = 'test_matches';
+    await this.runQuery(this.createTableQuery);
+  }
+
+  async cleanUp() {
+    await this.runQuery(this.cleanUpQuery);
+    await this.runQuery(this.createTableQuery);
+  }
 
   async addMatchWithGivenData(matchData) {
     if (!matchData) {
@@ -106,6 +138,18 @@ class MatchRepository {
   async runQueryForGetMatchesOfBoxer() {
     console.log("Real GetMatchesOfBoxer query to DB with given data");
     return [];
+  }
+
+  async runQuery(query) {
+    return new Promise((resolve, reject) => {
+      connection.query(query, (error, result) => {
+        if (error) {
+          console.log(error);
+          reject(error);
+        }
+        resolve(result);
+      });
+    });
   }
 
   async SetupAddMatches(matches) {

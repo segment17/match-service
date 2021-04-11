@@ -11,10 +11,13 @@
     "coverage": "nyc yarn test"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^7.0.0",
-    "@grpc/proto-loader": "^0.5.5",
-    "google-protobuf": "^3.13.0",
-    "grpc": "^1.24.3",
-    "nyc": "^15.1.0"
+    "@cucumber/cucumber": "7.0.0",
+    "@grpc/proto-loader": "0.5.5",
+    "google-protobuf": "3.13.0",
+    "grpc": "1.24.3",
+    "nyc": "15.1.0"
+  },
+  "dependencies": {
+    "mysql": "2.18.1"
   }
 }
