@@ -2,3 +2,4 @@
 node_modules/
 test/results.json
 features/cucumberstudio
+.nyc_output
