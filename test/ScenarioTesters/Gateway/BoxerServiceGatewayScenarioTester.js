@@ -8,9 +8,7 @@ class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
   unitFunctionIsInvokedWithData(functionName, dataSource) {
     const specifiedData = TestFunctions.extractSpecifiedObjectData(dataSource);
     switch (functionName) {
-      case 'getAllMatches':
       case 'getBoxer':
-      case 'getMatchesOfBoxer':
         globalObjects.boxerServiceGateway[functionName](specifiedData).then(r => {
           globalObjects.result = r;
         })
@@ -18,12 +16,6 @@ class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
       default:
         break;
     }
-  }
-
-  async thereAreMatchesSuchAs(dataSource) {
-    const matches = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.boxerServiceGateway.SetupAddMatches(matches);
-    globalObjects.done = true;
   }
 
   async thereIsABoxerSuchAs(dataSource) {
