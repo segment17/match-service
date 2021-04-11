@@ -48,7 +48,7 @@ class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
     assert(expectedCode === resultCode);
     assert(expectedMessage === resultMessage);
     if(expectedBoxer) {
-      assert(JSON.stringify(expectedBoxer) === JSON.stringify(resultBoxer[0]));
+      assert(JSON.stringify(expectedBoxer) === JSON.stringify(resultBoxer));
     }
   }
 }
