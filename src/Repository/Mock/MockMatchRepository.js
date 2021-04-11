@@ -137,5 +137,4 @@ class MockMatchRepository extends MatchRepository {
   }
 }
 
-const mockMatchRepositoryInstance = new MockMatchRepository();
-module.exports = mockMatchRepositoryInstance;
+module.exports = MockMatchRepository;

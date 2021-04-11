@@ -280,7 +280,7 @@ class Mediator {
   mock() {
     this.boxerServiceGateway = new MockBoxerServiceGateway();
     this.authServiceGateway = new MockAuthServiceGateway();
-    this.matchRepository = MockMatchRepository;
+    this.matchRepository = new MockMatchRepository();
   }
 
 }
