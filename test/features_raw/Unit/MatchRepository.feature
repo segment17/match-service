@@ -75,8 +75,11 @@ Feature: Match Repository Unit Feature
     Then returned data is as "<expected_data>"
 
     Examples:
-      | matches                           | repository_function | match                           | expected_data                           |
-      | Unit_Repository_Scenario7.matches | updateMatch         | Unit_Repository_Scenario7.match | Unit_Repository_Scenario7.expected_data |
+      | matches                                 | repository_function | match                                 | expected_data                                 |
+      | Unit_Repository_Scenario7.matches       | updateMatch         | Unit_Repository_Scenario7.match       | Unit_Repository_Scenario7.expected_data       |
+      | Unit_Repository_Scenario7_Fail1.matches | updateMatch         | Unit_Repository_Scenario7_Fail1.match | Unit_Repository_Scenario7_Fail1.expected_data |
+      | Unit_Repository_Scenario7_Fail2.matches | updateMatch         | Unit_Repository_Scenario7_Fail2.match | Unit_Repository_Scenario7_Fail2.expected_data |
+      | Unit_Repository_Scenario7_Fail3.matches | updateMatch         | Unit_Repository_Scenario7_Fail3.match | Unit_Repository_Scenario7_Fail3.expected_data |
 
   #FAIL SCENARIOS
 

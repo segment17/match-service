@@ -563,6 +563,7 @@ const Unit_Repository_Scenario6_Fail1 = {
   },
 };
 
+// UpdateMatch
 const Unit_Repository_Scenario7 = {
   matches: testMatches,
   match: {
@@ -573,6 +574,40 @@ const Unit_Repository_Scenario7 = {
     ...testMatches[0],
     matchTime: 129419968
   }
+};
+
+// UpdateMatch Faulty - no match
+const Unit_Repository_Scenario7_Fail1 = {
+  matches: testMatches,
+  match: null,
+  expected_data: {
+    name: 'InvalidArgument',
+    message: 'match cannot be empty',
+  },
+};
+
+// UpdateMatch Faulty - no match id
+const Unit_Repository_Scenario7_Fail2 = {
+  matches: testMatches,
+  match: {
+    matchTime: 129419968
+  },
+  expected_data: {
+    name: 'InvalidArgument',
+    message: 'match.id cannot be empty',
+  },
+};
+
+// UpdateMatch Faulty - match with given id not found
+const Unit_Repository_Scenario7_Fail3 = {
+  matches: testMatches,
+  match: {
+    id: NOT_VALID_MATCH_ID
+  },
+  expected_data: {
+    name: 'NotFound',
+    message: 'match_not_found',
+  },
 };
 
 module.exports = {
@@ -610,4 +645,7 @@ module.exports = {
   Unit_Repository_Scenario6,
   Unit_Repository_Scenario6_Fail1,
   Unit_Repository_Scenario7,
+  Unit_Repository_Scenario7_Fail1,
+  Unit_Repository_Scenario7_Fail2,
+  Unit_Repository_Scenario7_Fail3,
 };

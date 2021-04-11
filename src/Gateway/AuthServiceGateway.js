@@ -14,10 +14,6 @@ class AuthServiceGateway {
     return {}; //TODO
   }
 
-  async setupToken(obj) {
-    return null;
-  }
-
   async setupAddAdmin(obj) {
     return null;
   }
