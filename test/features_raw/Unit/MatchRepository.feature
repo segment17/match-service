@@ -41,8 +41,9 @@ Feature: Match Repository Unit Feature
     Then returned data is as "<expected_data>"
 
     Examples:
-      | match                           | repository_function | match_id                           | expected_data                           |
-      | Unit_Repository_Scenario4.match | getMatchById        | Unit_Repository_Scenario4.match_id | Unit_Repository_Scenario4.expected_data |
+      | match                                 | repository_function | match_id                                 | expected_data                                 |
+      | Unit_Repository_Scenario4.match       | getMatchById        | Unit_Repository_Scenario4.match_id       | Unit_Repository_Scenario4.expected_data       |
+      | Unit_Repository_Scenario4_Fail1.match | getMatchById        | Unit_Repository_Scenario4_Fail1.match_id | Unit_Repository_Scenario4_Fail1.expected_data |
 
   @Unit_Repository_Scenario5
   Scenario Outline: Remove match by id

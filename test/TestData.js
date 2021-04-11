@@ -515,6 +515,15 @@ const Unit_Repository_Scenario4 = {
   expected_data: testMatch,
 }
 
+const Unit_Repository_Scenario4_Fail1 = {
+  match: testMatch,
+  match_id: null,
+  expected_data: {
+    name: 'InvalidArgument',
+    message: 'matchId cannot be empty',
+  },
+}
+
 const Unit_Repository_Scenario5 = {
   matches: testMatches,
   match_id: testMatches[0].id,
@@ -567,6 +576,7 @@ module.exports = {
   Unit_Repository_Scenario3,
   Unit_Repository_Scenario3_Fail1,
   Unit_Repository_Scenario4,
+  Unit_Repository_Scenario4_Fail1,
   Unit_Repository_Scenario5,
   Unit_Repository_Scenario6,
   Unit_Repository_Scenario7,
