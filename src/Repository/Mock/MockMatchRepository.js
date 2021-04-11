@@ -31,7 +31,7 @@ class MockMatchRepository extends MatchRepository {
 
   async runQueryForRemoveMatchById(matchData) {
     if (!matchData || !this.matches || !this.matches.length) {
-      throw Error("Can't find match data.");
+      throw Error("Internal error.");
     }
 
     let removedMatch;
@@ -46,7 +46,7 @@ class MockMatchRepository extends MatchRepository {
     }
 
     if (removedMatch === undefined) {
-      throw Error("Can't find match data.");
+      throw Error("match_not_found");
     }
 
     this.matches = filteredMatches;

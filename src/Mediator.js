@@ -165,6 +165,13 @@ class Mediator {
         match
       }
     } catch (error) {
+      if (error.message === 'match_not_found') {
+        return this.getErrorObject({
+          code: 404,
+          message: error.message,
+        });
+      }
+
       return this.getErrorObject({
         code: 500,
         message: error.message,

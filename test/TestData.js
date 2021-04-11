@@ -4,6 +4,7 @@ const REQUEST_STATUSES = {
   CREATED: 'created',
   DELETED: 'deleted',
   FORBIDDEN: 'forbidden',
+  MATCH_NOT_FOUND: 'match_not_found',
   SUCCESS: 'success',
   UPDATED: 'updated',
 }
@@ -372,7 +373,7 @@ const M2_Scenario1_Fail1 = {
 
 // RemoveMatch Fail - not valid match id
 const M2_Scenario1_Fail2 = {
-  boxers: testBoxers,
+  matches: testMatches,
   admin: testAdmin,
   request_body: {
     id: NOT_VALID_MATCH_ID,
@@ -380,7 +381,7 @@ const M2_Scenario1_Fail2 = {
   },
   expected_response: {
     code: 404,
-    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+    message: REQUEST_STATUSES.MATCH_NOT_FOUND,
   }
 }
 
