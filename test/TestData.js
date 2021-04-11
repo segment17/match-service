@@ -194,21 +194,6 @@ var Unit_BoxerServiceGateway_Scenario1_Fail = {
   },
 };
 
-/* UNIT MATCH SERVICE GATEWAY FAIL SCENARIOS */
-
-// GetMatchesOfBoxer Fail
-var Unit_BoxerServiceGateway_Scenario3_Fail1 = {
-  boxers: testBoxers,
-  matches: testMatches,
-  boxer_id: 2,
-  expected_data: {
-    code: 404,
-    message: "not_found",
-    boxer: emptyBoxer,
-    matches: [],
-  },
-};
-
 /* COMPONENT SUCCESS SCENARIOS */
 
 // GetAllMatches
@@ -560,7 +545,6 @@ module.exports = {
   Unit_AuthServiceGateway_Scenario2_Fail1,
   Unit_BoxerServiceGateway_Scenario1,
   Unit_BoxerServiceGateway_Scenario1_Fail,
-  Unit_BoxerServiceGateway_Scenario3_Fail1,
   Unit_Repository_Scenario1,
   Unit_Repository_Scenario2,
   Unit_Repository_Scenario3,
