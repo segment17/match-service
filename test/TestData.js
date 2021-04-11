@@ -539,6 +539,15 @@ const Unit_Repository_Scenario5_Fail1 = {
   },
 }
 
+const Unit_Repository_Scenario5_Fail2 = {
+  matches: [],
+  match_id: 1,
+  expected_data: {
+    name: 'NotFound',
+    message: 'match_not_found',
+  },
+};
+
 const Unit_Repository_Scenario6 = {
   matches: testMatches,
   boxer_id: testMatches[0].id,
@@ -588,6 +597,7 @@ module.exports = {
   Unit_Repository_Scenario4_Fail1,
   Unit_Repository_Scenario5,
   Unit_Repository_Scenario5_Fail1,
+  Unit_Repository_Scenario5_Fail2,
   Unit_Repository_Scenario6,
   Unit_Repository_Scenario7,
 };

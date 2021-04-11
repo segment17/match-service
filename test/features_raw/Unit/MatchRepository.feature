@@ -55,6 +55,7 @@ Feature: Match Repository Unit Feature
       | matches                                 | repository_function | match_id                                 | expected_data                                 |
       | Unit_Repository_Scenario5.matches       | removeMatchById     | Unit_Repository_Scenario5.match_id       | Unit_Repository_Scenario5.expected_data       |
       | Unit_Repository_Scenario5_Fail1.matches | removeMatchById     | Unit_Repository_Scenario5_Fail1.match_id | Unit_Repository_Scenario5_Fail1.expected_data |
+      | Unit_Repository_Scenario5_Fail2.matches | removeMatchById     | Unit_Repository_Scenario5_Fail2.match_id | Unit_Repository_Scenario5_Fail2.expected_data |
 
   @Unit_Repository_Scenario6
   Scenario Outline: Remove matches of boxer
