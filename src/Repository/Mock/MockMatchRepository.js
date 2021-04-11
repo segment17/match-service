@@ -8,56 +8,35 @@ class MockMatchRepository extends MatchRepository {
   }
 
   async runQueryForAddMatchWithGivenData(matchData) {
-    if (!matchData) {
-      throw Error("Can't insert match data.");
-    }
-    const index = this.matches.length || 0;
     this.matches.push(matchData);
-    return this.matches[index];
   }
 
   async runQueryForGetMatchById(matchData) {
-    if (!matchData) {
-      throw Error("Can't find match data.");
+    const matches = this.matches.filter(match => match.id === matchData);
+    if (!matches || !matches.length) {
+      return [];
     }
 
-    const match = this.matches.filter(match => match.id === matchData);
-    if (!match || !match.length) {
-      throw Error("Can't find match data.");
-    }
-
-    return match[0];
+    return matches;
   }
 
   async runQueryForRemoveMatchById(matchData) {
-    if (!matchData || !this.matches || !this.matches.length) {
-      throw Error("Internal error.");
-    }
-
-    let removedMatch;
+    let removedMatches = [];
     let filteredMatches = [];
     for (let i = 0; i < this.matches.length; i++) {
       const match = this.matches[i];
       if (match.id === matchData) {
-        removedMatch = match;
+        removedMatches.push(match);
       } else {
         filteredMatches.push(match);
       }
     }
 
-    if (removedMatch === undefined) {
-      throw Error("match_not_found");
-    }
-
     this.matches = filteredMatches;
-    return removedMatch;
+    return removedMatches;
   }
 
   async runQueryForRemoveMatchesOfBoxer(boxerId) {
-    if (!boxerId || !this.matches || !this.matches.length) {
-      throw Error("Can't find match data.");
-    }
-
     let removedMatches = [];
     let filteredMatches = [];
     for (let i = 0; i < this.matches.length; i++) {
@@ -74,52 +53,34 @@ class MockMatchRepository extends MatchRepository {
   }
 
   async runQueryForUpdateMatch(updatedMatch) {
-    if (!updatedMatch) {
-      throw Error("Bad operation.");
-    }
-
-    if (!this.matches) {
-      throw Error("DB has gone away.");
-    }
-
-    if (!this.matches.length) {
-      throw Error("Match not found.");
-    }
-
-    let _updatedMatch;
+    let _updatedMatches = [];
     let _matches = [];
     for (let i = 0; i < this.matches.length; i++) {
       let match = this.matches[i];
       if (match.id === updatedMatch.id) {
-        _updatedMatch = {
+        _updatedMatches.push({
           ...match,
           ...updatedMatch
-        }
-        match = _updatedMatch;
+        });
       }
 
       _matches.push(match);
     }
 
     this.matches = _matches;
-    return _updatedMatch;
+    return _updatedMatches;
   }
 
   async runQueryForGetAllMatches() {
-    if (!this.matches) {
-      throw Error("DB has gone away.");
+    if (!this.matches || !this.matches.length) {
+      return [];
     }
 
     return this.matches;
   }
 
   async runQueryForGetMatchesOfBoxer(boxerId) {
-    if (!this.matches) {
-      throw Error("DB has gone away.");
-    }
-
     let filteredMatches = [];
-
     for (let i = 0; i < this.matches.length; i++) {
       const match = this.matches[i];
       if (match.homeBoxer.id === boxerId || match.awayBoxer.id === boxerId) {

@@ -20,107 +20,42 @@ class Mediator {
     return response;
   }
 
-  getErrorObject(validationResponse) {
+  responseObject({ code, message }) {
     return {
-      code: validationResponse.code,
-      message: validationResponse.message,
-      match: {
-        id: -1,
-        homeBoxerId: -1,
-        awayBoxerId: -1,
-        matchTime: -1,
-        isFinished: false,
-        winnerBoxerId: -1
-      }
+      code,
+      message,
     };
   }
 
-  calculateStandingOfBoxer(matches, boxer) {
-    let wins = 0;
-    let losses = 0;
-    for(let index in matches) {
-      const match = matches[index];
-      if(match.isFinished) {
-        if(match.winnerBoxer.id === boxer.id) {
-          wins++;
-        } else {
-          if(match.homeBoxer.id === boxer.id || match.awayBoxer.id === boxer.id) {
-            losses++;
-          }
-        }
-      }
+  handleException(exception) {
+    switch (exception.name) {
+      case 'InvalidArgument':
+        return this.responseObject({ code: 400, message: 'bad_request' });
+      case 'NotFound':
+        return this.responseObject({ code: 404, message: exception.message });
+      default:
+        return this.responseObject({ code: 500, message: exception.message });
     }
-    let score = wins / (wins + losses);
-    return { boxer: boxer.id === 0 ? null : boxer, winCount: wins, lossCount: losses, score: score ? score : 0 };
-  }
-
-  extractBoxersFromMatches(matches) {
-    let boxers = [];
-    let boxer_ids = [];
-    for(let index in matches) {
-      const away = matches[index].awayBoxer;
-      const home = matches[index].homeBoxer;
-      if(!boxer_ids.includes(away.id)) {
-        boxer_ids.push(away.id);
-        boxers.push(away);
-      }
-      if(!boxer_ids.includes(home.id)) {
-        boxer_ids.push(home.id);
-        boxers.push(home);
-      }
-    }
-    return boxers;
-  }
-
-  async getStandingAndMatchesOfBoxer(id) {
-    const response = await this.boxerServiceGateway.getMatchesOfBoxer(id);
-    const standing = this.calculateStandingOfBoxer(response.matches, response.boxer);
-
-    return {
-      code: response.code,
-      message: response.message,
-      boxer: response.boxer,
-      standingAndMatches: {
-        standing: standing,
-        matches: response.matches
-      }
-    };
-  }
-
-  async getAllStandings() {
-    const response = await this.boxerServiceGateway.getAllMatches();
-    const matches = response.matches;
-    let boxers = this.extractBoxersFromMatches(matches);
-    let standings = [];
-    for(let index in boxers) {
-      standings.push(this.calculateStandingOfBoxer(matches, boxers[index]));
-    }
-
-    return {
-      code: response.code,
-      message: response.message,
-      standings: standings
-    };
   }
 
   async addMatch(request) {
     const { homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token } = request;
     // Authentication validation
     const authValidation = await this.getAuthValidation(token);
-    if(authValidation.code !== 200) {
-      return this.getErrorObject(authValidation);
+    if (authValidation.code !== 200) {
+      return this.responseObject(authValidation);
     }
 
     // Home boxer validation
     const homeBoxerValidation = await this.boxerServiceGateway.getBoxer(homeBoxerId);
     if (homeBoxerValidation.code !== 200) {
-      return this.getErrorObject(homeBoxerValidation);
+      return this.responseObject(homeBoxerValidation);
     }
 
     // Away boxer validation
     const awayBoxerValidation = await this.boxerServiceGateway.getBoxer(awayBoxerId);
     if (awayBoxerValidation.code !== 200) {
-      return this.getErrorObject(awayBoxerValidation);
+      return this.responseObject(awayBoxerValidation);
     }
 
     // Add match to DB
@@ -134,15 +69,11 @@ class Mediator {
       });
 
       return {
-        code: 201,
-        message: 'created',
+        ...this.responseObject({ code: 201, message: 'created' }),
         match
       }
     } catch (error) {
-      return this.getErrorObject({
-        code: 500,
-        message: error.message,
-      });
+      return this.handleException(error);
     }
   }
 
@@ -151,8 +82,8 @@ class Mediator {
 
     // Authentication validation
     const authValidation = await this.getAuthValidation(token);
-    if(authValidation.code !== 200) {
-      return this.getErrorObject(authValidation);
+    if (authValidation.code !== 200) {
+      return this.responseObject(authValidation);
     }
 
     // Remove match from DB
@@ -160,22 +91,11 @@ class Mediator {
       const match = await this.matchRepository.removeMatchById(matchId);
 
       return {
-        code: 200,
-        message: 'deleted',
+        ...this.responseObject({ code: 200, message: 'deleted' }),
         match
       }
     } catch (error) {
-      if (error.message === 'match_not_found') {
-        return this.getErrorObject({
-          code: 404,
-          message: error.message,
-        });
-      }
-
-      return this.getErrorObject({
-        code: 500,
-        message: error.message,
-      });
+      return this.handleException(error);
     }
   }
 
@@ -185,7 +105,7 @@ class Mediator {
     // Home boxer validation
     const boxerValidation = await this.boxerServiceGateway.getBoxer(boxerId);
     if (boxerValidation.code !== 200) {
-      return this.getErrorObject(boxerValidation);
+      return this.responseObject(boxerValidation);
     }
 
     // Remove match from DB
@@ -193,16 +113,12 @@ class Mediator {
       const matches = await this.matchRepository.getMatchesOfBoxer(boxerId);
 
       return {
-        code: 200,
-        message: 'success',
+        ...this.responseObject({ code: 200, message: 'success' }),
         matches,
         boxer: boxerValidation.boxer,
       }
     } catch (error) {
-      return this.getErrorObject({
-        code: 500,
-        message: error.message,
-      });
+      return this.handleException(error);
     }
   }
 
@@ -211,14 +127,14 @@ class Mediator {
 
     // Authentication validation
     const authValidation = await this.getAuthValidation(token);
-    if(authValidation.code !== 200) {
-      return this.getErrorObject(authValidation);
+    if (authValidation.code !== 200) {
+      return this.responseObject(authValidation);
     }
 
     // Home boxer validation
     const boxerValidation = await this.boxerServiceGateway.getBoxer(boxerId);
     if (boxerValidation.code !== 200) {
-      return this.getErrorObject(boxerValidation);
+      return this.responseObject(boxerValidation);
     }
 
     // Remove match from DB
@@ -226,33 +142,29 @@ class Mediator {
       const matches = await this.matchRepository.removeMatchesOfBoxer(boxerId);
 
       return {
-        code: 200,
-        message: 'deleted',
+        ...this.responseObject({ code: 200, message: 'deleted' }),
         matches
       }
     } catch (error) {
-      return this.getErrorObject({
-        code: 500,
-        message: error.message,
-      });
+      return this.handleException(error);
     }
   }
 
   async updateMatch(request) {
-    const { id, homeBoxer, awayBoxer, matchTime, isFinished, winnerBoxerId, token} = request;
+    const { id, homeBoxer, awayBoxer, matchTime, isFinished, winnerBoxerId, token } = request;
     const updatedMatch = { id, homeBoxer, awayBoxer, matchTime, isFinished, winnerBoxerId };
 
     // Authentication validation
     const authValidation = await this.getAuthValidation(token);
-    if(authValidation.code !== 200) {
-      return this.getErrorObject(authValidation);
+    if (authValidation.code !== 200) {
+      return this.responseObject(authValidation);
     }
 
     // Home boxer validation
     if (homeBoxer) {
       const homeBoxerValidation = await this.boxerServiceGateway.getBoxer(homeBoxer.id);
       if (homeBoxerValidation.code !== 200) {
-        return this.getErrorObject(homeBoxerValidation);
+        return this.responseObject(homeBoxerValidation);
       }
     }
 
@@ -260,7 +172,7 @@ class Mediator {
       // Away boxer validation
       const awayBoxerValidation = await this.boxerServiceGateway.getBoxer(awayBoxer.id);
       if (awayBoxerValidation.code !== 200) {
-        return this.getErrorObject(awayBoxerValidation);
+        return this.responseObject(awayBoxerValidation);
       }
     }
 
@@ -269,15 +181,11 @@ class Mediator {
       const match = await this.matchRepository.updateMatch(updatedMatch);
 
       return {
-        code: 200,
-        message: 'updated',
+        ...this.responseObject({ code: 200, message: 'updated' }),
         match
       }
     } catch (error) {
-      return this.getErrorObject({
-        code: 500,
-        message: error.message,
-      });
+      return this.handleException(error);
     }
   }
 
@@ -287,15 +195,11 @@ class Mediator {
       const matches = await this.matchRepository.getAllMatches();
 
       return {
-        code: 200,
-        message: 'success',
+        ...this.responseObject({ code: 200, message: 'success' }),
         matches
       }
     } catch (error) {
-      return this.getErrorObject({
-        code: 500,
-        message: error.message,
-      });
+      return this.handleException(error);
     }
   }
 
