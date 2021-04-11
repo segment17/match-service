@@ -20,8 +20,9 @@ Feature: Match Repository Unit Feature
     Then returned data is as "<expected_data>"
 
     Examples:
-      | matches                           | repository_function | boxer_id                           | expected_data                           |
-      | Unit_Repository_Scenario2.matches | getMatchesOfBoxer   | Unit_Repository_Scenario2.boxer_id | Unit_Repository_Scenario2.expected_data |
+      | matches                                 | repository_function | boxer_id                                 | expected_data                                 |
+      | Unit_Repository_Scenario2.matches       | getMatchesOfBoxer   | Unit_Repository_Scenario2.boxer_id       | Unit_Repository_Scenario2.expected_data       |
+      | Unit_Repository_Scenario2_Fail1.matches | getMatchesOfBoxer   | Unit_Repository_Scenario2_Fail1.boxer_id | Unit_Repository_Scenario2_Fail1.expected_data |
 
   @Unit_Repository_Scenario3
   Scenario Outline: Add a new match to DB

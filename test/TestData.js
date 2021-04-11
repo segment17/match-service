@@ -171,28 +171,6 @@ const testMatchesIncludingFirstBoxer = [
   testMatch,
   testMatch3
 ];
-/* UNIT MATCH SERVICE GATEWAY SUCCESS SCENARIOS */
-
-// Get boxer from Boxer Service Gateway
-var Unit_BoxerServiceGateway_Scenario1 = {
-  boxers: testBoxers,
-  boxer_id: 1,
-  expected_data: {
-    code: 200,
-    message: REQUEST_STATUSES.SUCCESS,
-    boxer: testBoxers[0]
-  }
-};
-
-// Get boxer from Boxer Service Gateway - faulty
-var Unit_BoxerServiceGateway_Scenario1_Fail = {
-  boxers: [],
-  boxer_id: 1,
-  expected_data: {
-    code: 404,
-    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
-  },
-};
 
 /* COMPONENT SUCCESS SCENARIOS */
 
@@ -453,8 +431,6 @@ const M3_Scenario1_Variation1 = {
   }
 }
 
-// UNIT AUTH SERVICE GATEWAY SUCCESS SCENARIOS
-
 const Unit_AuthServiceGateway_Scenario1 = {
   admin: testAdmin,
   data_chunk: TOKENS.VALID,
@@ -464,8 +440,6 @@ const Unit_AuthServiceGateway_Scenario1 = {
   }
 }
 
-// UNIT AUTH SERVICE GATEWAY FAIL SCENARIOS
-
 const Unit_AuthServiceGateway_Scenario2_Fail1 = {
   admin: testAdmin,
   data_chunk: TOKENS.INVALID,
@@ -474,6 +448,27 @@ const Unit_AuthServiceGateway_Scenario2_Fail1 = {
     message: REQUEST_STATUSES.FORBIDDEN
   }
 }
+
+// Get boxer from Boxer Service Gateway
+var Unit_BoxerServiceGateway_Scenario1 = {
+  boxers: testBoxers,
+  boxer_id: 1,
+  expected_data: {
+    code: 200,
+    message: REQUEST_STATUSES.SUCCESS,
+    boxer: testBoxers[0]
+  }
+};
+
+// Get boxer from Boxer Service Gateway - faulty
+var Unit_BoxerServiceGateway_Scenario1_Fail = {
+  boxers: [],
+  boxer_id: 1,
+  expected_data: {
+    code: 404,
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+  },
+};
 
 const Unit_Repository_Scenario1 = {
   matches: testMatches,
@@ -485,6 +480,16 @@ const Unit_Repository_Scenario2 = {
   matches: testMatches,
   boxer_id: testBoxers[0].id,
   expected_data: testMatchesIncludingFirstBoxer,
+};
+
+// GetMatchesOfBoxer Fail - no boxer id
+const Unit_Repository_Scenario2_Fail1 = {
+  matches: testMatches,
+  boxer_id: null,
+  expected_data: {
+    name: 'InvalidArgument',
+    message: 'boxerId cannot be empty',
+  },
 };
 
 const Unit_Repository_Scenario3 = {
@@ -547,6 +552,7 @@ module.exports = {
   Unit_BoxerServiceGateway_Scenario1_Fail,
   Unit_Repository_Scenario1,
   Unit_Repository_Scenario2,
+  Unit_Repository_Scenario2_Fail1,
   Unit_Repository_Scenario3,
   Unit_Repository_Scenario4,
   Unit_Repository_Scenario5,

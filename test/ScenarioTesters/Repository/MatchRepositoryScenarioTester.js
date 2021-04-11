@@ -17,6 +17,8 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
       case 'updateMatch':
         globalObjects.matchRepository[unitFunctionName](data).then(d => {
           globalObjects.result = d;
+        }).catch(err => {
+          globalObjects.result = err;
         });
         break;
       default:
@@ -38,35 +40,41 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
     // Or separate checks
 
     const result = globalObjects.result;
-    const isResultArray = Array.isArray(result);
-    if (isResultArray) {
-      for (let index = 0; index < result.length; index++) {
-        const r = result[index];
-        const e = expectedData[index];
-        const { id, homeBoxer: { id: homeBoxerId }, awayBoxer: { id: awayBoxerId }, matchTime, isFinished } = r;
-
+    const isResultError = result instanceof Error;
+    if (isResultError) {
+      assert.strictEqual(expectedData.name, result.name);
+      assert.strictEqual(expectedData.message, result.message);
+    } else {
+      const isResultArray = Array.isArray(result);
+      if (isResultArray) {
+        for (let index = 0; index < result.length; index++) {
+          const r = result[index];
+          const e = expectedData[index];
+          const { id, homeBoxer: { id: homeBoxerId }, awayBoxer: { id: awayBoxerId }, matchTime, isFinished } = r;
+  
+          if (!homeBoxerId || !awayBoxerId || !matchTime || isFinished === undefined) {
+            assert(false);
+          }
+  
+          assert.strictEqual(id, e.id);
+          assert.strictEqual(homeBoxerId, e.homeBoxer.id);
+          assert.strictEqual(awayBoxerId, e.awayBoxer.id);
+          assert.strictEqual(matchTime, e.matchTime);
+          assert.strictEqual(isFinished, e.isFinished);
+        }
+      } else {
+        const { id, homeBoxer: { id: homeBoxerId }, awayBoxer: { id: awayBoxerId }, matchTime, isFinished } = result;
+    
         if (!homeBoxerId || !awayBoxerId || !matchTime || isFinished === undefined) {
           assert(false);
         }
-
-        assert.strictEqual(id, e.id);
-        assert.strictEqual(homeBoxerId, e.homeBoxer.id);
-        assert.strictEqual(awayBoxerId, e.awayBoxer.id);
-        assert.strictEqual(matchTime, e.matchTime);
-        assert.strictEqual(isFinished, e.isFinished);
+    
+        assert.strictEqual(id, expectedData.id);
+        assert.strictEqual(homeBoxerId, expectedData.homeBoxer.id);
+        assert.strictEqual(awayBoxerId, expectedData.awayBoxer.id);
+        assert.strictEqual(matchTime, expectedData.matchTime);
+        assert.strictEqual(isFinished, expectedData.isFinished);
       }
-    } else {
-      const { id, homeBoxer: { id: homeBoxerId }, awayBoxer: { id: awayBoxerId }, matchTime, isFinished } = result;
-  
-      if (!homeBoxerId || !awayBoxerId || !matchTime || isFinished === undefined) {
-        assert(false);
-      }
-  
-      assert.strictEqual(id, expectedData.id);
-      assert.strictEqual(homeBoxerId, expectedData.homeBoxer.id);
-      assert.strictEqual(awayBoxerId, expectedData.awayBoxer.id);
-      assert.strictEqual(matchTime, expectedData.matchTime);
-      assert.strictEqual(isFinished, expectedData.isFinished);
     }
   }
 
