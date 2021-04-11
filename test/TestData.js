@@ -283,7 +283,7 @@ const M1_Scenario1_Fail1 = {
     code: 403,
     message: REQUEST_STATUSES.FORBIDDEN,
   }
-}
+};
 
 // AddMatch Fail - not valid match data
 const M1_Scenario1_Fail2 = {
@@ -301,7 +301,7 @@ const M1_Scenario1_Fail2 = {
     code: 400,
     message: REQUEST_STATUSES.BAD_REQUEST,
   }
-}
+};
 
 // AddMatch Fail - not valid boxer id in one of the matches
 const M1_Scenario1_Fail3 = {
@@ -318,7 +318,7 @@ const M1_Scenario1_Fail3 = {
     code: 404,
     message: REQUEST_STATUSES.BOXER_NOT_FOUND,
   }
-}
+};
 
 // RemoveMatch Fail - not valid admin token
 const M2_Scenario1_Fail1 = {
@@ -332,7 +332,7 @@ const M2_Scenario1_Fail1 = {
     code: 403,
     message: REQUEST_STATUSES.FORBIDDEN,
   }
-}
+};
 
 // RemoveMatch Fail - not valid match id
 const M2_Scenario1_Fail2 = {
@@ -346,7 +346,7 @@ const M2_Scenario1_Fail2 = {
     code: 404,
     message: REQUEST_STATUSES.MATCH_NOT_FOUND,
   }
-}
+};
 
 // UpdateMatch Fail - not valid admin token
 const M3_Scenario1_Fail1 = {
@@ -362,7 +362,7 @@ const M3_Scenario1_Fail1 = {
     code: 403,
     message: REQUEST_STATUSES.FORBIDDEN,
   }
-}
+};
 
 // UpdateMatch Fail - not valid match
 const M3_Scenario1_Fail2 = {
@@ -377,7 +377,7 @@ const M3_Scenario1_Fail2 = {
     code: 400,
     message: REQUEST_STATUSES.BAD_REQUEST,
   }
-}
+};
 
 
 // AddMatch
@@ -396,7 +396,7 @@ const M1_Scenario1_Variation1 = {
     message: REQUEST_STATUSES.CREATED,
     match: testMatch
   }
-}
+};
 
 const M2_Scenario1_Variation1 = {
   matches: testMatches,
@@ -410,7 +410,7 @@ const M2_Scenario1_Variation1 = {
     message: REQUEST_STATUSES.DELETED,
     match: testMatches[0]
   }
-}
+};
 
 const M3_Scenario1_Variation1 = {
   matches: testMatches,
@@ -429,7 +429,7 @@ const M3_Scenario1_Variation1 = {
       matchTime: 129419968
     }
   }
-}
+};
 
 const Unit_AuthServiceGateway_Scenario1 = {
   admin: testAdmin,
@@ -438,7 +438,7 @@ const Unit_AuthServiceGateway_Scenario1 = {
     code: 200,
     message: REQUEST_STATUSES.SUCCESS
   }
-}
+};
 
 const Unit_AuthServiceGateway_Scenario2_Fail1 = {
   admin: testAdmin,
@@ -447,7 +447,7 @@ const Unit_AuthServiceGateway_Scenario2_Fail1 = {
     code: 403,
     message: REQUEST_STATUSES.FORBIDDEN
   }
-}
+};
 
 // Get boxer from Boxer Service Gateway
 var Unit_BoxerServiceGateway_Scenario1 = {
@@ -473,7 +473,7 @@ var Unit_BoxerServiceGateway_Scenario1_Fail = {
 const Unit_Repository_Scenario1 = {
   matches: testMatches,
   expected_data: testMatches,
-}
+};
 
 // GetMatchesOfBoxer
 const Unit_Repository_Scenario2 = {
@@ -496,7 +496,7 @@ const Unit_Repository_Scenario3 = {
   existing_match: [testMatch],
   data_chunk: testMatch2,
   new_match: testMatch2,
-}
+};
 
 // AddMatch Fail - no match data
 const Unit_Repository_Scenario3_Fail1 = {
@@ -513,7 +513,7 @@ const Unit_Repository_Scenario4 = {
   match: testMatch,
   match_id: 1,
   expected_data: testMatch,
-}
+};
 
 const Unit_Repository_Scenario4_Fail1 = {
   match: testMatch,
@@ -522,13 +522,13 @@ const Unit_Repository_Scenario4_Fail1 = {
     name: 'InvalidArgument',
     message: 'matchId cannot be empty',
   },
-}
+};
 
 const Unit_Repository_Scenario5 = {
   matches: testMatches,
   match_id: testMatches[0].id,
   expected_data: testMatches[0]
-}
+};
 
 const Unit_Repository_Scenario5_Fail1 = {
   matches: testMatches,
@@ -537,7 +537,7 @@ const Unit_Repository_Scenario5_Fail1 = {
     name: 'InvalidArgument',
     message: 'matchId cannot be empty',
   },
-}
+};
 
 const Unit_Repository_Scenario5_Fail2 = {
   matches: [],
@@ -552,7 +552,16 @@ const Unit_Repository_Scenario6 = {
   matches: testMatches,
   boxer_id: testMatches[0].id,
   expected_data: testMatchesIncludingFirstBoxer
-}
+};
+
+const Unit_Repository_Scenario6_Fail1 = {
+  matches: testMatches,
+  boxer_id: null,
+  expected_data: {
+    name: 'InvalidArgument',
+    message: 'boxerId cannot be empty',
+  },
+};
 
 const Unit_Repository_Scenario7 = {
   matches: testMatches,
@@ -564,7 +573,7 @@ const Unit_Repository_Scenario7 = {
     ...testMatches[0],
     matchTime: 129419968
   }
-}
+};
 
 module.exports = {
   B1_Scenario1_Variation1,
@@ -599,5 +608,6 @@ module.exports = {
   Unit_Repository_Scenario5_Fail1,
   Unit_Repository_Scenario5_Fail2,
   Unit_Repository_Scenario6,
+  Unit_Repository_Scenario6_Fail1,
   Unit_Repository_Scenario7,
 };
