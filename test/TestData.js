@@ -388,6 +388,7 @@ const M2_Scenario1_Fail2 = {
 // UpdateMatch Fail - not valid admin token
 const M3_Scenario1_Fail1 = {
   matches: testMatches,
+  boxers: testBoxers,
   admin: testAdmin,
   request_body: {
     ...testMatches[0],
@@ -402,6 +403,7 @@ const M3_Scenario1_Fail1 = {
 
 // UpdateMatch Fail - not valid match
 const M3_Scenario1_Fail2 = {
+  matches: testMatches,
   boxers: testBoxers,
   admin: testAdmin,
   request_body: {
@@ -409,8 +411,8 @@ const M3_Scenario1_Fail2 = {
     token: TOKENS.VALID,
   },
   expected_response: {
-    code: 404,
-    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+    code: 400,
+    message: REQUEST_STATUSES.BAD_REQUEST,
   }
 }
 
@@ -449,6 +451,7 @@ const M2_Scenario1_Variation1 = {
 
 const M3_Scenario1_Variation1 = {
   matches: testMatches,
+  boxers: testBoxers,
   admin: testAdmin,
   request_body: {
     ...testMatches[0],

@@ -239,13 +239,29 @@ class Mediator {
   }
 
   async updateMatch(request) {
-    const { id, homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token} = request;
-    const updatedMatch = { id, homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId };
+    const { id, homeBoxer, awayBoxer, matchTime, isFinished, winnerBoxerId, token} = request;
+    const updatedMatch = { id, homeBoxer, awayBoxer, matchTime, isFinished, winnerBoxerId };
 
     // Authentication validation
     const authValidation = await this.getAuthValidation(token);
     if(authValidation.code !== 200) {
       return this.getErrorObject(authValidation);
+    }
+
+    // Home boxer validation
+    if (homeBoxer) {
+      const homeBoxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(homeBoxer.id);
+      if (homeBoxerValidation.code !== 200) {
+        return this.getErrorObject(homeBoxerValidation);
+      }
+    }
+
+    if (awayBoxer) {
+      // Away boxer validation
+      const awayBoxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(awayBoxer.id);
+      if (awayBoxerValidation.code !== 200) {
+        return this.getErrorObject(awayBoxerValidation);
+      }
     }
 
     // Update match

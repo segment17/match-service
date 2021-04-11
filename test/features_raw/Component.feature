@@ -70,12 +70,13 @@ Feature: Match Service Component Features
   @M3 @M3_Scenario1
   Scenario Outline: Update Match
     Given there are matches such as "<matches>"
+    And there are boxers such as "<boxers>"
     And there is an admin such as "<admin>"
     When "<endpoint>" is called with "<request_body>"
     Then response is as "<expected_response>"
 
     Examples:
-      | matches                         | admin                         | endpoint    | request_body                         | expected_response                         |
-      | M3_Scenario1_Variation1.matches | M3_Scenario1_Variation1.admin | UpdateMatch | M3_Scenario1_Variation1.request_body | M3_Scenario1_Variation1.expected_response |
-      | M3_Scenario1_Fail1.matches      | M3_Scenario1_Fail1.admin      | RemoveMatch | M3_Scenario1_Fail1.request_body      | M3_Scenario1_Fail1.expected_response      |
-      | M3_Scenario1_Fail2.matches      | M3_Scenario1_Fail2.admin      | RemoveMatch | M3_Scenario1_Fail2.request_body      | M3_Scenario1_Fail2.expected_response      |
+      | matches                         | boxers                         | admin                         | endpoint    | request_body                         | expected_response                         |
+      | M3_Scenario1_Variation1.matches | M3_Scenario1_Variation1.boxers | M3_Scenario1_Variation1.admin | UpdateMatch | M3_Scenario1_Variation1.request_body | M3_Scenario1_Variation1.expected_response |
+      | M3_Scenario1_Fail1.matches      | M3_Scenario1_Fail1.boxers      | M3_Scenario1_Fail1.admin      | UpdateMatch | M3_Scenario1_Fail1.request_body      | M3_Scenario1_Fail1.expected_response      |
+      | M3_Scenario1_Fail2.matches      | M3_Scenario1_Fail2.boxers      | M3_Scenario1_Fail2.admin      | UpdateMatch | M3_Scenario1_Fail2.request_body      | M3_Scenario1_Fail2.expected_response      |

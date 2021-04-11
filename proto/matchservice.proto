@@ -38,8 +38,8 @@ message GetMatchesOfBoxerResponse {
 
 message UpdateMatchRequest {
     int32 id = 1;
-    optional int32 homeBoxerId = 2;
-    optional int32 awayBoxerId = 3;
+    optional Boxer homeBoxer = 2;
+    optional Boxer awayBoxer = 3;
     optional int64 matchTime = 4;
     optional bool isFinished = 5;
     optional int32 winnerBoxerId = 6;
