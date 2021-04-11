@@ -39,6 +39,7 @@ class GlobalObjects {
 
   // Mock everything...
   mock() {
+    this.result = null; // Result object that will be filled during tests.
     this.mediator.mock();
     this.boxerServiceGateway = new MockBoxerServiceGateway();
     this.authServiceGateway = new MockAuthServiceGateway();
