@@ -46,10 +46,10 @@ async function bindMock(call, callback) {
   callback(null, null);
 }
 
-/* async function bindSetupAddBoxer(call, callback) {
-  await globalObjects.controller.mediator.boxerServiceGateway.SetupAddBoxer(call.request.boxer);
+async function bindSetupAddAdmin(call, callback) {
+  await globalObjects.controller.mediator.authServiceGateway.setupAddAdmin(call.request.boxers);
   callback(null, {code: 200});
-} */
+}
 
 async function bindSetupAddBoxers(call, callback) {
   await globalObjects.controller.mediator.boxerServiceGateway.SetupAddBoxers(call.request.boxers);
@@ -66,15 +66,15 @@ function main() {
   server = new grpc.Server();
   server.addService(matchservice_package.MatchService.service, {
     AddMatch: bindAddMatch,
-    RemoveMatch: bindRemoveMatch,
-    UpdateMatch: bindUpdateMatch,
-    RemoveMatchesOfBoxer: bindRemoveMatchesOfBoxer,
     GetAllMatches: bindGetAllMatches,
     GetMatchesOfBoxer: bindGetMatchesOfBoxer,
     Mock: bindMock,
+    RemoveMatch: bindRemoveMatch,
+    RemoveMatchesOfBoxer: bindRemoveMatchesOfBoxer,
+    SetupAddAdmin: bindSetupAddAdmin,
     SetupAddBoxers: bindSetupAddBoxers,
-    // SetupAddBoxer: bindSetupAddBoxer,
-    SetupAddMatches: bindSetupAddMatches
+    SetupAddMatches: bindSetupAddMatches,
+    UpdateMatch: bindUpdateMatch,
   });
 
   if (process.env.MATCH_SERVICE_SERVICE_PORT != undefined) {
