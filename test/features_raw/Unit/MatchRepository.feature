@@ -60,7 +60,7 @@ Feature: Match Repository Unit Feature
     Then returned data is as "<expected_data>"
 
     Examples:
-      | matches                            | repository_function  | boxer_id                            | expected_data                            |
+      | matches                           | repository_function  | boxer_id                           | expected_data                           |
       | Unit_Repository_Scenario6.matches | removeMatchesOfBoxer | Unit_Repository_Scenario6.boxer_id | Unit_Repository_Scenario6.expected_data |
 
   @Unit_Repository_Scenario7
@@ -70,7 +70,7 @@ Feature: Match Repository Unit Feature
     Then returned data is as "<expected_data>"
 
     Examples:
-      | matches                            | repository_function | match                            | expected_data                            |
+      | matches                           | repository_function | match                           | expected_data                           |
       | Unit_Repository_Scenario7.matches | updateMatch         | Unit_Repository_Scenario7.match | Unit_Repository_Scenario7.expected_data |
 
-  #FAIL SCENARIOS
+#FAIL SCENARIOS
