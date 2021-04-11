@@ -498,6 +498,17 @@ const Unit_Repository_Scenario3 = {
   new_match: testMatch2,
 }
 
+// AddMatch Fail - no match data
+const Unit_Repository_Scenario3_Fail1 = {
+  matches: testMatches,
+  data_chunk: null,
+  expected_data: {
+    name: 'InvalidArgument',
+    message: 'matchData cannot be empty',
+  },
+};
+
+
 const Unit_Repository_Scenario4 = {
   match: testMatch,
   match_id: 1,
@@ -554,6 +565,7 @@ module.exports = {
   Unit_Repository_Scenario2,
   Unit_Repository_Scenario2_Fail1,
   Unit_Repository_Scenario3,
+  Unit_Repository_Scenario3_Fail1,
   Unit_Repository_Scenario4,
   Unit_Repository_Scenario5,
   Unit_Repository_Scenario6,

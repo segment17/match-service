@@ -74,4 +74,13 @@ Feature: Match Repository Unit Feature
       | matches                           | repository_function | match                           | expected_data                           |
       | Unit_Repository_Scenario7.matches | updateMatch         | Unit_Repository_Scenario7.match | Unit_Repository_Scenario7.expected_data |
 
-#FAIL SCENARIOS
+  #FAIL SCENARIOS
+
+  @Unit_Repository_Scenario3 @Fail
+  Scenario Outline: Add a new match to DB - Faulty
+    When "<repository_function>" is invoked with "<data_chunk>"
+    Then returned data is as "<expected_data>"
+
+    Examples:
+      | repository_function   | data_chunk                                 | expected_data                                 |
+      | addMatchWithGivenData | Unit_Repository_Scenario3_Fail1.data_chunk | Unit_Repository_Scenario3_Fail1.expected_data |
