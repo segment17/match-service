@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "test": "nyc cucumber-js --format json:./test/results.json --exit",
+    "cucumber-publish": "CUCUMBER_PUBLISH_TOKEN=b2130c03-b2b3-4ac8-8b80-2e6e46d43086 cucumber-js --publish --exit"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^7.0.0",
