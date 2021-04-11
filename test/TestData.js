@@ -483,7 +483,7 @@ const Unit_AuthServiceGateway_Scenario1 = {
 
 const Unit_AuthServiceGateway_Scenario2_Fail1 = {
   admin: testAdmin,
-  data_chunk: TOKENS.VALID,
+  data_chunk: TOKENS.INVALID,
   expected_data: {
     code: 403,
     message: REQUEST_STATUSES.FORBIDDEN
