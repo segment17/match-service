@@ -112,13 +112,13 @@ class Mediator {
     }
 
     // Home boxer validation
-    const homeBoxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(homeBoxerId);
+    const homeBoxerValidation = await this.boxerServiceGateway.getBoxer(homeBoxerId);
     if (homeBoxerValidation.code !== 200) {
       return this.getErrorObject(homeBoxerValidation);
     }
 
     // Away boxer validation
-    const awayBoxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(awayBoxerId);
+    const awayBoxerValidation = await this.boxerServiceGateway.getBoxer(awayBoxerId);
     if (awayBoxerValidation.code !== 200) {
       return this.getErrorObject(awayBoxerValidation);
     }
@@ -183,7 +183,7 @@ class Mediator {
     const { boxerId } = request;
 
     // Home boxer validation
-    const boxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(boxerId);
+    const boxerValidation = await this.boxerServiceGateway.getBoxer(boxerId);
     if (boxerValidation.code !== 200) {
       return this.getErrorObject(boxerValidation);
     }
@@ -216,7 +216,7 @@ class Mediator {
     }
 
     // Home boxer validation
-    const boxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(boxerId);
+    const boxerValidation = await this.boxerServiceGateway.getBoxer(boxerId);
     if (boxerValidation.code !== 200) {
       return this.getErrorObject(boxerValidation);
     }
@@ -250,7 +250,7 @@ class Mediator {
 
     // Home boxer validation
     if (homeBoxer) {
-      const homeBoxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(homeBoxer.id);
+      const homeBoxerValidation = await this.boxerServiceGateway.getBoxer(homeBoxer.id);
       if (homeBoxerValidation.code !== 200) {
         return this.getErrorObject(homeBoxerValidation);
       }
@@ -258,7 +258,7 @@ class Mediator {
 
     if (awayBoxer) {
       // Away boxer validation
-      const awayBoxerValidation = await this.boxerServiceGateway.getBoxerWithStandingAndMatches(awayBoxer.id);
+      const awayBoxerValidation = await this.boxerServiceGateway.getBoxer(awayBoxer.id);
       if (awayBoxerValidation.code !== 200) {
         return this.getErrorObject(awayBoxerValidation);
       }

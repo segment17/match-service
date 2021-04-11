@@ -9,7 +9,7 @@ class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
     const specifiedData = TestFunctions.extractSpecifiedObjectData(dataSource);
     switch (functionName) {
       case 'getAllMatches':
-      case 'getBoxerWithStandingAndMatches':
+      case 'getBoxer':
       case 'getMatchesOfBoxer':
         globalObjects.boxerServiceGateway[functionName](specifiedData).then(r => {
           globalObjects.result = r;

@@ -11,7 +11,7 @@ Feature: Boxer Service Gateway Unit Feature
 
     Examples:
       | boxers                                    | gateway_function               | boxer_id                                    | expected_data                                    |
-      | Unit_BoxerServiceGateway_Scenario1.boxers | getBoxerWithStandingAndMatches | Unit_BoxerServiceGateway_Scenario1.boxer_id | Unit_BoxerServiceGateway_Scenario1.expected_data |
+      | Unit_BoxerServiceGateway_Scenario1.boxers | getBoxer | Unit_BoxerServiceGateway_Scenario1.boxer_id | Unit_BoxerServiceGateway_Scenario1.expected_data |
 
   #FAIL SCENARIOS
 
@@ -23,4 +23,4 @@ Feature: Boxer Service Gateway Unit Feature
 
     Examples:
       | boxers                                         | gateway_function               | boxer_id                                         | expected_data                                         |
-      | Unit_BoxerServiceGateway_Scenario1_Fail.boxers | getBoxerWithStandingAndMatches | Unit_BoxerServiceGateway_Scenario1_Fail.boxer_id | Unit_BoxerServiceGateway_Scenario1_Fail.expected_data |
+      | Unit_BoxerServiceGateway_Scenario1_Fail.boxers | getBoxer | Unit_BoxerServiceGateway_Scenario1_Fail.boxer_id | Unit_BoxerServiceGateway_Scenario1_Fail.expected_data |
