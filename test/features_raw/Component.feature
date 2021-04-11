@@ -64,6 +64,8 @@ Feature: Match Service Component Features
     Examples:
       | matches                         | admin                         | endpoint    | request_body                         | expected_response                         |
       | M2_Scenario1_Variation1.matches | M2_Scenario1_Variation1.admin | RemoveMatch | M2_Scenario1_Variation1.request_body | M2_Scenario1_Variation1.expected_response |
+      | M2_Scenario1_Fail1.matches      | M2_Scenario1_Fail1.admin      | RemoveMatch | M2_Scenario1_Fail1.request_body      | M2_Scenario1_Fail1.expected_response      |
+      | M2_Scenario1_Fail2.matches      | M2_Scenario1_Fail2.admin      | RemoveMatch | M2_Scenario1_Fail2.request_body      | M2_Scenario1_Fail2.expected_response      |
 
   @M3 @M3_Scenario1
   Scenario Outline: Update Match
@@ -75,4 +77,5 @@ Feature: Match Service Component Features
     Examples:
       | matches                         | admin                         | endpoint    | request_body                         | expected_response                         |
       | M3_Scenario1_Variation1.matches | M3_Scenario1_Variation1.admin | UpdateMatch | M3_Scenario1_Variation1.request_body | M3_Scenario1_Variation1.expected_response |
-
+      | M3_Scenario1_Fail1.matches      | M3_Scenario1_Fail1.admin      | RemoveMatch | M3_Scenario1_Fail1.request_body      | M3_Scenario1_Fail1.expected_response      |
+      | M3_Scenario1_Fail2.matches      | M3_Scenario1_Fail2.admin      | RemoveMatch | M3_Scenario1_Fail2.request_body      | M3_Scenario1_Fail2.expected_response      |

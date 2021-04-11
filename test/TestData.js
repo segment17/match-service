@@ -12,6 +12,7 @@ const TOKENS = {
   INVALID: 'not_valid_token'
 }
 const NOT_VALID_BOXER_ID = -1;
+const NOT_VALID_MATCH_ID = -1;
 const testAdmin = {
   username: "test-admin-other",
   password_hash: "13019e4c76dbb79db5c2562ad0572f74"
@@ -102,14 +103,14 @@ const testMatch = {
   id: 1,
   homeBoxer: testBoxers[0], // 1
   awayBoxer: testBoxers[1], // 4
-  matchTime: 157419968, // Timestamp,
+  matchTime: 157419968,
   isFinished: false,
 };
 const testMatch2 = {
   id: 2,
   homeBoxer: testBoxers[2], // 6
   awayBoxer: testBoxers[3], // 8
-  matchTime: 157419968, // Timestamp,
+  matchTime: 157419968,
   isFinished: false,
 };
 const testMatch3 = {
@@ -310,7 +311,7 @@ const M1_Scenario1_Fail1 = {
   request_body: {
     homeBoxerId: 1,
     awayBoxerId: 4,
-    matchTime: 157419968, // Timestamp,
+    matchTime: 157419968,
     isFinished: false,
     token: TOKENS.INVALID,
   },
@@ -345,7 +346,7 @@ const M1_Scenario1_Fail3 = {
   request_body: {
     homeBoxerId: NOT_VALID_BOXER_ID,
     awayBoxerId: 4,
-    matchTime: 157419968, // Timestamp,
+    matchTime: 157419968,
     isFinished: false,
     token: TOKENS.VALID,
   },
@@ -355,6 +356,64 @@ const M1_Scenario1_Fail3 = {
   }
 }
 
+// RemoveMatch Fail - not valid admin token
+const M2_Scenario1_Fail1 = {
+  matches: testMatches,
+  admin: testAdmin,
+  request_body: {
+    id: testMatches[0].id,
+    token: TOKENS.INVALID,
+  },
+  expected_response: {
+    code: 403,
+    message: REQUEST_STATUSES.FORBIDDEN,
+  }
+}
+
+// RemoveMatch Fail - not valid match id
+const M2_Scenario1_Fail2 = {
+  boxers: testBoxers,
+  admin: testAdmin,
+  request_body: {
+    id: NOT_VALID_MATCH_ID,
+    token: TOKENS.VALID,
+  },
+  expected_response: {
+    code: 404,
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+  }
+}
+
+// UpdateMatch Fail - not valid admin token
+const M3_Scenario1_Fail1 = {
+  matches: testMatches,
+  admin: testAdmin,
+  request_body: {
+    ...testMatches[0],
+    matchTime: 129419968,
+    token: TOKENS.INVALID,
+  },
+  expected_response: {
+    code: 403,
+    message: REQUEST_STATUSES.FORBIDDEN,
+  }
+}
+
+// UpdateMatch Fail - not valid match
+const M3_Scenario1_Fail2 = {
+  boxers: testBoxers,
+  admin: testAdmin,
+  request_body: {
+    matchTime: 129419968,
+    token: TOKENS.VALID,
+  },
+  expected_response: {
+    code: 404,
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+  }
+}
+
+
 // AddMatch
 const M1_Scenario1_Variation1 = {
   boxers: testBoxers,
@@ -362,7 +421,7 @@ const M1_Scenario1_Variation1 = {
   request_body: {
     homeBoxerId: 1,
     awayBoxerId: 4,
-    matchTime: 157419968, // Timestamp,
+    matchTime: 157419968,
     isFinished: false,
     token: TOKENS.VALID,
   },
@@ -488,7 +547,11 @@ module.exports = {
   M1_Scenario1_Fail2,
   M1_Scenario1_Fail3,
   M2_Scenario1_Variation1,
+  M2_Scenario1_Fail1,
+  M2_Scenario1_Fail2,
   M3_Scenario1_Variation1,
+  M3_Scenario1_Fail1,
+  M3_Scenario1_Fail2,
   Unit_AuthServiceGateway_Scenario1,
   Unit_AuthServiceGateway_Scenario2_Fail1,
   Unit_BoxerServiceGateway_Scenario1,
