@@ -50,7 +50,10 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
         for (let index = 0; index < result.length; index++) {
           const r = result[index];
           const e = expectedData[index];
-          const { id, homeBoxer: { id: homeBoxerId }, awayBoxer: { id: awayBoxerId }, matchTime, isFinished } = r;
+
+          const { id, homeBoxer, awayBoxer, matchTime, isFinished } = r;
+          const homeBoxerId = homeBoxer ? homeBoxer.id : r.homeBoxerId;
+          const awayBoxerId = awayBoxer ? awayBoxer.id : r.awayBoxerId;
 
           if (!homeBoxerId || !awayBoxerId || !matchTime || isFinished === undefined) {
             assert(false);
@@ -60,7 +63,7 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
           assert.strictEqual(homeBoxerId, e.homeBoxer.id);
           assert.strictEqual(awayBoxerId, e.awayBoxer.id);
           assert.strictEqual(matchTime, e.matchTime);
-          assert.strictEqual(isFinished, e.isFinished);
+          assert.strictEqual(!!isFinished, !!e.isFinished);
         }
       } else {
         const { id, homeBoxer: { id: homeBoxerId }, awayBoxer: { id: awayBoxerId }, matchTime, isFinished } = result;

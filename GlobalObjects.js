@@ -62,6 +62,7 @@ class GlobalObjects {
     this.boxerServiceGateway = new BoxerServiceGateway();
     this.authServiceGateway = new AuthServiceGateway();
     this.emailServiceGateway = new EmailServiceGateway();
+    this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
     if (process.env.MATCH_SERVICE_SERVICE_PORT != undefined) {

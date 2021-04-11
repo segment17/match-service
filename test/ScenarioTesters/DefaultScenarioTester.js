@@ -23,6 +23,7 @@ class DefaultScenarioTester {
       });
     } else {
       globalObjects.reset();
+      globalObjects.matchRepository.enterIntegratedTestingEnvironment();
       globalObjects.done = true;
     }
   }

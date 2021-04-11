@@ -4,7 +4,7 @@ const ScenarioTesterFactory = require('../../test/ScenarioTesters/ScenarioTester
 const globalObjects = require('../../index');
 
 Before(async function (scenario) {
-  globalObjects.cleanUp();
+  await globalObjects.cleanUp();
   globalObjects.done = false;
   globalObjects.setScenarioTester(ScenarioTesterFactory.createScenarioTester(scenario));
   globalObjects.scenarioTester.before();
@@ -14,7 +14,7 @@ Before(async function (scenario) {
 });
 
 After(async function (scenario) {
-  globalObjects.cleanUp();
+  await globalObjects.cleanUp();
 })
 
 Given('{string} is running', function (serviceName) {

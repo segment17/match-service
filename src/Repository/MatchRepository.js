@@ -14,7 +14,7 @@ class MatchRepository {
       homeBoxerId INT NOT NULL,
       awayBoxerId INT NOT NULL,
       matchTime BIGINT NOT NULL,
-      isFinished INT NOT NULL,
+      isFinished BOOLEAN NOT NULL,
       winnerBoxerId INT,
       PRIMARY KEY (id)
     );`;
@@ -131,8 +131,7 @@ class MatchRepository {
   }
 
   async runQueryForGetAllMatches() {
-    console.log("Real GetAllMatches query to DB with given data");
-    return [];
+    return await this.runQuery(`SELECT * FROM ${this.tableName};`);
   }
 
   async runQueryForGetMatchesOfBoxer() {
@@ -153,7 +152,15 @@ class MatchRepository {
   }
 
   async SetupAddMatches(matches) {
-    console.log('matches: ', matches);
+    await matches.forEach(async match => {
+      await this.runQuery(this.createInsertQuery(match));
+    });
+  }
+
+  createInsertQuery(match) {
+    const { id, homeBoxer, awayBoxer, matchTime, winnerBoxer, isFinished } = match;
+    let query = `INSERT INTO ${this.tableName} (id, homeBoxerId, awayBoxerId, matchTime ,isFinished${winnerBoxer ? ', winnerBoxerId' : ''})`;
+    return query + ` VALUES (${id}, ${homeBoxer.id}, ${awayBoxer.id}, ${matchTime}, ${isFinished}${winnerBoxer ? `, ${winnerBoxer.id}` : ''});`
   }
 }
 
