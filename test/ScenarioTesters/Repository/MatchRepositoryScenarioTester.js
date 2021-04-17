@@ -78,7 +78,7 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
         assert.strictEqual(homeBoxerId, expectedData.homeBoxerId);
         assert.strictEqual(awayBoxerId, expectedData.awayBoxerId);
         assert.strictEqual(matchTime, expectedData.matchTime);
-        assert.strictEqual(isFinished, expectedData.isFinished);
+        assert.strictEqual(!!isFinished, !!expectedData.isFinished);
       }
     }
   }
