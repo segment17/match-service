@@ -1,4 +1,4 @@
-const { NotFound, InvalidArgument } = require("../common/Errors");
+const { NotFound, InvalidArgument, DBOperationFailed } = require("../common/Errors");
 const { connection } = require('./DB');
 
 class MatchRepository {
@@ -34,7 +34,11 @@ class MatchRepository {
       throw new InvalidArgument('matchData cannot be empty');
     }
 
-    await this.runQueryForAddMatchWithGivenData(matchData);
+    const { affectedRows } = await this.runQueryForAddMatchWithGivenData(matchData);
+    if (affectedRows !== 1) {
+      throw new DBOperationFailed('Match could not be inserted')
+    }
+
     return matchData;
   }
 
@@ -101,8 +105,8 @@ class MatchRepository {
   }
 
   async runQueryForAddMatchWithGivenData(matchData) {
-    console.log("Real AddMatch query to DB with given data");
-    return [];
+    const insertQuery = this.createInsertQuery(matchData);
+    return await this.runQuery(insertQuery);
   }
 
   async runQueryForGetMatchById(matchData) {
