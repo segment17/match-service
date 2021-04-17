@@ -100,7 +100,7 @@ class MatchRepository {
       throw new InvalidArgument('boxerId cannot be empty');
     }
 
-    const matches = await this.runQueryForRemoveMatchesOfBoxer(boxerId);
+    const matches = await this.runQueryForGetMatchesOfBoxer(boxerId);
     return matches;
   }
 
@@ -134,9 +134,8 @@ class MatchRepository {
   }
 
   async runQueryForGetMatchesOfBoxer(boxerId) {
-    console.log('boxerId: ', boxerId);
-    console.log("Real GetMatchesOfBoxer query to DB with given data");
-    return [];
+    const getQuery = this.createGetQuery({ boxerId });
+    return await this.runQuery(getQuery);
   }
 
   async runQuery(query) {
