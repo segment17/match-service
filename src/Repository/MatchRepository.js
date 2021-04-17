@@ -61,7 +61,7 @@ class MatchRepository {
       throw new NotFound('match_not_found');
     }
 
-    return removedMatches[0];
+    return removedMatches;
   }
 
   async removeMatchesOfBoxer(boxerId) {

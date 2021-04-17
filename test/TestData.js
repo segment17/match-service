@@ -406,7 +406,7 @@ const Unit_Repository_Scenario4_Fail1 = {
 const Unit_Repository_Scenario5 = {
   matches: testMatches,
   match_id: testMatches[0].id,
-  expected_data: testMatches[0]
+  expected_data: { affectedRows: 1 }
 };
 
 const Unit_Repository_Scenario5_Fail1 = {
