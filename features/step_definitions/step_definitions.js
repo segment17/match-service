@@ -13,9 +13,6 @@ Before(async function (scenario) {
   }
 });
 
-After(async function (scenario) {
-  await globalObjects.cleanUp();
-})
 
 Given('{string} is running', function (serviceName) {
   globalObjects.scenarioTester.serviceIsRunning(serviceName);
