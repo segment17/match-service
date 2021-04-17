@@ -551,7 +551,7 @@ const Unit_Repository_Scenario5_Fail2 = {
 const Unit_Repository_Scenario6 = {
   matches: testMatches,
   boxer_id: testMatches[0].id,
-  expected_data: testMatchesIncludingFirstBoxer
+  expected_data: { affectedRows: 2 }
 };
 
 const Unit_Repository_Scenario6_Fail1 = {

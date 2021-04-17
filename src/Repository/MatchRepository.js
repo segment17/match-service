@@ -119,9 +119,9 @@ class MatchRepository {
     return await this.runQuery(deleteQuery);
   }
 
-  async runQueryForRemoveMatchesOfBoxer(matchData) {
-    console.log("Real RemoveMatchesOfBoxer query to DB with given data");
-    return [];
+  async runQueryForRemoveMatchesOfBoxer(boxerId) {
+    const deleteQuery = this.createDeleteQuery({ boxerId });
+    return await this.runQuery(deleteQuery);
   }
 
   async runQueryForUpdateMatch(matchData) {

@@ -36,12 +36,16 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
 
   async returnedDataIsAs(dataSource) {
     const expectedData = TestFunctions.extractSpecifiedObjectData(dataSource);
+    const { affectedRows } = expectedData;
     await TestFunctions.waitUntilResult();
     // Or separate checks
 
     const result = globalObjects.result;
     const isResultError = result instanceof Error;
-    if (isResultError) {
+    if (affectedRows) {
+      assert.strictEqual(affectedRows, result.affectedRows);
+    }
+    else if (isResultError) {
       assert.strictEqual(expectedData.name, result.name);
       assert.strictEqual(expectedData.message, result.message);
     } else {

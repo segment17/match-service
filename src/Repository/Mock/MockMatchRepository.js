@@ -33,7 +33,7 @@ class MockMatchRepository extends MatchRepository {
     }
 
     this.matches = filteredMatches;
-    return removedMatches;
+    return { affectedRows: removedMatches.length };
   }
 
   async runQueryForRemoveMatchesOfBoxer(boxerId) {
@@ -49,7 +49,7 @@ class MockMatchRepository extends MatchRepository {
     }
 
     this.matches = filteredMatches;
-    return removedMatches;
+    return { affectedRows: removedMatches.length };
   }
 
   async runQueryForUpdateMatch(updatedMatch) {
