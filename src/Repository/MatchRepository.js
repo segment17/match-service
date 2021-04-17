@@ -24,11 +24,6 @@ class MatchRepository {
     return `DROP TABLE IF EXISTS ${this.tableName};`;
   }
 
-  async enterIntegratedTestingEnvironment() {
-    this.tableName = 'test_matches';
-    await this.runQuery(this.createTableQuery);
-  }
-
   async cleanUp() {
     await this.runQuery(this.cleanUpQuery);
     await this.runQuery(this.createTableQuery);
