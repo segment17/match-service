@@ -41,7 +41,7 @@ class MockMatchRepository extends MatchRepository {
     let filteredMatches = [];
     for (let i = 0; i < this.matches.length; i++) {
       const match = this.matches[i];
-      if (match.homeBoxer.id === boxerId || match.awayBoxer.id === boxerId) {
+      if (match.homeBoxerId === boxerId || match.awayBoxerId === boxerId) {
         removedMatches.push(match);
       } else {
         filteredMatches.push(match);
@@ -68,7 +68,7 @@ class MockMatchRepository extends MatchRepository {
     }
 
     this.matches = _matches;
-    return _updatedMatches;
+    return { affectedRows: _updatedMatches.length };
   }
 
   async runQueryForGetAllMatches() {
@@ -83,7 +83,7 @@ class MockMatchRepository extends MatchRepository {
     let filteredMatches = [];
     for (let i = 0; i < this.matches.length; i++) {
       const match = this.matches[i];
-      if (match.homeBoxer.id === boxerId || match.awayBoxer.id === boxerId) {
+      if (match.homeBoxerId === boxerId || match.awayBoxerId === boxerId) {
         filteredMatches.push(match);
       }
     }

@@ -72,14 +72,11 @@ Feature: Match Repository Unit Feature
   Scenario Outline: Update match
     Given there are matches such as "<matches>"
     When "<repository_function>" is invoked with "<match>"
-    Then returned data is as "<expected_data>"
+    Then DB has match such as "<expected_data>"
 
     Examples:
       | matches                                 | repository_function | match                                 | expected_data                                 |
       | Unit_Repository_Scenario7.matches       | updateMatch         | Unit_Repository_Scenario7.match       | Unit_Repository_Scenario7.expected_data       |
-      | Unit_Repository_Scenario7_Fail1.matches | updateMatch         | Unit_Repository_Scenario7_Fail1.match | Unit_Repository_Scenario7_Fail1.expected_data |
-      | Unit_Repository_Scenario7_Fail2.matches | updateMatch         | Unit_Repository_Scenario7_Fail2.match | Unit_Repository_Scenario7_Fail2.expected_data |
-      | Unit_Repository_Scenario7_Fail3.matches | updateMatch         | Unit_Repository_Scenario7_Fail3.match | Unit_Repository_Scenario7_Fail3.expected_data |
 
   #FAIL SCENARIOS
 
@@ -91,3 +88,15 @@ Feature: Match Repository Unit Feature
     Examples:
       | repository_function   | data_chunk                                 | expected_data                                 |
       | addMatchWithGivenData | Unit_Repository_Scenario3_Fail1.data_chunk | Unit_Repository_Scenario3_Fail1.expected_data |
+
+  @Unit_Repository_Scenario7
+  Scenario Outline: Update match
+    Given there are matches such as "<matches>"
+    When "<repository_function>" is invoked with "<match>"
+    Then returned data is as "<expected_data>"
+
+    Examples:
+      | matches                                 | repository_function | match                                 | expected_data                                 |
+      | Unit_Repository_Scenario7_Fail1.matches | updateMatch         | Unit_Repository_Scenario7_Fail1.match | Unit_Repository_Scenario7_Fail1.expected_data |
+      | Unit_Repository_Scenario7_Fail2.matches | updateMatch         | Unit_Repository_Scenario7_Fail2.match | Unit_Repository_Scenario7_Fail2.expected_data |
+      | Unit_Repository_Scenario7_Fail3.matches | updateMatch         | Unit_Repository_Scenario7_Fail3.match | Unit_Repository_Scenario7_Fail3.expected_data |
