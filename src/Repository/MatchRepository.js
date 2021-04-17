@@ -57,7 +57,7 @@ class MatchRepository {
     }
 
     const removedMatches = await this.runQueryForRemoveMatchById(matchId);
-    if (!removedMatches || !removedMatches.length) {
+    if (!removedMatches || removedMatches.affectedRows !== 1) {
       throw new NotFound('match_not_found');
     }
 
@@ -114,9 +114,9 @@ class MatchRepository {
     return await this.runQuery(getQuery);
   }
 
-  async runQueryForRemoveMatchById(matchData) {
-    console.log("Real RemoveMatchById query to DB with given data");
-    return [];
+  async runQueryForRemoveMatchById(matchId) {
+    const deleteQuery = this.createDeleteQuery({ matchId });
+    return await this.runQuery(deleteQuery);
   }
 
   async runQueryForRemoveMatchesOfBoxer(matchData) {
@@ -133,7 +133,8 @@ class MatchRepository {
     return await this.runQuery(`SELECT * FROM ${this.tableName};`);
   }
 
-  async runQueryForGetMatchesOfBoxer() {
+  async runQueryForGetMatchesOfBoxer(boxerId) {
+    console.log('boxerId: ', boxerId);
     console.log("Real GetMatchesOfBoxer query to DB with given data");
     return [];
   }
@@ -154,6 +155,21 @@ class MatchRepository {
     await matches.forEach(async match => {
       await this.runQuery(this.createInsertQuery(match));
     });
+  }
+
+  createDeleteQuery({ matchId, boxerId }) {
+    if (!matchId && !boxerId) { return {}; }
+    let query = `DELETE FROM ${this.tableName} WHERE `;
+    if (matchId) {
+      query = `${query} id = '${matchId}'`;
+    }
+    if (matchId && boxerId) {
+      query = `${query} AND `;
+    }
+    if (boxerId) {
+      query = `${query}awayBoxerId = '${boxerId}' OR homeBoxerId = '${boxerId}'`;
+    }
+    return `${query};`;
   }
 
   createGetQuery({ matchId, boxerId }) {
