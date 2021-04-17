@@ -18,146 +18,37 @@ const testAdmin = {
   username: "test-admin-other",
   password_hash: "13019e4c76dbb79db5c2562ad0572f74"
 };
-const testBoxer = {
-  id: 1,
-  fullName: "Mike Tyson",
-  birthDate: 127419968,
-  height: 178,
-  weight: 100,
-};
-const testBoxers = [
-  {
-    id: 1,
-    fullName: "Mike Tyson",
-    birthDate: 127419968,
-    height: 178,
-    weight: 100,
-  },
-  {
-    id: 4,
-    fullName: "Connor McGregor",
-    birthDate: 127419968,
-    height: 175,
-    weight: 80,
-  },
-  {
-    id: 6,
-    fullName: "Logan Paul",
-    birthDate: 127419968,
-    height: 195,
-    weight: 120,
-  },
-  {
-    id: 8,
-    fullName: 'Dwayne "The Rock" Johnson',
-    birthDate: 127419968,
-    height: 196,
-    weight: 118,
-  }
-];
-const testStandingOfTestBoxer = {
-  boxer: testBoxer,
-  winCount: 1,
-  lossCount: 1,
-  score: 0.5
-};
-const testStandings = [
-  testStandingOfTestBoxer,
-  {
-    boxer: {
-      id: 4,
-      fullName: "Connor McGregor",
-      birthDate: 127419968,
-      height: 175,
-      weight: 80,
-    },
-    winCount: 1,
-    lossCount: 1,
-    score: 0.5
-  },
-  {
-    boxer: {
-      id: 6,
-      fullName: "Logan Paul",
-      birthDate: 127419968,
-      height: 195,
-      weight: 120,
-    },
-    winCount: 0,
-    lossCount: 1,
-    score: 0
-  },
-  {
-    boxer: {
-      id: 8,
-      fullName: 'Dwayne "The Rock" Johnson',
-      birthDate: 127419968,
-      height: 196,
-      weight: 118,
-    },
-    winCount: 1,
-    lossCount: 0,
-    score: 1
-  }
+const testBoxerIDs = [
+  1, 4, 6, 8,
 ];
 const testMatch = {
   id: 1,
-  homeBoxer: testBoxers[0], // 1
-  awayBoxer: testBoxers[1], // 4
+  homeBoxerId: testBoxerIDs[0], // 1
+  awayBoxerId: testBoxerIDs[1], // 4
   matchTime: 157419968,
   isFinished: false,
 };
 const testMatch2 = {
   id: 2,
-  homeBoxer: testBoxers[2], // 6
-  awayBoxer: testBoxers[3], // 8
+  homeBoxerId: testBoxerIDs[2], // 6
+  awayBoxerId: testBoxerIDs[3], // 8
   matchTime: 157419968,
   isFinished: false,
 };
 const testMatch3 = {
   id: 3,
-  awayBoxer: {
-    id: 1,
-    fullName: "Mike Tyson",
-    birthDate: 127419968, // Timestamp
-    height: 178,
-    weight: 100,
-  },
-  homeBoxer: {
-    id: 8,
-    fullName: 'Dwayne "The Rock" Johnson',
-    birthDate: 127419968, // Timestamp
-    height: 196,
-    weight: 118,
-  },
+  awayBoxerId: 1,
+  homeBoxerId: 8,
   matchTime: 129419968,
   isFinished: false,
 }
 const testMatch4 = {
   id: 4,
-  awayBoxer: {
-    id: 4,
-    fullName: "Connor McGregor",
-    birthDate: 127419968, // Timestamp
-    height: 175,
-    weight: 80,
-  },
-  homeBoxer: {
-    id: 8,
-    fullName: 'Dwayne "The Rock" Johnson',
-    birthDate: 127419968, // Timestamp
-    height: 196,
-    weight: 118,
-  },
+  awayBoxerId: 4,
+  homeBoxerId: 8,
   matchTime: 129419968,
   isFinished: true,
-  winnerBoxer: {
-    id: 8,
-    fullName: 'Dwayne "The Rock" Johnson',
-    birthDate: 127419968, // Timestamp
-    height: 196,
-    weight: 118,
-  }
+  winnerBoxer: 8,
 };
 const testMatches = [
   testMatch,
@@ -165,8 +56,7 @@ const testMatches = [
   testMatch3,
   testMatch4,
 ];
-const emptyBoxer = { id: 0, fullName: '', birthDate: '0', height: 0, weight: 0 };
-const emptyStanding = { boxer: null, winCount: 0, lossCount: 0, score: 0 };
+
 const testMatchesIncludingFirstBoxer = [
   testMatch,
   testMatch3
@@ -184,28 +74,17 @@ const H1_Scenario1_Variation1 = {
   },
 };
 
-// GetAllStandings
-const H2_Scenario1_Variation1 = {
-  boxers: testBoxers,
-  matches: testMatches,
-  expected_response: {
-    code: 200,
-    message: REQUEST_STATUSES.SUCCESS,
-    standings: testStandings,
-  },
-};
-
 // GetMatchesOfBoxer
 const B1_Scenario1_Variation1 = {
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   matches: testMatches,
   request_body: {
-    boxerId: testBoxers[0].id,
+    boxerId: testBoxerIDs[0],
   },
   expected_response: {
     code: 200,
     message: REQUEST_STATUSES.SUCCESS,
-    boxer: testBoxers[0],
+    boxer: testBoxerIDs[0],
     matches: testMatchesIncludingFirstBoxer,
   },
 };
@@ -213,9 +92,9 @@ const B1_Scenario1_Variation1 = {
 // Remova matches of a boxer
 const B4_Scenario1_Variation1 = {
   matches: testMatches,
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   request_body: {
-    boxerId: testMatches[0].id,
+    boxerId: testBoxerIDs[0],
     token: TOKENS.VALID,
   },
   expected_response: {
@@ -229,7 +108,7 @@ const B4_Scenario1_Variation1 = {
 
 // GetMatchesOfBoxer Fail - not valid boxer id
 const B1_Scenario1_Fail2 = {
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   matches: testMatches,
   request_body: {
     boxerId: 99999,
@@ -243,9 +122,9 @@ const B1_Scenario1_Fail2 = {
 // RemoveMatchesOfBoxer Fail - not valid admin token
 const B4_Scenario1_Fail1 = {
   matches: testMatches,
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   request_body: {
-    boxerId: testMatches[0].id,
+    boxerId: testBoxerIDs[0],
     token: TOKENS.INVALID,
   },
   expected_response: {
@@ -257,7 +136,7 @@ const B4_Scenario1_Fail1 = {
 // RemoveMatchesOfBoxer Fail - not valid boxer id
 const B4_Scenario1_Fail2 = {
   matches: testMatches,
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   request_body: {
     boxerId: NOT_VALID_BOXER_ID,
     token: TOKENS.VALID,
@@ -270,11 +149,11 @@ const B4_Scenario1_Fail2 = {
 
 // AddMatch Fail - not valid admin token
 const M1_Scenario1_Fail1 = {
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   admin: testAdmin,
   request_body: {
-    homeBoxerId: 1,
-    awayBoxerId: 4,
+    homeBoxerIdId: 1,
+    awayBoxerIdId: 4,
     matchTime: 157419968,
     isFinished: false,
     token: TOKENS.INVALID,
@@ -287,11 +166,11 @@ const M1_Scenario1_Fail1 = {
 
 // AddMatch Fail - not valid match data
 const M1_Scenario1_Fail2 = {
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   admin: testAdmin,
   request_body: {
-    homeBoxerId: 1,
-    awayBoxerId: 4,
+    homeBoxerIdId: 1,
+    awayBoxerIdId: 4,
     // Commenting intentionally to make it fail
     // matchTime: 157419968,
     // isFinished: false,
@@ -305,11 +184,11 @@ const M1_Scenario1_Fail2 = {
 
 // AddMatch Fail - not valid boxer id in one of the matches
 const M1_Scenario1_Fail3 = {
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   admin: testAdmin,
   request_body: {
-    homeBoxerId: NOT_VALID_BOXER_ID,
-    awayBoxerId: 4,
+    homeBoxerIdId: NOT_VALID_BOXER_ID,
+    awayBoxerIdId: 4,
     matchTime: 157419968,
     isFinished: false,
     token: TOKENS.VALID,
@@ -351,7 +230,7 @@ const M2_Scenario1_Fail2 = {
 // UpdateMatch Fail - not valid admin token
 const M3_Scenario1_Fail1 = {
   matches: testMatches,
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   admin: testAdmin,
   request_body: {
     ...testMatches[0],
@@ -367,7 +246,7 @@ const M3_Scenario1_Fail1 = {
 // UpdateMatch Fail - not valid match
 const M3_Scenario1_Fail2 = {
   matches: testMatches,
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   admin: testAdmin,
   request_body: {
     matchTime: 129419968,
@@ -382,11 +261,11 @@ const M3_Scenario1_Fail2 = {
 
 // AddMatch
 const M1_Scenario1_Variation1 = {
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   admin: testAdmin,
   request_body: {
-    homeBoxerId: 1,
-    awayBoxerId: 4,
+    homeBoxerIdId: 1,
+    awayBoxerIdId: 4,
     matchTime: 157419968,
     isFinished: false,
     token: TOKENS.VALID,
@@ -414,7 +293,7 @@ const M2_Scenario1_Variation1 = {
 
 const M3_Scenario1_Variation1 = {
   matches: testMatches,
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   admin: testAdmin,
   request_body: {
     ...testMatches[0],
@@ -451,12 +330,12 @@ const Unit_AuthServiceGateway_Scenario2_Fail1 = {
 
 // Get boxer from Boxer Service Gateway
 var Unit_BoxerServiceGateway_Scenario1 = {
-  boxers: testBoxers,
+  boxers: testBoxerIDs,
   boxer_id: 1,
   expected_data: {
     code: 200,
     message: REQUEST_STATUSES.SUCCESS,
-    boxer: testBoxers[0]
+    boxer: testBoxerIDs[0]
   }
 };
 
@@ -478,7 +357,7 @@ const Unit_Repository_Scenario1 = {
 // GetMatchesOfBoxer
 const Unit_Repository_Scenario2 = {
   matches: testMatches,
-  boxer_id: testBoxers[0].id,
+  boxer_id: testBoxerIDs[0],
   expected_data: testMatchesIncludingFirstBoxer,
 };
 
@@ -602,7 +481,8 @@ const Unit_Repository_Scenario7_Fail2 = {
 const Unit_Repository_Scenario7_Fail3 = {
   matches: testMatches,
   match: {
-    id: NOT_VALID_MATCH_ID
+    id: 15,
+    matchTime: 129419968,
   },
   expected_data: {
     name: 'NotFound',
@@ -617,7 +497,6 @@ module.exports = {
   B4_Scenario1_Fail1,
   B4_Scenario1_Fail2,
   H1_Scenario1_Variation1,
-  H2_Scenario1_Variation1,
   M1_Scenario1_Variation1,
   M1_Scenario1_Fail1,
   M1_Scenario1_Fail2,

@@ -78,16 +78,20 @@ class MatchRepository {
       throw new InvalidArgument('match cannot be empty');
     }
 
-    if (!match.id) {
+    const { id, awayBoxerId, homeBoxerId, matchTime, isFinished, winnerBoxer } = match;
+    if (id === undefined || id < 1) {
       throw new InvalidArgument('match.id cannot be empty');
+    }
+    if (!homeBoxerId && !awayBoxerId && !matchTime && !isFinished && !winnerBoxer) {
+      throw new InvalidArgument('match cannot be empty');
     }
 
     const updatedMatches = await this.runQueryForUpdateMatch(match);
-    if (!updatedMatches || !updatedMatches.length) {
+    if (!updatedMatches || updatedMatches.affectedRows < 1) {
       throw new NotFound('match_not_found');
     }
 
-    return updatedMatches[0];
+    return updatedMatches;
   }
 
   async getAllMatches() {
@@ -124,9 +128,9 @@ class MatchRepository {
     return await this.runQuery(deleteQuery);
   }
 
-  async runQueryForUpdateMatch(matchData) {
-    console.log("Real UpdateMatch query to DB with given data");
-    return [];
+  async runQueryForUpdateMatch(match) {
+    const updateQuery = this.createUpdateQuery(match);
+    return await this.runQuery(updateQuery);
   }
 
   async runQueryForGetAllMatches() {
@@ -186,10 +190,45 @@ class MatchRepository {
     return `${query};`;
   }
 
+  createUpdateQuery(match) {
+    const { id, homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxer } = match;
+
+    let query = `UPDATE ${this.tableName} SET `;
+    if (homeBoxerId) {
+      query = `${query} homeBoxerId = '${homeBoxerId}'`;
+    }
+    if (awayBoxerId) {
+      if (homeBoxerId) {
+        query = `${query},`;
+      }
+      query = `${query} awayBoxerId = '${awayBoxerId}'`;
+    }
+    if (matchTime) {
+      if (homeBoxerId || awayBoxerId) {
+        query = `${query},`;
+      }
+      query = `${query} matchTime = '${matchTime}'`;
+    }
+    if (isFinished) {
+      if (homeBoxerId || awayBoxerId || matchTime) {
+        query = `${query},`;
+      }
+      query = `${query} isFinished = '${isFinished}'`;
+    }
+    if (winnerBoxer) {
+      if (homeBoxerId || awayBoxerId || matchTime || isFinished) {
+        query = `${query},`;
+      }
+      query = `${query} winnerBoxer = '${winnerBoxer}'`;
+    }
+
+    return `${query} WHERE id = '${id}';`;
+  }
+
   createInsertQuery(match) {
-    const { id, homeBoxer, awayBoxer, matchTime, winnerBoxer, isFinished } = match;
-    let query = `INSERT INTO ${this.tableName} (id, homeBoxerId, awayBoxerId, matchTime ,isFinished${winnerBoxer ? ', winnerBoxerId' : ''})`;
-    return query + ` VALUES (${id}, ${homeBoxer.id}, ${awayBoxer.id}, ${matchTime}, ${isFinished}${winnerBoxer ? `, ${winnerBoxer.id}` : ''});`
+    const { id, awayBoxerId, homeBoxerId, matchTime, winnerBoxerId, isFinished } = match;
+    let query = `INSERT INTO ${this.tableName} (id, homeBoxerId, awayBoxerId, matchTime ,isFinished${winnerBoxerId ? ', winnerBoxerId' : ''})`;
+    return query + ` VALUES (${id}, ${homeBoxerId}, ${awayBoxerId}, ${matchTime}, ${isFinished}${winnerBoxerId ? `, ${winnerBoxerId}` : ''});`
   }
 }
 
