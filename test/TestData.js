@@ -18,9 +18,37 @@ const testAdmin = {
   username: "test-admin-other",
   password_hash: "13019e4c76dbb79db5c2562ad0572f74"
 };
-const testBoxerIDs = [
-  1, 4, 6, 8,
+const testBoxers = [
+  {
+    id: 1,
+    fullName: "Mike Tyson",
+    birthDate: 127419968,
+    height: 178,
+    weight: 100,
+  },
+  {
+    id: 4,
+    fullName: "Connor McGregor",
+    birthDate: 127419968,
+    height: 175,
+    weight: 80,
+  },
+  {
+    id: 6,
+    fullName: "Logan Paul",
+    birthDate: 127419968,
+    height: 195,
+    weight: 120,
+  },
+  {
+    id: 8,
+    fullName: 'Dwayne "The Rock" Johnson',
+    birthDate: 127419968,
+    height: 196,
+    weight: 118,
+  }
 ];
+const testBoxerIDs = testBoxers.map(boxer => boxer.id);
 const testMatch = {
   id: 1,
   homeBoxerId: testBoxerIDs[0], // 1
@@ -330,12 +358,12 @@ const Unit_AuthServiceGateway_Scenario2_Fail1 = {
 
 // Get boxer from Boxer Service Gateway
 var Unit_BoxerServiceGateway_Scenario1 = {
-  boxers: testBoxerIDs,
-  boxer_id: 1,
+  boxers: testBoxers,
+  boxer_id: testBoxerIDs[0],
   expected_data: {
     code: 200,
     message: REQUEST_STATUSES.SUCCESS,
-    boxer: testBoxerIDs[0]
+    boxer: testBoxers[0]
   }
 };
 
