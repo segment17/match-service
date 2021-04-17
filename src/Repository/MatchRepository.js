@@ -109,9 +109,9 @@ class MatchRepository {
     return await this.runQuery(insertQuery);
   }
 
-  async runQueryForGetMatchById(matchData) {
-    console.log("Real GetMatchById query to DB with given data");
-    return [];
+  async runQueryForGetMatchById(matchId) {
+    const getQuery = this.createGetQuery({ matchId });
+    return await this.runQuery(getQuery);
   }
 
   async runQueryForRemoveMatchById(matchData) {
@@ -154,6 +154,21 @@ class MatchRepository {
     await matches.forEach(async match => {
       await this.runQuery(this.createInsertQuery(match));
     });
+  }
+
+  createGetQuery({ matchId, boxerId }) {
+    if (!matchId && !boxerId) { return {}; }
+    let query = `SELECT * FROM ${this.tableName} WHERE `;
+    if (matchId) {
+      query = `${query} id = '${matchId}'`;
+    }
+    if (matchId && boxerId) {
+      query = `${query} AND `;
+    }
+    if (boxerId) {
+      query = `${query}awayBoxerId = '${boxerId}' OR homeBoxerId = '${boxerId}'`;
+    }
+    return `${query};`;
   }
 
   createInsertQuery(match) {
