@@ -76,7 +76,6 @@ const testMatch4 = {
   homeBoxerId: 8,
   matchTime: 129419968,
   isFinished: true,
-  winnerBoxer: 8,
 };
 const testMatches = [
   testMatch,
@@ -104,7 +103,7 @@ const H1_Scenario1_Variation1 = {
 
 // GetMatchesOfBoxer
 const B1_Scenario1_Variation1 = {
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   matches: testMatches,
   request_body: {
     boxerId: testBoxerIDs[0],
@@ -112,7 +111,7 @@ const B1_Scenario1_Variation1 = {
   expected_response: {
     code: 200,
     message: REQUEST_STATUSES.SUCCESS,
-    boxer: testBoxerIDs[0],
+    boxer: testBoxers[0],
     matches: testMatchesIncludingFirstBoxer,
   },
 };
@@ -120,7 +119,7 @@ const B1_Scenario1_Variation1 = {
 // Remova matches of a boxer
 const B4_Scenario1_Variation1 = {
   matches: testMatches,
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   request_body: {
     boxerId: testBoxerIDs[0],
     token: TOKENS.VALID,
@@ -128,7 +127,6 @@ const B4_Scenario1_Variation1 = {
   expected_response: {
     code: 200,
     message: REQUEST_STATUSES.DELETED,
-    matches: testMatchesIncludingFirstBoxer
   },
 };
 
@@ -136,7 +134,7 @@ const B4_Scenario1_Variation1 = {
 
 // GetMatchesOfBoxer Fail - not valid boxer id
 const B1_Scenario1_Fail2 = {
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   matches: testMatches,
   request_body: {
     boxerId: 99999,
@@ -150,7 +148,7 @@ const B1_Scenario1_Fail2 = {
 // RemoveMatchesOfBoxer Fail - not valid admin token
 const B4_Scenario1_Fail1 = {
   matches: testMatches,
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   request_body: {
     boxerId: testBoxerIDs[0],
     token: TOKENS.INVALID,
@@ -164,7 +162,7 @@ const B4_Scenario1_Fail1 = {
 // RemoveMatchesOfBoxer Fail - not valid boxer id
 const B4_Scenario1_Fail2 = {
   matches: testMatches,
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   request_body: {
     boxerId: NOT_VALID_BOXER_ID,
     token: TOKENS.VALID,
@@ -177,11 +175,11 @@ const B4_Scenario1_Fail2 = {
 
 // AddMatch Fail - not valid admin token
 const M1_Scenario1_Fail1 = {
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   admin: testAdmin,
   request_body: {
-    homeBoxerIdId: 1,
-    awayBoxerIdId: 4,
+    homeBoxerId: 1,
+    awayBoxerId: 4,
     matchTime: 157419968,
     isFinished: false,
     token: TOKENS.INVALID,
@@ -194,11 +192,11 @@ const M1_Scenario1_Fail1 = {
 
 // AddMatch Fail - not valid match data
 const M1_Scenario1_Fail2 = {
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   admin: testAdmin,
   request_body: {
-    homeBoxerIdId: 1,
-    awayBoxerIdId: 4,
+    homeBoxerId: 1,
+    awayBoxerId: 4,
     // Commenting intentionally to make it fail
     // matchTime: 157419968,
     // isFinished: false,
@@ -212,11 +210,11 @@ const M1_Scenario1_Fail2 = {
 
 // AddMatch Fail - not valid boxer id in one of the matches
 const M1_Scenario1_Fail3 = {
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   admin: testAdmin,
   request_body: {
-    homeBoxerIdId: NOT_VALID_BOXER_ID,
-    awayBoxerIdId: 4,
+    homeBoxerId: NOT_VALID_BOXER_ID,
+    awayBoxerId: 4,
     matchTime: 157419968,
     isFinished: false,
     token: TOKENS.VALID,
@@ -258,7 +256,7 @@ const M2_Scenario1_Fail2 = {
 // UpdateMatch Fail - not valid admin token
 const M3_Scenario1_Fail1 = {
   matches: testMatches,
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   admin: testAdmin,
   request_body: {
     ...testMatches[0],
@@ -274,7 +272,7 @@ const M3_Scenario1_Fail1 = {
 // UpdateMatch Fail - not valid match
 const M3_Scenario1_Fail2 = {
   matches: testMatches,
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   admin: testAdmin,
   request_body: {
     matchTime: 129419968,
@@ -289,11 +287,11 @@ const M3_Scenario1_Fail2 = {
 
 // AddMatch
 const M1_Scenario1_Variation1 = {
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   admin: testAdmin,
   request_body: {
-    homeBoxerIdId: 1,
-    awayBoxerIdId: 4,
+    homeBoxerId: 1,
+    awayBoxerId: 4,
     matchTime: 157419968,
     isFinished: false,
     token: TOKENS.VALID,
@@ -301,7 +299,7 @@ const M1_Scenario1_Variation1 = {
   expected_response: {
     code: 201,
     message: REQUEST_STATUSES.CREATED,
-    match: testMatch
+    affectedRows: 1
   }
 };
 
@@ -321,7 +319,7 @@ const M2_Scenario1_Variation1 = {
 
 const M3_Scenario1_Variation1 = {
   matches: testMatches,
-  boxers: testBoxerIDs,
+  boxers: testBoxers,
   admin: testAdmin,
   request_body: {
     ...testMatches[0],

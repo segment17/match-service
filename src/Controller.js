@@ -62,11 +62,11 @@ class Controller {
   }
 
   async guardUpdateMatch(request) {
-    const { id, homeBoxer, awayBoxer, matchTime, isFinished, token } = request;
+    const { id, homeBoxerId, awayBoxerId, matchTime, isFinished, token } = request;
     // Do validation here
     if (id === 0
-      || homeBoxer === null
-      || awayBoxer === null
+      || homeBoxerId === 0
+      || awayBoxerId === 0
       || matchTime === '0'
       // || isFinished === false // Idk how to check if this value exists
       || token === ''

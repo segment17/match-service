@@ -82,8 +82,8 @@ class DefaultScenarioTester {
 
   compareMatches(actual, expected) {
     for(let index in expected) {
-      this.compareBoxers(actual[index].homeBoxer, actual[index].homeBoxer);
-      this.compareBoxers(actual[index].awayBoxer, actual[index].awayBoxer);
+      assert(actual[index].homeBoxerId === expected[index].homeBoxerId);
+      assert(actual[index].awayBoxerId === expected[index].awayBoxerId);
       assert(actual[index].id === expected[index].id);
       assert(actual[index].matchTime == expected[index].matchTime);
       assert(actual[index].isFinished === expected[index].isFinished);

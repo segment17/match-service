@@ -33,13 +33,13 @@ class MatchRepository {
     if (!matchData) {
       throw new InvalidArgument('matchData cannot be empty');
     }
-
+    
     const { affectedRows } = await this.runQueryForAddMatchWithGivenData(matchData);
     if (affectedRows !== 1) {
       throw new DBOperationFailed('Match could not be inserted')
     }
 
-    return matchData;
+    return { affectedRows };
   }
 
   async getMatchById(matchId) {

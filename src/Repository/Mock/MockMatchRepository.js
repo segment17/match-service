@@ -9,6 +9,7 @@ class MockMatchRepository extends MatchRepository {
 
   async runQueryForAddMatchWithGivenData(matchData) {
     this.matches.push(matchData);
+    return { affectedRows: 1 };
   }
 
   async runQueryForGetMatchById(matchData) {

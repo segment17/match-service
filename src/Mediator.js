@@ -60,7 +60,7 @@ class Mediator {
 
     // Add match to DB
     try {
-      const match = await this.matchRepository.addMatchWithGivenData({
+      const result = await this.matchRepository.addMatchWithGivenData({
         awayBoxerId,
         homeBoxerId,
         isFinished,
@@ -70,7 +70,7 @@ class Mediator {
 
       return {
         ...this.responseObject({ code: 201, message: 'created' }),
-        match
+        ...result
       }
     } catch (error) {
       return this.handleException(error);
@@ -151,8 +151,8 @@ class Mediator {
   }
 
   async updateMatch(request) {
-    const { id, homeBoxer, awayBoxer, matchTime, isFinished, winnerBoxerId, token } = request;
-    const updatedMatch = { id, homeBoxer, awayBoxer, matchTime, isFinished, winnerBoxerId };
+    const { id, homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token } = request;
+    const updatedMatch = { id, homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId };
 
     // Authentication validation
     const authValidation = await this.getAuthValidation(token);
@@ -161,16 +161,16 @@ class Mediator {
     }
 
     // Home boxer validation
-    if (homeBoxer) {
-      const homeBoxerValidation = await this.boxerServiceGateway.getBoxer(homeBoxer.id);
+    if (homeBoxerId) {
+      const homeBoxerValidation = await this.boxerServiceGateway.getBoxer(homeBoxerId);
       if (homeBoxerValidation.code !== 200) {
         return this.responseObject(homeBoxerValidation);
       }
     }
 
-    if (awayBoxer) {
+    if (awayBoxerId) {
       // Away boxer validation
-      const awayBoxerValidation = await this.boxerServiceGateway.getBoxer(awayBoxer.id);
+      const awayBoxerValidation = await this.boxerServiceGateway.getBoxer(awayBoxerId);
       if (awayBoxerValidation.code !== 200) {
         return this.responseObject(awayBoxerValidation);
       }
