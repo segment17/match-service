@@ -58,14 +58,16 @@ class MockMatchRepository extends MatchRepository {
     let _matches = [];
     for (let i = 0; i < this.matches.length; i++) {
       let match = this.matches[i];
+      let _updatedMatch = match;
       if (match.id === updatedMatch.id) {
-        _updatedMatches.push({
+        _updatedMatch = {
           ...match,
           ...updatedMatch
-        });
+        };
+        _updatedMatches.push(_updatedMatch);
       }
 
-      _matches.push(match);
+      _matches.push(_updatedMatch);
     }
 
     this.matches = _matches;
