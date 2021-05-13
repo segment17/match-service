@@ -5,7 +5,7 @@ hiptest-publisher --config-file test/hiptest-publisher.conf --test-run-id 521216
 kubectl delete deployments --all app=match-service
 kubectl delete svc --all app=match-service
 eval $(minikube docker-env)
-docker build -t segment17/matchservice .
+docker build -t segment17hub/matchservice .
 kubectl apply -f manifest.yaml
 latest_pod=$(kubectl get pods --sort-by=.metadata.creationTimestamp -o jsonpath="{.items[-1].metadata.name}")
 while [[ $(kubectl get pods $latest_pod -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "Waiting for pod..." && sleep 1; done
