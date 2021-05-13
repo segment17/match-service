@@ -1,11 +1,11 @@
 @E2E
 Feature: Match Service E2E Features
 
-  Background: Prepare Services
-    Given "MatchService" is running
-    And "BoxerService" is running
-    And "AuthService" is running
-    And "EmailService" is running
+  # Background: Prepare Services
+  #   Given "MatchService" is running
+  #   And "BoxerService" is running
+  #   And "AuthService" is running
+  #   And "EmailService" is running
 
   @H1 @H1_Scenario1
   Scenario Outline: Get All Matches
