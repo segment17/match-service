@@ -100,6 +100,10 @@ message SetupAddBoxerResponse {
   int32 code = 1;
 }
 
+message SetupClearBoxersResponse {
+  int32 code = 1;
+}
+
 message SetupAddStandingAndMatchesRequest {
   StandingAndMatches standingAndMatches = 1;
 }
@@ -129,6 +133,7 @@ service BoxerService {
   rpc Mock(Null) returns (Null) {};
   rpc EnterIntegratedTestingEnvironment(Null) returns (Null) {};
   rpc SetupAddBoxer(SetupAddBoxerRequest) returns (SetupAddBoxerResponse) {};
+  rpc SetupClearBoxers(Null) returns (SetupClearBoxersResponse) {};
   rpc SetupAddStandingAndMatches(SetupAddStandingAndMatchesRequest) returns (SetupAddBoxerResponse) {};
   rpc SetupAddToken(SetupAddTokenRequest) returns (SetupAddTokenResponse) {};
 }
