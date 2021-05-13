@@ -74,6 +74,7 @@ class GlobalObjects {
 
   async cleanUp() {
     await this.matchRepository.cleanUp();
+    await this.boxerServiceGateway.cleanUp();
   }
 
 }
