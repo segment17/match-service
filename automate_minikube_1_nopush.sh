@@ -2,8 +2,8 @@
 start=$(date +%s)
 rm -rf features/cucumberstudio
 hiptest-publisher --config-file test/hiptest-publisher.conf --test-run-id 521216 --only=features
-kubectl delete deployments --all app=match-service
-kubectl delete svc --all app=match-service
+kubectl delete deployments --selector app=match-service
+kubectl delete svc --selector app=match-service
 eval $(minikube docker-env)
 docker build -t segment17hub/matchservice .
 kubectl apply -f manifest.yaml
