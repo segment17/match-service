@@ -16,11 +16,12 @@ CREATE TABLE IF NOT EXISTS matches (
 */
 
 const connectionSetup = {
-  host: process.env.BOXER_MYSQL_SERVICE_SERVICE_HOST != undefined ? process.env.BOXER_MYSQL_SERVICE_SERVICE_HOST : "localhost",
+  host: process.env.MATCH_MYSQL_SERVICE_SERVICE_HOST != undefined ? process.env.MATCH_MYSQL_SERVICE_SERVICE_HOST : "localhost",
   user: "root",
   password: "root",
   database: "matchservice",
 };
+console.log('connectionSetup: ', connectionSetup);
 
 var connection = mysql.createConnection(connectionSetup);
 
