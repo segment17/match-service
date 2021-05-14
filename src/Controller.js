@@ -25,9 +25,9 @@ class Controller {
   async guardAddMatch(request) {
     const { homeBoxerId, awayBoxerId, matchTime, isFinished, token } = request;
 
-    if (homeBoxerId === 0
-      || awayBoxerId === 0
-      || matchTime === '0'
+    if (homeBoxerId <= 0
+      || awayBoxerId <= 0
+      || matchTime <= '0'
       // || isFinished === false // Idk how to check if this value exists
       || token === ''
     ) {
@@ -53,8 +53,14 @@ class Controller {
   }
 
   async guardRemoveMatchesOfBoxer(request) {
+    const { boxerId } = request;
 
-    // Do validation here
+    if (boxerId <= 0) {
+      return {
+        code: 400,
+        message: 'bad_request'
+      }
+    }
 
     let response = await this.mediator.removeMatchesOfBoxer(request);
     // Do validation here
