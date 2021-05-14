@@ -13,12 +13,16 @@ class BoxerServiceGateway {
     return response;
   }
 
+  async GetBoxer({ id }, cb) {
+    const response = await this.doCallForGetBoxer(id);
+    cb(null, response);
+  }
+
   async cleanUp () {
     return await this.doCallForSetupClearBoxers();
   }
 
   async SetupAddBoxer(obj) {
-    
     await this.doCallForSetupAddBoxer(obj);
   }
 
