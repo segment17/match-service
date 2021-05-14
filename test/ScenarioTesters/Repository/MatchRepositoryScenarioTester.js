@@ -86,13 +86,13 @@ class MatchRepositoryScenarioTester extends DefaultScenarioTester {
   async thereIsAMatchSuchAs(dataSource) {
     const match = TestFunctions.extractSpecifiedObjectData(dataSource);
     await globalObjects.matchRepository.SetupAddMatches([match]);
+    globalObjects.done = true;
   }
 
   async thereAreMatchesSuchAs(dataSource) {
     const matches = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.matchRepository.SetupAddMatches(matches, function (err, res) {
-      globalObjects.done = true;
-    });
+    await globalObjects.matchRepository.SetupAddMatches(matches);
+    globalObjects.done = true;
   }
 
   /* thereIsAnActiveStandingSpecifiedAsData(dataSource) {

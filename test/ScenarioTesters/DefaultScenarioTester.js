@@ -124,7 +124,9 @@ class DefaultScenarioTester {
 
   async thereIsAMatchSuchAs(dataSource) {
     const match = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.client.SetupAddMatches([match]);
+    await globalObjects.client.SetupAddMatches([match], function (err, res) {
+      globalObjects.done = true;
+    });
   }
 
   async thereAreMatchesSuchAs(dataSource) {

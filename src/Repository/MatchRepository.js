@@ -1,3 +1,4 @@
+const globalObjects = require("../..");
 const { NotFound, InvalidArgument, DBOperationFailed } = require("../common/Errors");
 const { connection } = require('./DB');
 
@@ -155,7 +156,7 @@ class MatchRepository {
   }
 
   async SetupAddMatches(matches) {
-        await matches.forEach(async match => {
+    await matches.forEach(async match => {
       await this.runQuery(this.createInsertQuery(match));
     });
   }
