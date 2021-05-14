@@ -31,6 +31,7 @@ class MatchRepository {
   }
 
   async addMatchWithGivenData(matchData) {
+    console.log('matchData: ', matchData);
     if (!matchData) {
       throw new InvalidArgument('matchData cannot be empty');
     }
@@ -230,11 +231,18 @@ class MatchRepository {
   }
 
   createInsertQuery(match) {
+    
     const { id, awayBoxerId, homeBoxerId, matchTime, winnerBoxerId, isFinished } = match;
-    let query = `INSERT INTO ${this.tableName} (id, homeBoxerId, awayBoxerId, matchTime ,isFinished${winnerBoxerId ? ', winnerBoxerId' : ''})`;
-    let fq = query + ` VALUES (${id}, ${homeBoxerId}, ${awayBoxerId}, ${matchTime}, ${isFinished}${winnerBoxerId ? `, ${winnerBoxerId}` : ''});`
-    console.log('fq: ', fq)
-    return fq;
+    if (id == undefined) {
+      let query = `INSERT INTO ${this.tableName} (homeBoxerId, awayBoxerId, matchTime, isFinished${winnerBoxerId ? ', winnerBoxerId' : ''})`;
+      let fq = query + ` VALUES (${homeBoxerId}, ${awayBoxerId}, ${matchTime}, ${isFinished}${winnerBoxerId ? `, ${winnerBoxerId}` : ''});`
+      return fq;
+    } else {
+      let query = `INSERT INTO ${this.tableName} (id, homeBoxerId, awayBoxerId, matchTime, isFinished${winnerBoxerId ? ', winnerBoxerId' : ''})`;
+      let fq = query + ` VALUES (${id}, ${homeBoxerId}, ${awayBoxerId}, ${matchTime}, ${isFinished}${winnerBoxerId ? `, ${winnerBoxerId}` : ''});`
+      return fq;
+      
+    }
   }
 }
 
