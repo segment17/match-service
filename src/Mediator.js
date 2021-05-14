@@ -28,8 +28,7 @@ class Mediator {
   }
 
   handleException(exception) {
-    console.log('exception: ', exception);
-    
+        
     switch (exception.name) {
       case 'InvalidArgument':
         return this.responseObject({ code: 400, message: 'bad_request' });
@@ -41,8 +40,7 @@ class Mediator {
   }
 
   async addMatch(request) {
-    console.log('request: ', request);
-    const { homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token } = request;
+        const { homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token } = request;
     // Authentication validation
     const authValidation = await this.getAuthValidation(token);
     if (authValidation.code !== 200) {

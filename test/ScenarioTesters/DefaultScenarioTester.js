@@ -95,12 +95,10 @@ class DefaultScenarioTester {
 
   async responseIsAs(expectedResponseSource) {
     const expectedResponse = TestFunctions.extractSpecifiedObjectData(expectedResponseSource);
-    console.log('expectedResponse: ', expectedResponse);
-    await TestFunctions.waitUntilResult();
+        await TestFunctions.waitUntilResult();
 
     const response = globalObjects.result;
-    console.log('response: ', response);
-    assert.strictEqual(response.code, expectedResponse.code);
+        assert.strictEqual(response.code, expectedResponse.code);
     assert.strictEqual(response.message,  expectedResponse.message);
     if(expectedResponse.standings) {
       this.compareStandings(response.standings.sort((a, b) => a.boxer.id - b.boxer.id), expectedResponse.standings.sort((a, b) => a.boxer.id - b.boxer.id));

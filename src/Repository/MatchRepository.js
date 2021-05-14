@@ -25,14 +25,12 @@ class MatchRepository {
   }
 
   async cleanUp() {
-    console.log("CELANING UP");
-    await this.runQuery(this.cleanUpQuery);
+        await this.runQuery(this.cleanUpQuery);
     await this.runQuery(this.createTableQuery);
   }
 
   async addMatchWithGivenData(matchData) {
-    console.log('matchData: ', matchData);
-    if (!matchData) {
+        if (!matchData) {
       throw new InvalidArgument('matchData cannot be empty');
     }
     
@@ -98,8 +96,7 @@ class MatchRepository {
 
   async getAllMatches() {
     const allMatches = await this.runQueryForGetAllMatches();
-    console.log('allMatches: ', allMatches);
-    return allMatches;
+        return allMatches;
   }
 
   async getMatchesOfBoxer(boxerId) {
@@ -137,8 +134,7 @@ class MatchRepository {
   }
 
   async runQueryForGetAllMatches() {
-    console.log(`SELECT * FROM ${this.tableName};`);
-    return await this.runQuery(`SELECT * FROM ${this.tableName};`);
+        return await this.runQuery(`SELECT * FROM ${this.tableName};`);
   }
 
   async runQueryForGetMatchesOfBoxer(boxerId) {
@@ -159,8 +155,7 @@ class MatchRepository {
   }
 
   async SetupAddMatches(matches) {
-    console.log('setup matches: ', matches);
-    await matches.forEach(async match => {
+        await matches.forEach(async match => {
       await this.runQuery(this.createInsertQuery(match));
     });
   }

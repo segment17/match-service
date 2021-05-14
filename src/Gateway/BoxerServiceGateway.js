@@ -72,8 +72,7 @@ class BoxerServiceGateway {
   }
 
   async PROMISE_doCallForSetupAddBoxer (obj) {
-    console.log('obj: ', obj);
-    return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
       this.client.SetupAddBoxer({boxer: obj}, function (err, res) {
         resolve(res);
       });
