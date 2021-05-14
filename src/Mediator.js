@@ -16,7 +16,7 @@ class Mediator {
   // Endpoints
 
   async getAuthValidation(token) {
-    const response = await this.authServiceGateway.getValidation(token);
+    const response = await this.authServiceGateway.Validate(token);
     return response;
   }
 

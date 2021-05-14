@@ -95,7 +95,7 @@ class DefaultScenarioTester {
 
   async responseIsAs(expectedResponseSource) {
     const expectedResponse = TestFunctions.extractSpecifiedObjectData(expectedResponseSource);
-        await TestFunctions.waitUntilResult();
+    await TestFunctions.waitUntilResult();
 
     const response = globalObjects.result;
         assert.strictEqual(response.code, expectedResponse.code);

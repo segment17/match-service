@@ -11,7 +11,7 @@ Feature: Auth Service Gateway Unit Feature
 
     Examples:
       | admin                                   | gateway_function | data_chunk                                   | expected_data                                   |
-      | Unit_AuthServiceGateway_Scenario1.admin | getValidation    | Unit_AuthServiceGateway_Scenario1.data_chunk | Unit_AuthServiceGateway_Scenario1.expected_data |
+      | Unit_AuthServiceGateway_Scenario1.admin | Validate         | Unit_AuthServiceGateway_Scenario1.data_chunk | Unit_AuthServiceGateway_Scenario1.expected_data |
 
   #FAIL SCENARIOS
 
@@ -23,4 +23,4 @@ Feature: Auth Service Gateway Unit Feature
 
     Examples:
       | admin                                         | gateway_function | data_chunk                                         | expected_data                                         |
-      | Unit_AuthServiceGateway_Scenario2_Fail1.admin | getValidation    | Unit_AuthServiceGateway_Scenario2_Fail1.data_chunk | Unit_AuthServiceGateway_Scenario2_Fail1.expected_data |
+      | Unit_AuthServiceGateway_Scenario2_Fail1.admin | Validate         | Unit_AuthServiceGateway_Scenario2_Fail1.data_chunk | Unit_AuthServiceGateway_Scenario2_Fail1.expected_data |
