@@ -16,6 +16,11 @@ class AuthServiceGateway {
     return response;
   }
 
+  async Validate({ token }, cb) {
+    const response = await this.doCallForGetValidation(token);
+    cb(null, response);
+  }
+
   async doCallForGetValidation(obj) {
     // Connect to Kubernetes if possible
     if (this.client == undefined || this.client == null) {
