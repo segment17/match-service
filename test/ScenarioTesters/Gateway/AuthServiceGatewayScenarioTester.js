@@ -40,7 +40,7 @@ class AuthServiceGatewayScenarioTester extends DefaultScenarioTester {
   
   async unitFunctionIsInvokedWithData(functionName, dataSource) { 
     const specified = TestFunctions.extractSpecifiedObjectData(dataSource);
-    globalObjects.authServiceGateway.Validate(specified).then((data) => {
+    globalObjects.authServiceGateway.getValidation(specified).then((data) => {
       globalObjects.result = data;
     });
   }
