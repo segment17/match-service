@@ -336,6 +336,26 @@ const M3_Scenario1_Variation1 = {
   }
 };
 
+const Integration_AuthService_Scenario1_fail = {
+  request_body: {
+    token: TOKENS.VALID,
+  },
+  expected_response: {
+    code: 200,
+    message: REQUEST_STATUSES.SUCCESS
+  },
+};
+
+const Integration_AuthService_Scenario1_success = {
+  request_body: {
+    token: TOKENS.INVALID,
+  },
+  expected_response: {
+    code: 403,
+    message: REQUEST_STATUSES.FORBIDDEN
+  },
+};
+
 const Unit_AuthServiceGateway_Scenario1 = {
   admin: testAdmin,
   data_chunk: TOKENS.VALID,
@@ -533,6 +553,8 @@ module.exports = {
   M3_Scenario1_Variation1,
   M3_Scenario1_Fail1,
   M3_Scenario1_Fail2,
+  Integration_AuthService_Scenario1_success,
+  Integration_AuthService_Scenario1_fail,
   Unit_AuthServiceGateway_Scenario1,
   Unit_AuthServiceGateway_Scenario2_Fail1,
   Unit_BoxerServiceGateway_Scenario1,

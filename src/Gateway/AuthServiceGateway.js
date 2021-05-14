@@ -11,8 +11,15 @@ class AuthServiceGateway {
   // Template code
 
   // Gateway exposed function
-    let response = await this.doCallForGetValidation(token);
   async Validate(token, cb) {
+    let _token = token;
+    if (typeof token !== 'string') {
+      _token = token.token;
+    }
+    let response = await this.doCallForGetValidation(_token);
+    if (cb) {
+      cb(null, response);
+    }
     return response;
   }
 
