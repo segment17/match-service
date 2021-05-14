@@ -356,6 +356,43 @@ const Integration_AuthService_Scenario1_success = {
   },
 };
 
+// Get Boxer - success
+const Integration_BoxerService_Scenario1_success = {
+  boxers: testBoxers,
+  request_body: {
+    id: testBoxerIDs[0],
+  },
+  expected_response: {
+    code: 200,
+    message: REQUEST_STATUSES.SUCCESS,
+    boxer: testBoxers[0]
+  },
+};
+
+// Get Boxer - not found boxer
+const Integration_BoxerService_Scenario1_fail1 = {
+  boxers: testBoxers,
+  request_body: {
+    id: 9999,
+  },
+  expected_response: {
+    code: 404,
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+  },
+};
+
+// Get Boxer - invalid boxer id
+const Integration_BoxerService_Scenario1_fail2 = {
+  boxers: testBoxers,
+  request_body: {
+    id: NOT_VALID_BOXER_ID,
+  },
+  expected_response: {
+    code: 400,
+    message: REQUEST_STATUSES.BAD_REQUEST
+  },
+};
+
 const Unit_AuthServiceGateway_Scenario1 = {
   admin: testAdmin,
   data_chunk: TOKENS.VALID,
@@ -555,6 +592,9 @@ module.exports = {
   M3_Scenario1_Fail2,
   Integration_AuthService_Scenario1_success,
   Integration_AuthService_Scenario1_fail,
+  Integration_BoxerService_Scenario1_success,
+  Integration_BoxerService_Scenario1_fail1,
+  Integration_BoxerService_Scenario1_fail2,
   Unit_AuthServiceGateway_Scenario1,
   Unit_AuthServiceGateway_Scenario2_Fail1,
   Unit_BoxerServiceGateway_Scenario1,
