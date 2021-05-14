@@ -18,11 +18,13 @@ class BoxerServiceGateway {
   }
 
   async SetupAddBoxer(obj) {
+    
     await this.doCallForSetupAddBoxer(obj);
   }
 
   async SetupAddBoxers(obj) {
-    for (let boxer in obj) {
+    for (let i in obj) {
+      const boxer = obj[i];
       await this.doCallForSetupAddBoxer(boxer);
     }
   }
@@ -33,14 +35,13 @@ class BoxerServiceGateway {
       if (process.env.BOXER_SERVICE_SERVICE_PORT != undefined) {
         this.client = new boxerservice_package.BoxerService(process.env.BOXER_SERVICE_SERVICE_HOST + ":" + process.env.BOXER_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
       } else {
-        this.client = new boxerservice_package.BoxerService("0.0.0.0:50001", grpc.credentials.createInsecure());
+        this.client = new boxerservice_package.BoxerService("0.0.0.0:50002", grpc.credentials.createInsecure());
       }
     }
 
-    console.log(this.client);
 
     let response = await this.PROMISE_doCallForGetBoxer(obj);
-    console.log(response);
+
 
     return response;
   }
@@ -48,7 +49,7 @@ class BoxerServiceGateway {
   async PROMISE_doCallForGetBoxer (obj) {
     return new Promise((resolve, reject) => {
       this.client.GetBoxer({id: obj}, function (err, res) {
-        console.log(res);
+
         resolve(res);
       });
     });
@@ -60,22 +61,20 @@ class BoxerServiceGateway {
       if (process.env.BOXER_SERVICE_SERVICE_PORT != undefined) {
         this.client = new boxerservice_package.BoxerService(process.env.BOXER_SERVICE_SERVICE_HOST + ":" + process.env.BOXER_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
       } else {
-        this.client = new boxerservice_package.BoxerService("0.0.0.0:50001", grpc.credentials.createInsecure());
+        this.client = new boxerservice_package.BoxerService("0.0.0.0:50002", grpc.credentials.createInsecure());
       }
     }
 
-    console.log(this.client);
 
     let response = await this.PROMISE_doCallForSetupAddBoxer(obj);
-    console.log(response);
 
     return response;
   }
 
   async PROMISE_doCallForSetupAddBoxer (obj) {
+    console.log('obj: ', obj);
     return new Promise((resolve, reject) => {
       this.client.SetupAddBoxer({boxer: obj}, function (err, res) {
-        console.log(res);
         resolve(res);
       });
     });
@@ -88,14 +87,12 @@ class BoxerServiceGateway {
       if (process.env.BOXER_SERVICE_SERVICE_PORT != undefined) {
         this.client = new boxerservice_package.BoxerService(process.env.BOXER_SERVICE_SERVICE_HOST + ":" + process.env.BOXER_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
       } else {
-        this.client = new boxerservice_package.BoxerService("0.0.0.0:50001", grpc.credentials.createInsecure());
+        this.client = new boxerservice_package.BoxerService("0.0.0.0:50002", grpc.credentials.createInsecure());
       }
     }
 
-    console.log(this.client);
 
     let response = await this.PROMISE_doCallForSetupClearBoxers();
-    console.log(response);
 
     return response;
   }
@@ -103,7 +100,6 @@ class BoxerServiceGateway {
   async PROMISE_doCallForSetupClearBoxers () {
     return new Promise((resolve, reject) => {
       this.client.SetupClearBoxers({}, function (err, res) {
-        console.log(res);
         resolve(res);
       });
     });

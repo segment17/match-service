@@ -96,8 +96,8 @@ class DefaultScenarioTester {
     await TestFunctions.waitUntilResult();
 
     const response = globalObjects.result;
-    assert(response.code === expectedResponse.code);
-    assert(response.message === expectedResponse.message);
+    assert.strictEqual(response.code, expectedResponse.code);
+    assert.strictEqual(response.message,  expectedResponse.message);
     if(expectedResponse.standings) {
       this.compareStandings(response.standings.sort((a, b) => a.boxer.id - b.boxer.id), expectedResponse.standings.sort((a, b) => a.boxer.id - b.boxer.id));
     }

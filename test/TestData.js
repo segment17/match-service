@@ -1,5 +1,5 @@
 const REQUEST_STATUSES = {
-  BOXER_NOT_FOUND: 'boxer_not_found',
+  BOXER_NOT_FOUND: 'not_found',
   BAD_REQUEST: 'bad_request',
   CREATED: 'created',
   DELETED: 'deleted',

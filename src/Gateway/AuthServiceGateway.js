@@ -26,10 +26,8 @@ class AuthServiceGateway {
       }
     }
 
-    console.log(this.client);
 
     let response = await this.PROMISE_doCallForGetValidation(obj);
-    console.log(response);
 
     return response;
   }
@@ -37,7 +35,6 @@ class AuthServiceGateway {
   async PROMISE_doCallForGetValidation (obj) {
     return new Promise((resolve, reject) => {
       this.client.Validate({token: obj}, function (err, res) {
-        console.log(res);
         resolve(res);
       });
     });
