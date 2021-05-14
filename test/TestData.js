@@ -168,8 +168,8 @@ const B4_Scenario1_Fail2 = {
     token: TOKENS.VALID,
   },
   expected_response: {
-    code: 404,
-    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+    code: 400,
+    message: REQUEST_STATUSES.BAD_REQUEST,
   },
 };
 
