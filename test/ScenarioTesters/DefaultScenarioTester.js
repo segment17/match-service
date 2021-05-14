@@ -28,7 +28,9 @@ class DefaultScenarioTester {
   }
 
   endpointIsCalledWithRequestBody(endpoint, requestBodySource) {
+
     const requestBody = TestFunctions.extractSpecifiedObjectData(requestBodySource);
+    
     assert(requestBody !== undefined);
     assert(endpoint !== undefined);
     switch (endpoint) {
@@ -93,9 +95,11 @@ class DefaultScenarioTester {
 
   async responseIsAs(expectedResponseSource) {
     const expectedResponse = TestFunctions.extractSpecifiedObjectData(expectedResponseSource);
+    console.log('expectedResponse: ', expectedResponse);
     await TestFunctions.waitUntilResult();
 
     const response = globalObjects.result;
+    console.log('response: ', response);
     assert.strictEqual(response.code, expectedResponse.code);
     assert.strictEqual(response.message,  expectedResponse.message);
     if(expectedResponse.standings) {

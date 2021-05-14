@@ -2,6 +2,7 @@ const { Given, When, Then, Before, After } = require('@cucumber/cucumber');
 const TestFunctions = require('../../test/TestFunctions');
 const ScenarioTesterFactory = require('../../test/ScenarioTesters/ScenarioTesterFactory');
 const globalObjects = require('../../index');
+const assert = require('assert');
 
 Before(async function (scenario) {
   await globalObjects.cleanUp();
@@ -46,12 +47,20 @@ Then('response is as {string}', async function (expectedResponse) {
   await globalObjects.scenarioTester.responseIsAs(expectedResponse);
 });
 
-Given('there are matches such as {string}', function (matchesDataSource) {
-  globalObjects.scenarioTester.thereAreMatchesSuchAs(matchesDataSource);
+Given('there are matches such as {string}', async function (matchesDataSource) {
+  globalObjects.done = false;
+  await globalObjects.scenarioTester.thereAreMatchesSuchAs(matchesDataSource);
+  while (!globalObjects.done) {
+    await TestFunctions.sleep(100);
+  }
 });
 
-Given('there is a match such as {string}', function (matcheDataSource) {
-  globalObjects.scenarioTester.thereIsAMatchSuchAs(matcheDataSource);
+Given('there is a match such as {string}', async function (matcheDataSource) {
+  globalObjects.done = false;
+  await globalObjects.scenarioTester.thereIsAMatchSuchAs(matcheDataSource);
+  while (!globalObjects.done) {
+    await TestFunctions.sleep(100);
+  }
 });
 
 Given('there is a token such as {string}', async function (tokenDataSource) {
