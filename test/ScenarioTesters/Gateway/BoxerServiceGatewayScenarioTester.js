@@ -35,13 +35,24 @@ class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
     await TestFunctions.waitUntilResult();
 
     const { code: expectedCode, message: expectedMessage, boxer: expectedBoxer } = expectedData;
+    console.log('expectedBoxer: ', expectedBoxer);
     const { code: resultCode, message: resultMessage, boxer: resultBoxer } = globalObjects.result;
+    console.log('resultBoxer: ', resultBoxer);
 
     assert(expectedCode === resultCode);
     assert(expectedMessage === resultMessage);
+
     if(expectedBoxer) {
-      assert(JSON.stringify(expectedBoxer) === JSON.stringify(resultBoxer));
+      this.assertionsForBoxerEquals(expectedBoxer, resultBoxer);
     }
+  }
+
+  assertionsForBoxerEquals(expected, actual) {
+    assert(actual != null);
+    assert(expected.id == actual.id);
+    assert(expected.birthDate == actual.birthDate);
+    assert(expected.height == actual.height);
+    assert(expected.weight == actual.weight);
   }
 }
 
