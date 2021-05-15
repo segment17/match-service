@@ -12,13 +12,8 @@ class AuthServiceGateway {
 
   // Gateway exposed function
   async getValidation(token) {
-    const response = await this.doCallForGetValidation(token);
+    let response = await this.doCallForGetValidation(token);
     return response;
-  }
-
-  async Validate({ token }, cb) {
-    const response = await this.doCallForGetValidation(token);
-    cb(null, response);
   }
 
   async doCallForGetValidation(obj) {
