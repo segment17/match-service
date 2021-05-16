@@ -112,6 +112,10 @@ message SetupAddAdminResponse {
 
 message Empty {};
 
+message SetupCleanUpResponse {
+  int32 code = 1;
+}
+
 service MatchService {
   rpc AddMatch(AddMatchRequest) returns (AddMatchResponse);
   rpc RemoveMatch(RemoveMatchRequest) returns (RemoveMatchResponse);
@@ -122,5 +126,6 @@ service MatchService {
   rpc SetupAddBoxers(SetupAddBoxersRequest) returns (SetupAddBoxersResponse);
   rpc SetupAddMatches(SetupAddMatchesRequest) returns (SetupAddMatchesResponse);
   rpc SetupAddAdmin(SetupAddAdminRequest) returns (SetupAddAdminResponse);
+  rpc SetupCleanUp(Empty) returns (SetupCleanUpResponse);
   rpc Mock(Empty) returns (Empty) {};
 }

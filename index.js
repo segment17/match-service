@@ -61,6 +61,11 @@ async function bindSetupAddMatches(call, callback) {
   callback(null, {code: 200});
 }
 
+async function bindSetupCleanUp(call, callback) {
+  await globalObjects.cleanUp();
+  callback(null, {code: 200});
+}
+
 function main() {
   console.log("Server running...");
   server = new grpc.Server();
@@ -75,6 +80,7 @@ function main() {
     SetupAddBoxers: bindSetupAddBoxers,
     SetupAddMatches: bindSetupAddMatches,
     UpdateMatch: bindUpdateMatch,
+    SetupCleanUp: bindSetupCleanUp
   });
 
   if (process.env.MATCH_SERVICE_SERVICE_PORT != undefined) {
