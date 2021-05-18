@@ -8,7 +8,9 @@
   "scripts": {
     "test": "cucumber-js --format json:./test/results.json --exit",
     "cucumber-publish": "CUCUMBER_PUBLISH_TOKEN=b2130c03-b2b3-4ac8-8b80-2e6e46d43086 cucumber-js --publish --exit",
-    "coverage": "nyc yarn test"
+    "coverage": "nyc yarn test",
+    "coverage-report": "yarn coverage && yarn nyc report --reporter=html",
+    "coverage-naked-report": "yarn nyc report --reporter=html"
   },
   "devDependencies": {
     "@cucumber/cucumber": "7.0.0",
