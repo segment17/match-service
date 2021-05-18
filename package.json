@@ -10,14 +10,17 @@
     "cucumber-publish": "CUCUMBER_PUBLISH_TOKEN=b2130c03-b2b3-4ac8-8b80-2e6e46d43086 cucumber-js --publish --exit",
     "coverage": "nyc yarn test",
     "coverage-report": "yarn coverage && yarn nyc report --reporter=html",
-    "coverage-naked-report": "yarn nyc report --reporter=html"
+    "coverage-naked-report": "yarn nyc report --reporter=html",
+    "count": "sh count.sh",
+    "count-report": "yarn count > count-report"
   },
   "devDependencies": {
     "@cucumber/cucumber": "7.0.0",
     "@grpc/proto-loader": "0.5.5",
     "google-protobuf": "3.13.0",
     "grpc": "1.24.3",
-    "nyc": "15.1.0"
+    "nyc": "15.1.0",
+    "sloc": "^0.2.1"
   },
   "dependencies": {
     "mysql": "2.18.1"

@@ -1,0 +1,213 @@
+$ sh count.sh
+
+index.js:
+
+$ /Users/omergulen/Documents/others/s17/match-service/node_modules/.bin/sloc index.js
+
+---------- Result ------------
+
+            Physical :  94
+              Source :  76
+             Comment :  2
+ Single-line comment :  2
+       Block comment :  0
+               Mixed :  0
+ Empty block comment :  0
+               Empty :  16
+               To Do :  0
+
+Number of files read :  1
+
+----------------------------
+
+
+GlobalObjects:
+
+$ /Users/omergulen/Documents/others/s17/match-service/node_modules/.bin/sloc GlobalObjects.js
+
+---------- Result ------------
+
+            Physical :  82
+              Source :  65
+             Comment :  8
+ Single-line comment :  8
+       Block comment :  0
+               Mixed :  3
+ Empty block comment :  0
+               Empty :  12
+               To Do :  0
+
+Number of files read :  1
+
+----------------------------
+
+
+Dockerfile:
+
+       7
+
+Dockerfile comments:
+
+       0
+
+k8s manifests:
+
+$ /Users/omergulen/Documents/others/s17/match-service/node_modules/.bin/sloc manifest.yaml
+
+---------- Result ------------
+
+            Physical :  92
+              Source :  90
+             Comment :  2
+ Single-line comment :  2
+       Block comment :  0
+               Mixed :  0
+ Empty block comment :  0
+               Empty :  0
+               To Do :  0
+
+Number of files read :  1
+
+----------------------------
+
+
+automations:
+
+       8 ./automate_local_1_nopush.sh
+      17 ./automate_minikube_1.sh
+      18 ./automate_minikube_1_nopush.sh
+       8 ./automate_local_1.sh
+      51 total
+
+Automations comments:
+
+      10
+
+src:
+
+$ /Users/omergulen/Documents/others/s17/match-service/node_modules/.bin/sloc src/
+
+---------- Result ------------
+
+            Physical :  988
+              Source :  745
+             Comment :  60
+ Single-line comment :  49
+       Block comment :  11
+               Mixed :  0
+ Empty block comment :  0
+               Empty :  183
+               To Do :  1
+
+Number of files read :  12
+
+----------------------------
+
+
+proto:
+
+      41 ./proto/authservice.proto
+     139 ./proto/boxerservice.proto
+     130 ./proto/matchservice.proto
+     310 total
+
+features:
+
+     102 ./test/features_raw/Unit/MatchRepository.feature
+      26 ./test/features_raw/Unit/BoxerServiceGateway.feature
+       6 ./test/features_raw/Unit/EmailServiceGateway.feature
+      25 ./test/features_raw/Unit/AuthServiceGateway.feature
+     103 ./test/features_raw/Integration/MatchRepository.feature
+      26 ./test/features_raw/Integration/BoxerServiceGateway.feature
+      25 ./test/features_raw/Integration/AuthServiceGateway.feature
+      82 ./test/features_raw/E2E.feature
+      82 ./test/features_raw/Component.feature
+     477 total
+
+Feature comments:
+
+      16
+
+step-definitions:
+
+$ /Users/omergulen/Documents/others/s17/match-service/node_modules/.bin/sloc features/step_definitions
+
+---------- Result ------------
+
+            Physical :  104
+              Source :  86
+             Comment :  0
+ Single-line comment :  0
+       Block comment :  0
+               Mixed :  0
+ Empty block comment :  0
+               Empty :  18
+               To Do :  0
+
+Number of files read :  1
+
+----------------------------
+
+
+scenario-testers:
+
+$ /Users/omergulen/Documents/others/s17/match-service/node_modules/.bin/sloc test/ScenarioTesters
+
+---------- Result ------------
+
+            Physical :  468
+              Source :  374
+             Comment :  25
+ Single-line comment :  3
+       Block comment :  22
+               Mixed :  0
+ Empty block comment :  2
+               Empty :  71
+               To Do :  0
+
+Number of files read :  7
+
+----------------------------
+
+
+test-data:
+
+$ /Users/omergulen/Documents/others/s17/match-service/node_modules/.bin/sloc test/TestData.js
+
+---------- Result ------------
+
+            Physical :  556
+              Source :  486
+             Comment :  32
+ Single-line comment :  30
+       Block comment :  2
+               Mixed :  4
+ Empty block comment :  0
+               Empty :  42
+               To Do :  0
+
+Number of files read :  1
+
+----------------------------
+
+
+test-functions:
+
+$ /Users/omergulen/Documents/others/s17/match-service/node_modules/.bin/sloc test/TestFunctions.js
+
+---------- Result ------------
+
+            Physical :  49
+              Source :  38
+             Comment :  2
+ Single-line comment :  2
+       Block comment :  0
+               Mixed :  0
+ Empty block comment :  0
+               Empty :  9
+               To Do :  0
+
+Number of files read :  1
+
+----------------------------
+
