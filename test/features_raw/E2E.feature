@@ -50,6 +50,7 @@ Feature: Match Service E2E Features
       | M1_Scenario1_Fail1.boxers      | M1_Scenario1_Fail1.admin      | AddMatch | M1_Scenario1_Fail1.request_body      | M1_Scenario1_Fail1.expected_response      |
       | M1_Scenario1_Fail2.boxers      | M1_Scenario1_Fail2.admin      | AddMatch | M1_Scenario1_Fail2.request_body      | M1_Scenario1_Fail2.expected_response      |
       | M1_Scenario1_Fail3.boxers      | M1_Scenario1_Fail3.admin      | AddMatch | M1_Scenario1_Fail3.request_body      | M1_Scenario1_Fail3.expected_response      |
+      | M1_Scenario1_Fail4.boxers      | M1_Scenario1_Fail4.admin      | AddMatch | M1_Scenario1_Fail4.request_body      | M1_Scenario1_Fail4.expected_response      |
 
   @M2 @M2_Scenario1
   Scenario Outline: Remove Match
@@ -77,3 +78,5 @@ Feature: Match Service E2E Features
       | M3_Scenario1_Variation1.matches | M3_Scenario1_Variation1.boxers | M3_Scenario1_Variation1.admin | UpdateMatch | M3_Scenario1_Variation1.request_body | M3_Scenario1_Variation1.expected_response |
       | M3_Scenario1_Fail1.matches      | M3_Scenario1_Fail1.boxers      | M3_Scenario1_Fail1.admin      | UpdateMatch | M3_Scenario1_Fail1.request_body      | M3_Scenario1_Fail1.expected_response      |
       | M3_Scenario1_Fail2.matches      | M3_Scenario1_Fail2.boxers      | M3_Scenario1_Fail2.admin      | UpdateMatch | M3_Scenario1_Fail2.request_body      | M3_Scenario1_Fail2.expected_response      |
+      | M3_Scenario1_Fail3.matches      | M3_Scenario1_Fail3.boxers      | M3_Scenario1_Fail3.admin      | UpdateMatch | M3_Scenario1_Fail3.request_body      | M3_Scenario1_Fail3.expected_response      |
+      | M3_Scenario1_Fail4.matches      | M3_Scenario1_Fail4.boxers      | M3_Scenario1_Fail4.admin      | UpdateMatch | M3_Scenario1_Fail4.request_body      | M3_Scenario1_Fail4.expected_response      |

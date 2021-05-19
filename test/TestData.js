@@ -204,20 +204,37 @@ const M1_Scenario1_Fail2 = {
   }
 };
 
-// AddMatch Fail - not valid boxer id in one of the matches
+// AddMatch Fail - not valid boxer id in home boxer
 const M1_Scenario1_Fail3 = {
   boxers: testBoxers,
   admin: testAdmin,
   request_body: {
-    homeBoxerId: NOT_VALID_BOXER_ID,
+    homeBoxerId: 9999,
     awayBoxerId: 4,
     matchTime: 157419968,
     isFinished: false,
     token: TOKENS.VALID,
   },
   expected_response: {
-    code: 400,
-    message: REQUEST_STATUSES.BAD_REQUEST,
+    code: 404,
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+  }
+};
+
+// AddMatch Fail - not valid boxer id away boxer
+const M1_Scenario1_Fail4 = {
+  boxers: testBoxers,
+  admin: testAdmin,
+  request_body: {
+    homeBoxerId: 1,
+    awayBoxerId: 9999,
+    matchTime: 157419968,
+    isFinished: false,
+    token: TOKENS.VALID,
+  },
+  expected_response: {
+    code: 404,
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
   }
 };
 
@@ -277,6 +294,38 @@ const M3_Scenario1_Fail2 = {
   expected_response: {
     code: 400,
     message: REQUEST_STATUSES.BAD_REQUEST,
+  }
+};
+
+// UpdateMatch Fail - not valid home boxer
+const M3_Scenario1_Fail3 = {
+  matches: testMatches,
+  boxers: testBoxers,
+  admin: testAdmin,
+  request_body: {
+    id: 1,
+    homeBoxerId: 9999,
+    token: TOKENS.VALID,
+  },
+  expected_response: {
+    code: 404,
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
+  }
+};
+
+// UpdateMatch Fail - not valid away boxer
+const M3_Scenario1_Fail4 = {
+  matches: testMatches,
+  boxers: testBoxers,
+  admin: testAdmin,
+  request_body: {
+    id: 1,
+    awayBoxerId: 9999,
+    token: TOKENS.VALID,
+  },
+  expected_response: {
+    code: 404,
+    message: REQUEST_STATUSES.BOXER_NOT_FOUND,
   }
 };
 
@@ -523,12 +572,15 @@ module.exports = {
   M1_Scenario1_Fail1,
   M1_Scenario1_Fail2,
   M1_Scenario1_Fail3,
+  M1_Scenario1_Fail4,
   M2_Scenario1_Variation1,
   M2_Scenario1_Fail1,
   M2_Scenario1_Fail2,
   M3_Scenario1_Variation1,
   M3_Scenario1_Fail1,
   M3_Scenario1_Fail2,
+  M3_Scenario1_Fail3,
+  M3_Scenario1_Fail4,
   Unit_AuthServiceGateway_Scenario1,
   Unit_AuthServiceGateway_Scenario2_Fail1,
   Unit_BoxerServiceGateway_Scenario1,
