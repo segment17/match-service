@@ -16,29 +16,28 @@ class AuthServiceGateway {
 
   async doCallForGetValidation(obj) {
     // Connect to Kubernetes if possible
-    if (this.client == undefined || this.client == null) {
-      if (process.env.AUTH_SERVICE_SERVICE_PORT != undefined) {
+    if (!this.client) {
+      if (process.env.AUTH_SERVICE_SERVICE_HOST && process.env.AUTH_SERVICE_SERVICE_PORT) {
         this.client = new authservice_package.AuthService(process.env.AUTH_SERVICE_SERVICE_HOST + ":" + process.env.AUTH_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
       } else {
         this.client = new authservice_package.AuthService("0.0.0.0:50001", grpc.credentials.createInsecure());
       }
     }
 
-
     let response = await this.PROMISE_doCallForGetValidation(obj);
-
     return response;
   }
 
   async PROMISE_doCallForGetValidation (obj) {
-    return new Promise((resolve, reject) => {
-      this.client.Validate({token: obj}, function (err, res) {
+    return new Promise((resolve, _) => {
+      this.client.Validate({token: obj}, function (_, res) {
         resolve(res);
       });
     });
   }
 
   async setupAddAdmin(obj) {
+    // TODO :: Discuss
     return null;
   }
 }
