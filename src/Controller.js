@@ -7,16 +7,6 @@ class Controller {
     this.mediator = new Mediator();
   }
 
-  async guardGetStandingAndMatchesOfBoxer(request) {
-    let response = await this.mediator.getStandingAndMatchesOfBoxer(request.boxerId);
-    return response;
-  }
-
-  async guardGetAllStandings() {
-    let response = await this.mediator.getAllStandings();
-    return response;
-  }
-
   async guardAddMatch(request) {
     const { homeBoxerId, awayBoxerId, matchTime, isFinished, token } = request;
     if (!(homeBoxerId && awayBoxerId && matchTime !== '0' && token !== '')) {
