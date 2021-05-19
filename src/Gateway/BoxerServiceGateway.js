@@ -18,7 +18,6 @@ class BoxerServiceGateway {
   }
 
   async SetupAddBoxer(obj) {
-    
     await this.doCallForSetupAddBoxer(obj);
   }
 
@@ -31,25 +30,21 @@ class BoxerServiceGateway {
 
   async doCallForGetBoxer(obj) {
     // Connect to Kubernetes if possible
-    if (this.client == undefined || this.client == null) {
-      if (process.env.BOXER_SERVICE_SERVICE_PORT != undefined) {
+    if (!this.client) {
+      if (process.env.BOXER_SERVICE_SERVICE_HOST && process.env.BOXER_SERVICE_SERVICE_PORT) {
         this.client = new boxerservice_package.BoxerService(process.env.BOXER_SERVICE_SERVICE_HOST + ":" + process.env.BOXER_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
       } else {
         this.client = new boxerservice_package.BoxerService("0.0.0.0:50002", grpc.credentials.createInsecure());
       }
     }
 
-
     let response = await this.PROMISE_doCallForGetBoxer(obj);
-
-
     return response;
   }
 
   async PROMISE_doCallForGetBoxer (obj) {
-    return new Promise((resolve, reject) => {
-      this.client.GetBoxer({id: obj}, function (err, res) {
-
+    return new Promise((resolve, _) => {
+      this.client.GetBoxer({id: obj}, function (_, res) {
         resolve(res);
       });
     });
@@ -57,23 +52,21 @@ class BoxerServiceGateway {
 
   async doCallForSetupAddBoxer(obj) {
     // Connect to Kubernetes if possible
-    if (this.client == undefined || this.client == null) {
-      if (process.env.BOXER_SERVICE_SERVICE_PORT != undefined) {
+    if (!this.client) {
+      if (process.env.BOXER_SERVICE_SERVICE_HOST && process.env.BOXER_SERVICE_SERVICE_PORT) {
         this.client = new boxerservice_package.BoxerService(process.env.BOXER_SERVICE_SERVICE_HOST + ":" + process.env.BOXER_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
       } else {
         this.client = new boxerservice_package.BoxerService("0.0.0.0:50002", grpc.credentials.createInsecure());
       }
     }
 
-
     let response = await this.PROMISE_doCallForSetupAddBoxer(obj);
-
     return response;
   }
 
   async PROMISE_doCallForSetupAddBoxer (obj) {
-        return new Promise((resolve, reject) => {
-      this.client.SetupAddBoxer({boxer: obj}, function (err, res) {
+        return new Promise((resolve, _) => {
+      this.client.SetupAddBoxer({boxer: obj}, function (_, res) {
         resolve(res);
       });
     });
@@ -82,28 +75,25 @@ class BoxerServiceGateway {
 
   async doCallForSetupClearBoxers() {
     // Connect to Kubernetes if possible
-    if (this.client == undefined || this.client == null) {
-      if (process.env.BOXER_SERVICE_SERVICE_PORT != undefined) {
+    if (!this.client) {
+      if (process.env.BOXER_SERVICE_SERVICE_HOST && process.env.BOXER_SERVICE_SERVICE_PORT) {
         this.client = new boxerservice_package.BoxerService(process.env.BOXER_SERVICE_SERVICE_HOST + ":" + process.env.BOXER_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
       } else {
         this.client = new boxerservice_package.BoxerService("0.0.0.0:50002", grpc.credentials.createInsecure());
       }
     }
 
-
     let response = await this.PROMISE_doCallForSetupClearBoxers();
-
     return response;
   }
 
   async PROMISE_doCallForSetupClearBoxers () {
-    return new Promise((resolve, reject) => {
-      this.client.SetupClearBoxers({}, function (err, res) {
+    return new Promise((resolve, _) => {
+      this.client.SetupClearBoxers({}, function (_, res) {
         resolve(res);
       });
     });
   }
-
 }
 
 module.exports = BoxerServiceGateway;
