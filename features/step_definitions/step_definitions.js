@@ -2,26 +2,12 @@ const { Given, When, Then, Before, After } = require('@cucumber/cucumber');
 const TestFunctions = require('../../test/TestFunctions');
 const ScenarioTesterFactory = require('../../test/ScenarioTesters/ScenarioTesterFactory');
 const globalObjects = require('../../index');
-const assert = require('assert');
 
 Before(async function (scenario) {
   await globalObjects.cleanUp();
   globalObjects.done = false;
   globalObjects.setScenarioTester(ScenarioTesterFactory.createScenarioTester(scenario));
   globalObjects.scenarioTester.before();
-  while (!globalObjects.done) {
-    await TestFunctions.sleep(100);
-  }
-});
-
-
-Given('{string} is running', function (serviceName) {
-  globalObjects.scenarioTester.serviceIsRunning(serviceName);
-});
-
-Given('there is a boxer such as {string}', async function (boxerDataSource) {
-  globalObjects.done = false;
-  await globalObjects.scenarioTester.thereIsABoxerSuchAs(boxerDataSource);
   while (!globalObjects.done) {
     await TestFunctions.sleep(100);
   }
@@ -58,17 +44,6 @@ Given('there are matches such as {string}', async function (matchesDataSource) {
 Given('there is a match such as {string}', async function (matcheDataSource) {
   globalObjects.done = false;
   await globalObjects.scenarioTester.thereIsAMatchSuchAs(matcheDataSource);
-  while (!globalObjects.done) {
-    await TestFunctions.sleep(100);
-  }
-});
-
-Given('there is a token such as {string}', async function (tokenDataSource) {
-  globalObjects.done = false;
-  await globalObjects.scenarioTester.thereIsATokenSuchAs(tokenDataSource);
-  while (!globalObjects.done) {
-    await TestFunctions.sleep(100);
-  }
 });
 
 Given('there is an admin such as {string}', async function (adminDataSource) {
@@ -93,10 +68,6 @@ Then('returned data is as {string}', async function (expectedDataSource) {
 
 Then('DB has match such as {string}', async function (matchDataSource) {
   await globalObjects.scenarioTester.dbHasMatchSuchAs(matchDataSource);
-});
-
-Then('DB does not have match such as {string}', async function (matchDataSource) {
-  await globalObjects.scenarioTester.dbHasNoMatchSuchAs(matchDataSource);
 });
 
 Given('the latest match in DB is such as {string}', async function (matchesDataSource) {
