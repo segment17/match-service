@@ -26,6 +26,7 @@ Feature: Match Service Component Features
       | B4_Scenario1_Variation1.matches | B4_Scenario1_Variation1.boxers | B4_Scenario1_Variation1.admin | RemoveMatchesOfBoxer | B4_Scenario1_Variation1.request_body | B4_Scenario1_Variation1.expected_response |
       | B4_Scenario1_Fail1.matches      | B4_Scenario1_Fail1.boxers      | B4_Scenario1_Fail1.admin      | RemoveMatchesOfBoxer | B4_Scenario1_Fail1.request_body      | B4_Scenario1_Fail1.expected_response      |
       | B4_Scenario1_Fail2.matches      | B4_Scenario1_Fail2.boxers      | B4_Scenario1_Fail2.admin      | RemoveMatchesOfBoxer | B4_Scenario1_Fail2.request_body      | B4_Scenario1_Fail2.expected_response      |
+      | B4_Scenario1_Fail3.matches      | B4_Scenario1_Fail3.boxers      | B4_Scenario1_Fail3.admin      | RemoveMatchesOfBoxer | B4_Scenario1_Fail3.request_body      | B4_Scenario1_Fail3.expected_response      |
 
   @H1 @H1_Scenario1
   Scenario Outline: Get All Matches
