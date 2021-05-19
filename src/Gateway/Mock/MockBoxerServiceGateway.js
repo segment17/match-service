@@ -13,9 +13,6 @@ class MockBoxerServiceGateway extends BoxerServiceGateway {
       message: "not_found",
       boxer: { id: 0, fullName: '', birthDate: '0', height: 0, weight: 0 },
     };
-    if (!this.boxersList) {
-      return notFoundObject;
-    }
 
     const boxers = this.boxersList.filter(boxer => boxer.id === param);
     if (boxers.length === 0) {
@@ -31,7 +28,6 @@ class MockBoxerServiceGateway extends BoxerServiceGateway {
 
   async SetupAddBoxer(obj) {
     this.boxersList.push(obj);
-    return;
   }
 
   async SetupAddBoxers(obj) {
