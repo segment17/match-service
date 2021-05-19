@@ -1,5 +1,5 @@
 @Integration @Gateway @BoxerServiceGateway
-Feature: Boxer Service Gateway Unit Feature
+Feature: Boxer Service Gateway Integration Feature
 
   #SUCCESS SCENARIOS
 

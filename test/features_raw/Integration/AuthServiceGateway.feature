@@ -1,5 +1,5 @@
 @Integration @Gateway @AuthServiceGateway
-Feature: Auth Service Gateway Unit Feature
+Feature: Auth Service Gateway Integration Feature
 
   #SUCCESS SCENARIOS
 
