@@ -67,7 +67,7 @@ async function bindSetupCleanUp(call, callback) {
 }
 
 function main() {
-  console.log("Server running...");
+  console.log('Server running...');
   server = new grpc.Server();
   server.addService(matchservice_package.MatchService.service, {
     AddMatch: bindAddMatch,
