@@ -4,8 +4,6 @@ const BoxerServiceGateway = require('./src/Gateway/BoxerServiceGateway');
 const MockBoxerServiceGateway = require('./src/Gateway/Mock/MockBoxerServiceGateway');
 const AuthServiceGateway = require('./src/Gateway/AuthServiceGateway');
 const MockAuthServiceGateway = require('./src/Gateway/Mock/MockAuthServiceGateway');
-const EmailServiceGateway = require('./src/Gateway/EmailServiceGateway');
-const MockEmailServiceGateway = require('./src/Gateway/Mock/MockEmailServiceGateway');
 const MatchRepository = require('./src/Repository/MatchRepository');
 const MockMatchRepository = require('./src/Repository/Mock/MockMatchRepository');
 
@@ -26,7 +24,6 @@ class GlobalObjects {
     this.mediator = new Mediator();
     this.boxerServiceGateway = new BoxerServiceGateway();
     this.authServiceGateway = new AuthServiceGateway();
-    this.emailServiceGateway = new EmailServiceGateway();
     this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
@@ -43,7 +40,6 @@ class GlobalObjects {
     this.mediator.mock();
     this.boxerServiceGateway = new MockBoxerServiceGateway();
     this.authServiceGateway = new MockAuthServiceGateway();
-    this.emailServiceGateway = new MockEmailServiceGateway();
     this.matchRepository = new MockMatchRepository();
   }
 
@@ -61,7 +57,6 @@ class GlobalObjects {
     this.mediator = new Mediator();
     this.boxerServiceGateway = new BoxerServiceGateway();
     this.authServiceGateway = new AuthServiceGateway();
-    this.emailServiceGateway = new EmailServiceGateway();
     this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
