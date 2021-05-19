@@ -135,13 +135,6 @@ class DefaultScenarioTester {
     });
   }
 
-  async thereIsABoxerSuchAs(dataSource) {
-    const specifiedBoxer = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.client.SetupAddBoxers({ boxers: [specifiedBoxer] }, function (err, res) {
-      globalObjects.done = true;
-    });
-  }
-
   async thereAreBoxersSuchAs(dataSource) {
     const boxers = TestFunctions.extractSpecifiedObjectData(dataSource);
     await globalObjects.client.SetupAddBoxers({ boxers: boxers }, function (err, res) {
