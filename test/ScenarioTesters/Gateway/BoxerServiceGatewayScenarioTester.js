@@ -35,9 +35,7 @@ class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
     await TestFunctions.waitUntilResult();
 
     const { code: expectedCode, message: expectedMessage, boxer: expectedBoxer } = expectedData;
-    console.log('expectedBoxer: ', expectedBoxer);
     const { code: resultCode, message: resultMessage, boxer: resultBoxer } = globalObjects.result;
-    console.log('resultBoxer: ', resultBoxer);
 
     assert(expectedCode === resultCode);
     assert(expectedMessage === resultMessage);

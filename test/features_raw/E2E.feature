@@ -1,9 +1,6 @@
 @E2E
 Feature: Match Service E2E Features
 
-  #SUCCESS SCENARIOS
-
-
   @B1 @B1_Scenario1
   Scenario Outline: Get Matches Of Boxer
     Given there are boxers such as "<boxers>"

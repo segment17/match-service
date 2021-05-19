@@ -38,7 +38,6 @@ class MockBoxerServiceGateway extends BoxerServiceGateway {
     for(let index in obj) {
       this.boxersList.push(obj[index]);
     }
-    return;
   }
 }
 

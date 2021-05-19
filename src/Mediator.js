@@ -13,8 +13,6 @@ class Mediator {
     this.matchRepository = new MatchRepository();
   }
 
-  // Endpoints
-
   async getAuthValidation(token) {
     const response = await this.authServiceGateway.getValidation(token);
     return response;
@@ -192,7 +190,6 @@ class Mediator {
   }
 
   async getAllMatches(request) {
-    // Remove match from DB
     try {
       const matches = await this.matchRepository.getAllMatches();
 

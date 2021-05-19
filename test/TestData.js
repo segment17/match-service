@@ -89,8 +89,6 @@ const testMatchesIncludingFirstBoxer = [
   testMatch3
 ];
 
-/* COMPONENT SUCCESS SCENARIOS */
-
 // GetAllMatches
 const H1_Scenario1_Variation1 = {
   matches: testMatches,
@@ -129,8 +127,6 @@ const B4_Scenario1_Variation1 = {
     message: REQUEST_STATUSES.DELETED,
   },
 };
-
-/* COMPONENT FAIL SCENARIOS */
 
 // GetMatchesOfBoxer Fail - not valid boxer id
 const B1_Scenario1_Fail2 = {

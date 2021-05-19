@@ -1,8 +1,6 @@
 @Integration @Repository @MatchRepository
 Feature: Match Repository Integration Feature
 
-  #SUCCESS SCENARIOS
-
   @Unit_Repository_Scenario1
   Scenario Outline: Get all matches
     Given there are matches such as "<matches>"
@@ -77,8 +75,6 @@ Feature: Match Repository Integration Feature
     Examples:
       | matches                           | repository_function | match                           | expected_data                           |
       | Unit_Repository_Scenario7.matches | updateMatch         | Unit_Repository_Scenario7.match | Unit_Repository_Scenario7.expected_data |
-
-  #FAIL SCENARIOS
 
   @Unit_Repository_Scenario3 @Fail
   Scenario Outline: Add a new match to DB - Faulty

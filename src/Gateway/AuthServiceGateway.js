@@ -8,8 +8,6 @@ const authservice_package = grpc.loadPackageDefinition(packageDefinition).authse
 
 class AuthServiceGateway {
 
-  // Template code
-
   // Gateway exposed function
   async getValidation(token) {
     let response = await this.doCallForGetValidation(token);

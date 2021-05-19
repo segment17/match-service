@@ -1,4 +1,3 @@
-const globalObjects = require("../..");
 const { NotFound, InvalidArgument, DBOperationFailed } = require("../common/Errors");
 const { connection } = require('./DB');
 
