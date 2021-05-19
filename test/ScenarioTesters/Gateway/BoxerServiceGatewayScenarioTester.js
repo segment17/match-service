@@ -40,7 +40,7 @@ class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
     assert(expectedCode === resultCode);
     assert(expectedMessage === resultMessage);
 
-    if(expectedBoxer) {
+    if (expectedBoxer) {
       this.assertionsForBoxerEquals(expectedBoxer, resultBoxer);
     }
   }

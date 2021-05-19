@@ -46,4 +46,4 @@ async function waitUntilResult() {
   }
 }
 
-module.exports = { extractSpecifiedObjectData, isScenarioUnit, isScenarioIntegration, isScenarioComponent, isScenarioE2E, waitUntilResult, sleep}
+module.exports = { extractSpecifiedObjectData, isScenarioUnit, isScenarioIntegration, isScenarioComponent, isScenarioE2E, waitUntilResult, sleep }

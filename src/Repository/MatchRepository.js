@@ -19,21 +19,21 @@ class MatchRepository {
       PRIMARY KEY (id)
     );`;
   }
-  
+
   get cleanUpQuery() {
     return `DROP TABLE IF EXISTS ${this.tableName};`;
   }
 
   async cleanUp() {
-        await this.runQuery(this.cleanUpQuery);
+    await this.runQuery(this.cleanUpQuery);
     await this.runQuery(this.createTableQuery);
   }
 
   async addMatchWithGivenData(matchData) {
-        if (!matchData) {
+    if (!matchData) {
       throw new InvalidArgument('matchData cannot be empty');
     }
-    
+
     const { affectedRows } = await this.runQueryForAddMatchWithGivenData(matchData);
     if (affectedRows !== 1) {
       throw new DBOperationFailed('Match could not be inserted')
@@ -96,7 +96,7 @@ class MatchRepository {
 
   async getAllMatches() {
     const allMatches = await this.runQueryForGetAllMatches();
-        return allMatches;
+    return allMatches;
   }
 
   async getMatchesOfBoxer(boxerId) {
@@ -134,7 +134,7 @@ class MatchRepository {
   }
 
   async runQueryForGetAllMatches() {
-        return await this.runQuery(`SELECT * FROM ${this.tableName};`);
+    return await this.runQuery(`SELECT * FROM ${this.tableName};`);
   }
 
   async runQueryForGetMatchesOfBoxer(boxerId) {
@@ -226,7 +226,6 @@ class MatchRepository {
   }
 
   createInsertQuery(match) {
-    
     const { id, awayBoxerId, homeBoxerId, matchTime, winnerBoxerId, isFinished } = match;
     if (id == undefined) {
       let query = `INSERT INTO ${this.tableName} (homeBoxerId, awayBoxerId, matchTime, isFinished${winnerBoxerId ? ', winnerBoxerId' : ''})`;
@@ -236,7 +235,6 @@ class MatchRepository {
       let query = `INSERT INTO ${this.tableName} (id, homeBoxerId, awayBoxerId, matchTime, isFinished${winnerBoxerId ? ', winnerBoxerId' : ''})`;
       let fq = query + ` VALUES (${id}, ${homeBoxerId}, ${awayBoxerId}, ${matchTime}, ${isFinished}${winnerBoxerId ? `, ${winnerBoxerId}` : ''});`
       return fq;
-      
     }
   }
 }

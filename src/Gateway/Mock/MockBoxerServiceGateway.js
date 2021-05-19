@@ -1,7 +1,7 @@
 const BoxerServiceGateway = require('../BoxerServiceGateway');
 
 class MockBoxerServiceGateway extends BoxerServiceGateway {
-  
+
   constructor() {
     super();
     this.boxersList = [];

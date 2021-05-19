@@ -1,7 +1,7 @@
 const AuthServiceGateway = require('../AuthServiceGateway');
 
 class MockAuthServiceGateway extends AuthServiceGateway {
-  
+
   constructor() {
     super();
     this.admin = null;

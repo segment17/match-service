@@ -26,7 +26,6 @@ class Mediator {
   }
 
   handleException(exception) {
-        
     switch (exception.name) {
       case 'InvalidArgument':
         return this.responseObject({ code: 400, message: 'bad_request' });
@@ -38,7 +37,8 @@ class Mediator {
   }
 
   async addMatch(request) {
-        const { homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token } = request;
+    const { homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId, token } = request;
+
     // Authentication validation
     const authValidation = await this.getAuthValidation(token);
     if (authValidation.code !== 200) {
@@ -60,7 +60,6 @@ class Mediator {
     // Add match to DB
     try {
       const result = await this.matchRepository.addMatchWithGivenData({
-
         awayBoxerId,
         homeBoxerId,
         isFinished,
@@ -89,7 +88,6 @@ class Mediator {
     // Remove match from DB
     try {
       const match = await this.matchRepository.removeMatchById(matchId);
-
       return {
         ...this.responseObject({ code: 200, message: 'deleted' }),
         match
@@ -111,7 +109,6 @@ class Mediator {
     // Remove match from DB
     try {
       const matches = await this.matchRepository.getMatchesOfBoxer(boxerId);
-
       return {
         ...this.responseObject({ code: 200, message: 'success' }),
         matches,
@@ -140,7 +137,6 @@ class Mediator {
     // Remove match from DB
     try {
       const matches = await this.matchRepository.removeMatchesOfBoxer(boxerId);
-
       return {
         ...this.responseObject({ code: 200, message: 'deleted' }),
         matches
@@ -179,7 +175,6 @@ class Mediator {
     // Update match
     try {
       const match = await this.matchRepository.updateMatch(updatedMatch);
-
       return {
         ...this.responseObject({ code: 200, message: 'updated' }),
         match
@@ -192,7 +187,6 @@ class Mediator {
   async getAllMatches(request) {
     try {
       const matches = await this.matchRepository.getAllMatches();
-
       return {
         ...this.responseObject({ code: 200, message: 'success' }),
         matches

@@ -8,7 +8,7 @@ class DefaultScenarioTester {
     this.scenario = scenario;
   }
 
-  get shouldMock () {
+  get shouldMock() {
     return !TestFunctions.isScenarioE2E(this.scenario) && !TestFunctions.isScenarioIntegration(this.scenario);
   }
 
@@ -28,9 +28,8 @@ class DefaultScenarioTester {
   }
 
   endpointIsCalledWithRequestBody(endpoint, requestBodySource) {
-
     const requestBody = TestFunctions.extractSpecifiedObjectData(requestBodySource);
-    
+
     assert(requestBody !== undefined);
     assert(endpoint !== undefined);
     switch (endpoint) {
@@ -74,7 +73,7 @@ class DefaultScenarioTester {
   }
 
   compareStandings(actual, expected) {
-    for(let index in expected) {
+    for (let index in expected) {
       this.compareBoxers(actual[index].boxer, expected[index].boxer);
       assert(actual[index].winCount == expected[index].winCount);
       assert(actual[index].lossCount == expected[index].lossCount);
@@ -83,7 +82,7 @@ class DefaultScenarioTester {
   }
 
   compareMatches(actual, expected) {
-    for(let index in expected) {
+    for (let index in expected) {
       assert(actual[index].homeBoxerId === expected[index].homeBoxerId);
       assert(actual[index].awayBoxerId === expected[index].awayBoxerId);
       assert(actual[index].id === expected[index].id);
@@ -95,15 +94,15 @@ class DefaultScenarioTester {
 
   async responseIsAs(expectedResponseSource) {
     const expectedResponse = TestFunctions.extractSpecifiedObjectData(expectedResponseSource);
-        await TestFunctions.waitUntilResult();
+    await TestFunctions.waitUntilResult();
 
     const response = globalObjects.result;
-        assert.strictEqual(response.code, expectedResponse.code);
-    assert.strictEqual(response.message,  expectedResponse.message);
-    if(expectedResponse.standings) {
+    assert.strictEqual(response.code, expectedResponse.code);
+    assert.strictEqual(response.message, expectedResponse.message);
+    if (expectedResponse.standings) {
       this.compareStandings(response.standings.sort((a, b) => a.boxer.id - b.boxer.id), expectedResponse.standings.sort((a, b) => a.boxer.id - b.boxer.id));
     }
-    if(expectedResponse.boxer) {
+    if (expectedResponse.boxer) {
       this.compareBoxers(response.boxer, expectedResponse.boxer);
     }
     if (expectedResponse.matches) {
@@ -117,7 +116,7 @@ class DefaultScenarioTester {
 
   async thereIsAnAdminSuchAs(dataSource) {
     const specified = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.client.SetupAddAdmin({admin: specified}, function (err, res) {
+    await globalObjects.client.SetupAddAdmin({ admin: specified }, function (err, res) {
       globalObjects.done = true;
     });
   }
@@ -131,21 +130,21 @@ class DefaultScenarioTester {
 
   async thereAreMatchesSuchAs(dataSource) {
     const matches = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.client.SetupAddMatches({matches: matches}, function (err, res) {
+    await globalObjects.client.SetupAddMatches({ matches: matches }, function (err, res) {
       globalObjects.done = true;
     });
   }
 
   async thereIsABoxerSuchAs(dataSource) {
     const specifiedBoxer = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.client.SetupAddBoxers({boxers: [specifiedBoxer]}, function (err, res) {
+    await globalObjects.client.SetupAddBoxers({ boxers: [specifiedBoxer] }, function (err, res) {
       globalObjects.done = true;
     });
   }
 
   async thereAreBoxersSuchAs(dataSource) {
     const boxers = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.client.SetupAddBoxers({boxers: boxers}, function (err, res) {
+    await globalObjects.client.SetupAddBoxers({ boxers: boxers }, function (err, res) {
       globalObjects.done = true;
     });
   }
