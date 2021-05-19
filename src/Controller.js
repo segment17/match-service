@@ -19,13 +19,7 @@ class Controller {
 
   async guardAddMatch(request) {
     const { homeBoxerId, awayBoxerId, matchTime, isFinished, token } = request;
-
-    if (homeBoxerId <= 0
-      || awayBoxerId <= 0
-      || matchTime <= '0'
-      // || isFinished === false // Idk how to check if this value exists
-      || token === ''
-    ) {
+    if (!(homeBoxerId && awayBoxerId && matchTime !== '0' && token !== '')) {
       return {
         code: 400,
         message: 'bad_request'
@@ -56,14 +50,8 @@ class Controller {
   }
 
   async guardUpdateMatch(request) {
-    const { id, homeBoxerId, awayBoxerId, matchTime, isFinished, token } = request;
-    if (id === 0
-      || homeBoxerId === 0
-      || awayBoxerId === 0
-      || matchTime === '0'
-      // || isFinished === false // Idk how to check if this value exists
-      || token === ''
-    ) {
+    const { id, homeBoxerId, awayBoxerId, matchTime, token } = request;
+    if (id === 0 || !(matchTime !== '0' || token !== '' || homeBoxerId || awayBoxerId)) {
       return {
         code: 400,
         message: 'bad_request'
