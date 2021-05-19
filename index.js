@@ -83,11 +83,7 @@ function main() {
     SetupCleanUp: bindSetupCleanUp
   });
 
-  if (process.env.MATCH_SERVICE_SERVICE_PORT != undefined) {
-    server.bind("0.0.0.0" + ":" + process.env.MATCH_SERVICE_SERVICE_PORT, grpc.ServerCredentials.createInsecure());
-  } else {
-    server.bind("localhost:50003", grpc.ServerCredentials.createInsecure());
-  }
+  server.bind('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.ServerCredentials.createInsecure());
   server.start();
 }
 
