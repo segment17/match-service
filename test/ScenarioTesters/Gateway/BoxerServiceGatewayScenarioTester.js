@@ -18,12 +18,6 @@ class BoxerServiceGatewayScenarioTester extends DefaultScenarioTester {
     }
   }
 
-  async thereIsABoxerSuchAs(dataSource) {
-    const specifiedBoxer = TestFunctions.extractSpecifiedObjectData(dataSource);
-    await globalObjects.boxerServiceGateway.SetupAddBoxer(specifiedBoxer);
-    globalObjects.done = true;
-  }
-
   async thereAreBoxersSuchAs(dataSource) {
     const boxers = TestFunctions.extractSpecifiedObjectData(dataSource);
     await globalObjects.boxerServiceGateway.SetupAddBoxers(boxers);
