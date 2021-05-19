@@ -30,14 +30,7 @@ class BoxerServiceGateway {
 
   async doCallForGetBoxer(obj) {
     // Connect to Kubernetes if possible
-    if (!this.client) {
-      if (process.env.BOXER_SERVICE_SERVICE_HOST && process.env.BOXER_SERVICE_SERVICE_PORT) {
-        this.client = new boxerservice_package.BoxerService(process.env.BOXER_SERVICE_SERVICE_HOST + ":" + process.env.BOXER_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
-      } else {
-        this.client = new boxerservice_package.BoxerService("0.0.0.0:50002", grpc.credentials.createInsecure());
-      }
-    }
-
+    this.client = new boxerservice_package.BoxerService((process.env.BOXER_SERVICE_SERVICE_HOST || '0.0.0.0') + ':' + (process.env.BOXER_SERVICE_SERVICE_PORT || '50002'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForGetBoxer(obj);
     return response;
   }
@@ -52,14 +45,7 @@ class BoxerServiceGateway {
 
   async doCallForSetupAddBoxer(obj) {
     // Connect to Kubernetes if possible
-    if (!this.client) {
-      if (process.env.BOXER_SERVICE_SERVICE_HOST && process.env.BOXER_SERVICE_SERVICE_PORT) {
-        this.client = new boxerservice_package.BoxerService(process.env.BOXER_SERVICE_SERVICE_HOST + ":" + process.env.BOXER_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
-      } else {
-        this.client = new boxerservice_package.BoxerService("0.0.0.0:50002", grpc.credentials.createInsecure());
-      }
-    }
-
+    this.client = new boxerservice_package.BoxerService((process.env.BOXER_SERVICE_SERVICE_HOST || '0.0.0.0') + ':' + (process.env.BOXER_SERVICE_SERVICE_PORT || '50002'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForSetupAddBoxer(obj);
     return response;
   }
@@ -75,14 +61,7 @@ class BoxerServiceGateway {
 
   async doCallForSetupClearBoxers() {
     // Connect to Kubernetes if possible
-    if (!this.client) {
-      if (process.env.BOXER_SERVICE_SERVICE_HOST && process.env.BOXER_SERVICE_SERVICE_PORT) {
-        this.client = new boxerservice_package.BoxerService(process.env.BOXER_SERVICE_SERVICE_HOST + ":" + process.env.BOXER_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
-      } else {
-        this.client = new boxerservice_package.BoxerService("0.0.0.0:50002", grpc.credentials.createInsecure());
-      }
-    }
-
+    this.client = new boxerservice_package.BoxerService((process.env.BOXER_SERVICE_SERVICE_HOST || '0.0.0.0') + ':' + (process.env.BOXER_SERVICE_SERVICE_PORT || '50002'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForSetupClearBoxers();
     return response;
   }
