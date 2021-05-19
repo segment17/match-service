@@ -27,11 +27,7 @@ class GlobalObjects {
     this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
-    if (process.env.MATCH_SERVICE_SERVICE_PORT != undefined) {
-      this.client = new matchservice_package.MatchService("0.0.0.0" + ":" + process.env.MATCH_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
-    } else {
-      this.client = new matchservice_package.MatchService("0.0.0.0:50003", grpc.credentials.createInsecure());
-    }
+    this.client = new matchservice_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.credentials.createInsecure());
   }
 
   // Mock everything...
@@ -60,11 +56,7 @@ class GlobalObjects {
     this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
-    if (process.env.MATCH_SERVICE_SERVICE_PORT != undefined) {
-      this.client = new matchservice_package.MatchService("0.0.0.0" + ":" + process.env.MATCH_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
-    } else {
-      this.client = new matchservice_package.MatchService("0.0.0.0:50003", grpc.credentials.createInsecure());
-    }
+    this.client = new matchservice_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.credentials.createInsecure());
   }
 
   async cleanUp() {
