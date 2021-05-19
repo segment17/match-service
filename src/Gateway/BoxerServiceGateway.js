@@ -17,10 +17,6 @@ class BoxerServiceGateway {
     return await this.doCallForSetupClearBoxers();
   }
 
-  async SetupAddBoxer(obj) {
-    await this.doCallForSetupAddBoxer(obj);
-  }
-
   async SetupAddBoxers(obj) {
     for (let i in obj) {
       const boxer = obj[i];
