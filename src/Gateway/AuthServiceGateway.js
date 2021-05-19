@@ -16,14 +16,7 @@ class AuthServiceGateway {
 
   async doCallForGetValidation(obj) {
     // Connect to Kubernetes if possible
-    if (!this.client) {
-      if (process.env.AUTH_SERVICE_SERVICE_HOST && process.env.AUTH_SERVICE_SERVICE_PORT) {
-        this.client = new authservice_package.AuthService(process.env.AUTH_SERVICE_SERVICE_HOST + ":" + process.env.AUTH_SERVICE_SERVICE_PORT, grpc.credentials.createInsecure());
-      } else {
-        this.client = new authservice_package.AuthService("0.0.0.0:50001", grpc.credentials.createInsecure());
-      }
-    }
-
+    this.client = new authservice_package.AuthService((process.env.AUTH_SERVICE_SERVICE_HOST || '0.0.0.0') + ':' + (process.env.AUTH_SERVICE_SERVICE_PORT || '50001'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForGetValidation(obj);
     return response;
   }
