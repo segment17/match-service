@@ -1,9 +1,9 @@
 // GRPC SETUP
 const grpc = require('grpc');
 const protoLoader = require('@grpc/proto-loader');
-const PROTO_PATH = __dirname + '../../../proto/authservice.proto';
+const PROTO_PATH = __dirname + '../../../proto/ubc.proto';
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, { keepCase: true, longs: String, enums: String, defaults: true, oneofs: true });
-const authservice_package = grpc.loadPackageDefinition(packageDefinition).authservice_package;
+const ubc_package = grpc.loadPackageDefinition(packageDefinition).ubc_package;
 // GRPC SETUP
 
 class AuthServiceGateway {
@@ -16,7 +16,7 @@ class AuthServiceGateway {
 
   async doCallForGetValidation(obj) {
     // Connect to Kubernetes if possible
-    this.client = new authservice_package.AuthService((process.env.AUTH_SERVICE_SERVICE_HOST || '0.0.0.0') + ':' + (process.env.AUTH_SERVICE_SERVICE_PORT || '50001'), grpc.credentials.createInsecure());
+    this.client = new ubc_package.AuthService((process.env.AUTH_SERVICE_SERVICE_HOST || '0.0.0.0') + ':' + (process.env.AUTH_SERVICE_SERVICE_PORT || '50001'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForGetValidation(obj);
     return response;
   }

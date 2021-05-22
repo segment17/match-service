@@ -5,9 +5,9 @@ module.exports = globalObjects;
 // GRPC SETUP
 const grpc = require('grpc');
 const protoLoader = require('@grpc/proto-loader');
-const PROTO_PATH = __dirname + '/proto/matchservice.proto';
+const PROTO_PATH = __dirname + '/proto/ubc.proto';
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, { keepCase: true, longs: String, enums: String, defaults: true, oneofs: true });
-const matchservice_package = grpc.loadPackageDefinition(packageDefinition).matchservice_package;
+const ubc_package = grpc.loadPackageDefinition(packageDefinition).ubc_package;
 // GRPC SETUP
 
 async function bindAddMatch(call, callback) {
@@ -69,7 +69,7 @@ async function bindSetupCleanUp(call, callback) {
 function main() {
   console.log('Server running...');
   server = new grpc.Server();
-  server.addService(matchservice_package.MatchService.service, {
+  server.addService(ubc_package.MatchService.service, {
     AddMatch: bindAddMatch,
     GetAllMatches: bindGetAllMatches,
     GetMatchesOfBoxer: bindGetMatchesOfBoxer,

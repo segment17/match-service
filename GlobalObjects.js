@@ -10,9 +10,9 @@ const MockMatchRepository = require('./src/Repository/Mock/MockMatchRepository')
 // GRPC SETUP
 const grpc = require('grpc');
 const protoLoader = require('@grpc/proto-loader');
-const PROTO_PATH = __dirname + '/proto/matchservice.proto';
+const PROTO_PATH = __dirname + '/proto/ubc.proto';
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, { keepCase: true, longs: String, enums: String, defaults: true, oneofs: true });
-const matchservice_package = grpc.loadPackageDefinition(packageDefinition).matchservice_package;
+const ubc_package = grpc.loadPackageDefinition(packageDefinition).ubc_package;
 // GRPC SETUP
 
 class GlobalObjects {
@@ -27,7 +27,7 @@ class GlobalObjects {
     this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
-    this.client = new matchservice_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.credentials.createInsecure());
+    this.client = new ubc_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.credentials.createInsecure());
   }
 
   // Mock everything...
@@ -56,7 +56,7 @@ class GlobalObjects {
     this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
-    this.client = new matchservice_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.credentials.createInsecure());
+    this.client = new ubc_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.credentials.createInsecure());
   }
 
   async cleanUp() {
