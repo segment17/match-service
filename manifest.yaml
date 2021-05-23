@@ -99,5 +99,5 @@ spec:
   grpc: True
   prefix: /ubc_package.MatchService/
   rewrite: /ubc_package.MatchService/
-  service: match-service
+  service: match-service:50051
 ---
