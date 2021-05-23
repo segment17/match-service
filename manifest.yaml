@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: match-service
-        imagePullPolicy: Never
-        image: segment17hub/matchservice
+        imagePullPolicy: IfNotPresent
+        image: segment17hub/matchservice:0.1
         ports:
         - containerPort: 50051
 ---
@@ -52,7 +52,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: mysql:5.7
+        image: mysql:5.6
         ports:
         - containerPort: 3306
         env:
@@ -64,7 +64,7 @@ spec:
       volumes:
         - name: match-mysql-persistent-storage
           persistentVolumeClaim:
-            claimName: match-mysql-claim
+            claimName: match-mysql-volume-claim
 ---
 apiVersion: v1
 kind: Service
@@ -81,7 +81,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: match-mysql-claim
+  name: match-mysql-volume-claim
 spec:
   storageClassName: standard
   accessModes:
@@ -90,3 +90,14 @@ spec:
     requests:
       storage: 1Gi
 # MYSQL
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: match-service
+spec:
+  grpc: True
+  prefix: /ubc_package.MatchService/
+  rewrite: /ubc_package.MatchService/
+  service: match-service
+---
