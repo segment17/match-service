@@ -27,7 +27,7 @@ class GlobalObjects {
     this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
-    this.client = new ubc_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.credentials.createInsecure());
+    this.client = new ubc_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50053'), grpc.credentials.createInsecure());
   }
 
   // Mock everything...
@@ -56,7 +56,7 @@ class GlobalObjects {
     this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
-    this.client = new ubc_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.credentials.createInsecure());
+    this.client = new ubc_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50053'), grpc.credentials.createInsecure());
   }
 
   async cleanUp() {

@@ -83,7 +83,7 @@ function main() {
     SetupCleanUp: bindSetupCleanUp
   });
 
-  server.bind('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50003'), grpc.ServerCredentials.createInsecure());
+  server.bind('0.0.0.0:50053', grpc.ServerCredentials.createInsecure());
   server.start();
 }
 
