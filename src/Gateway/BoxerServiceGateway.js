@@ -26,7 +26,7 @@ class BoxerServiceGateway {
 
   async doCallForGetBoxer(obj) {
     // Connect to Kubernetes if possible
-    this.client = new ubc_package.BoxerService((process.env.BOXER_SERVICE_SERVICE_HOST || '0.0.0.0') + ':' + (process.env.BOXER_SERVICE_SERVICE_PORT || '50002'), grpc.credentials.createInsecure());
+    this.client = new ubc_package.BoxerService((process.env.BOXER_SERVICE_ADDR || '0.0.0.0:50052'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForGetBoxer(obj);
     return response;
   }
@@ -41,7 +41,7 @@ class BoxerServiceGateway {
 
   async doCallForSetupAddBoxer(obj) {
     // Connect to Kubernetes if possible
-    this.client = new ubc_package.BoxerService((process.env.BOXER_SERVICE_SERVICE_HOST || '0.0.0.0') + ':' + (process.env.BOXER_SERVICE_SERVICE_PORT || '50002'), grpc.credentials.createInsecure());
+    this.client = new ubc_package.BoxerService((process.env.BOXER_SERVICE_ADDR || '0.0.0.0:50052'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForSetupAddBoxer(obj);
     return response;
   }
@@ -57,7 +57,7 @@ class BoxerServiceGateway {
 
   async doCallForSetupClearBoxers() {
     // Connect to Kubernetes if possible
-    this.client = new ubc_package.BoxerService((process.env.BOXER_SERVICE_SERVICE_HOST || '0.0.0.0') + ':' + (process.env.BOXER_SERVICE_SERVICE_PORT || '50002'), grpc.credentials.createInsecure());
+    this.client = new ubc_package.BoxerService((process.env.BOXER_SERVICE_ADDR || '0.0.0.0:50052'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForSetupClearBoxers();
     return response;
   }

@@ -3,7 +3,7 @@
 var mysql = require('mysql');
 
 const connectionSetup = {
-  host: process.env.MATCH_MYSQL_SERVICE_SERVICE_HOST || "localhost",
+  host: process.env.MATCH_MYSQL_SERVICE_ADDR || "localhost",
   user: "root",
   password: "root",
   database: "matchservice",

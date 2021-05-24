@@ -27,7 +27,7 @@ class GlobalObjects {
     this.matchRepository = new MatchRepository();
 
     // Connect to Kubernetes if possible
-    this.client = new ubc_package.MatchService('0.0.0.0' + ':' + (process.env.MATCH_SERVICE_SERVICE_PORT || '50053'), grpc.credentials.createInsecure());
+    this.client = new ubc_package.MatchService((process.env.MATCH_SERVICE_ADDR || '0.0.0.0:50053'), grpc.credentials.createInsecure());
   }
 
   // Mock everything...
