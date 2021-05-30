@@ -5,7 +5,7 @@ metadata:
   labels:
     app: match-service
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: match-service
@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: match-service
-        imagePullPolicy: IfNotPresent
-        image: segment17hub/matchservice:0.1.1
+        imagePullPolicy: Always
+        image: segment17hub/matchservice:0.1.2rc
         ports:
         - containerPort: 50053
         env:
@@ -51,6 +51,7 @@ kind: Deployment
 metadata:
   name: match-mysql-deployment
 spec:
+  # replicas: 3
   selector:
     matchLabels:
       app: matchmysql
