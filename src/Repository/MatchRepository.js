@@ -78,11 +78,11 @@ class MatchRepository {
       throw new InvalidArgument('match cannot be empty');
     }
 
-    const { id, awayBoxerId, homeBoxerId, matchTime, isFinished, winnerBoxer } = match;
+    const { id, awayBoxerId, homeBoxerId, matchTime, isFinished, winnerBoxerId } = match;
     if (id === undefined || id < 1) {
       throw new InvalidArgument('match.id cannot be empty');
     }
-    if (!homeBoxerId && !awayBoxerId && !matchTime && !isFinished && !winnerBoxer) {
+    if (!homeBoxerId && !awayBoxerId && !matchTime && !isFinished && !winnerBoxerId) {
       throw new InvalidArgument('match cannot be empty');
     }
 
@@ -191,7 +191,7 @@ class MatchRepository {
   }
 
   createUpdateQuery(match) {
-    const { id, homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxer } = match;
+    const { id, homeBoxerId, awayBoxerId, matchTime, isFinished, winnerBoxerId } = match;
 
     let query = `UPDATE ${this.tableName} SET `;
     if (homeBoxerId) {
@@ -209,17 +209,17 @@ class MatchRepository {
       }
       query = `${query} matchTime = '${matchTime}'`;
     }
-    if (isFinished) {
+    if (isFinished != undefined && isFinished != null) {
       if (homeBoxerId || awayBoxerId || matchTime) {
         query = `${query},`;
       }
-      query = `${query} isFinished = '${isFinished}'`;
+      query = `${query} isFinished = ${isFinished}`;
     }
-    if (winnerBoxer) {
+    if (winnerBoxerId !== undefined) {
       if (homeBoxerId || awayBoxerId || matchTime || isFinished) {
         query = `${query},`;
       }
-      query = `${query} winnerBoxer = '${winnerBoxer}'`;
+      query = `${query} winnerBoxerId = ${winnerBoxerId}`;
     }
 
     return `${query} WHERE id = '${id}';`;

@@ -40,7 +40,10 @@ class Controller {
   }
 
   async guardUpdateMatch(request) {
-    const { id, homeBoxerId, awayBoxerId, matchTime, token } = request;
+    const { id, homeBoxerId, awayBoxerId, matchTime, token, winnerBoxerId } = request;
+    if (winnerBoxerId == 0) {
+      request.winnerBoxerId = null;
+    }
     if (id === 0 || !(matchTime !== '0' || token !== '' || homeBoxerId || awayBoxerId)) {
       return {
         code: 400,
