@@ -5,7 +5,9 @@ const PROTO_PATH = __dirname + '../../../proto/ubc.proto';
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, { keepCase: true, longs: String, enums: String, defaults: true, oneofs: true });
 const ubc_package = grpc.loadPackageDefinition(packageDefinition).ubc_package;
 // GRPC SETUP
-
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 class BoxerServiceGateway {
 
   async getBoxer(boxerId) {
@@ -26,8 +28,12 @@ class BoxerServiceGateway {
 
   async doCallForGetBoxer(obj) {
     // Connect to Kubernetes if possible
+    await sleep(300);
+    console.log('🔵BoxerService.GetBoxer🔵\t:: ', obj);
     this.client = new ubc_package.BoxerService((process.env.BOXER_SERVICE_ADDR || '0.0.0.0:50052'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForGetBoxer(obj);
+    await sleep(300);
+    console.log('🟣BoxerService.GetBoxer🟣\t:: ', JSON.stringify(response));
     return response;
   }
 

@@ -10,33 +10,61 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, { keepCase: true, lon
 const ubc_package = grpc.loadPackageDefinition(packageDefinition).ubc_package;
 // GRPC SETUP
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function bindAddMatch(call, callback) {
+  await sleep(300);
+  console.log('\n⚪AddMatch⚪\t:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardAddMatch(call.request);
+  await sleep(300);
+  console.log('🟢AddMatch🟢\t:: ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindUpdateMatch(call, callback) {
+  await sleep(300);
+  console.log('\n⚪UpdateMatch⚪\t:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardUpdateMatch(call.request);
+  await sleep(300);
+  console.log('🟢UpdateMatch🟢\t:: ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindRemoveMatch(call, callback) {
+  await sleep(300);
+  console.log('\n⚪RemoveMatch⚪\t:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardRemoveMatch(call.request);
+  await sleep(300);
+  console.log('🟢RemoveMatch🟢\t:: ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindRemoveMatchesOfBoxer(call, callback) {
+  await sleep(300);
+  console.log('\n⚪RemoveMatchesOfBoxer⚪:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardRemoveMatchesOfBoxer(call.request);
+  await sleep(300);
+  console.log('🟢RemoveMatchesOfBoxer🟢:: ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindGetAllMatches(call, callback) {
+  await sleep(300);
+  console.log('\n⚪GetAllMatches⚪\t:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardGetAllMatches(call.request);
+  await sleep(300);
+  console.log('🟢GetAllMatches🟢\t:: ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindGetMatchesOfBoxer(call, callback) {
+  await sleep(300);
+  console.log('\n⚪GetMatchesOfBoxer⚪\t:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardGetMatchesOfBoxer(call.request);
+  await sleep(300);
+  console.log('🟢GetMatchesOfBoxer🟢\t:: ', JSON.stringify(r));
   callback(null, r);
 }
 
