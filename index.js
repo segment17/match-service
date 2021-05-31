@@ -16,55 +16,55 @@ function sleep(ms) {
 
 async function bindAddMatch(call, callback) {
   await sleep(50);
-  console.log('\n⚪AddMatch⚪\t:: ', JSON.stringify(call.request));
+  console.log('\n⚪  AddMatch:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardAddMatch(call.request);
   await sleep(50);
-  console.log('🟢AddMatch🟢\t:: ', JSON.stringify(r));
+  console.log('🟢  AddMatch:: ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindUpdateMatch(call, callback) {
   await sleep(50);
-  console.log('\n⚪UpdateMatch⚪\t:: ', JSON.stringify(call.request));
+  console.log('\n⚪  UpdateMatch:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardUpdateMatch(call.request);
   await sleep(50);
-  console.log('🟢UpdateMatch🟢\t:: ', JSON.stringify(r));
+  console.log('🟢  UpdateMatch:: ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindRemoveMatch(call, callback) {
   await sleep(50);
-  console.log('\n⚪RemoveMatch⚪\t:: ', JSON.stringify(call.request));
+  console.log('\n⚪  RemoveMatch:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardRemoveMatch(call.request);
   await sleep(50);
-  console.log('🟢RemoveMatch🟢\t:: ', JSON.stringify(r));
+  console.log('🟢  RemoveMatch:: ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindRemoveMatchesOfBoxer(call, callback) {
   await sleep(50);
-  console.log('\n⚪RemoveMatchesOfBoxer⚪:: ', JSON.stringify(call.request));
+  console.log('\n⚪  RemoveMatchesOfBoxer ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardRemoveMatchesOfBoxer(call.request);
   await sleep(50);
-  console.log('🟢RemoveMatchesOfBoxer🟢:: ', JSON.stringify(r));
+  console.log('🟢  RemoveMatchesOfBoxer ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindGetAllMatches(call, callback) {
   await sleep(50);
-  console.log('\n⚪GetAllMatches⚪\t:: ', JSON.stringify(call.request));
+  console.log('\n⚪  GetAllMatches:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardGetAllMatches(call.request);
   await sleep(50);
-  console.log('🟢GetAllMatches🟢\t:: ', JSON.stringify(r));
+  console.log('🟢  GetAllMatches:: ', JSON.stringify(r));
   callback(null, r);
 }
 
 async function bindGetMatchesOfBoxer(call, callback) {
   await sleep(50);
-  console.log('\n⚪GetMatchesOfBoxer⚪\t:: ', JSON.stringify(call.request));
+  console.log('\n⚪  GetMatchesOfBoxer:: ', JSON.stringify(call.request));
   let r = await globalObjects.controller.guardGetMatchesOfBoxer(call.request);
   await sleep(50);
-  console.log('🟢GetMatchesOfBoxer🟢\t:: ', JSON.stringify(r));
+  console.log('🟢  GetMatchesOfBoxer:: ', JSON.stringify(r));
   callback(null, r);
 }
 

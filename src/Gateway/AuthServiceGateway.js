@@ -20,11 +20,11 @@ class AuthServiceGateway {
   async doCallForGetValidation(obj) {
     // Connect to Kubernetes if possible
     await sleep(50);
-    console.log('🔵AuthService.Validate🔵\t:: ', obj.substring(0,30));
+    console.log('🔵  AuthService.Validate:: ', obj.substring(0,30));
     this.client = new ubc_package.AuthService((process.env.AUTH_SERVICE_ADDR || '0.0.0.0:50051'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForGetValidation(obj);
     await sleep(50);
-    console.log('🟣AuthService.Validate🟣\t:: ', JSON.stringify(response));
+    console.log('🟣  AuthService.Validate:: ', JSON.stringify(response));
     return response;
   }
 
