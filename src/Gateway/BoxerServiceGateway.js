@@ -28,11 +28,11 @@ class BoxerServiceGateway {
 
   async doCallForGetBoxer(obj) {
     // Connect to Kubernetes if possible
-    await sleep(300);
+    await sleep(50);
     console.log('🔵BoxerService.GetBoxer🔵\t:: ', obj);
     this.client = new ubc_package.BoxerService((process.env.BOXER_SERVICE_ADDR || '0.0.0.0:50052'), grpc.credentials.createInsecure());
     let response = await this.PROMISE_doCallForGetBoxer(obj);
-    await sleep(300);
+    await sleep(50);
     console.log('🟣BoxerService.GetBoxer🟣\t:: ', JSON.stringify(response));
     return response;
   }
