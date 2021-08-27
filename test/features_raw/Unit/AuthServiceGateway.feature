@@ -3,7 +3,7 @@ Feature: Auth Service Gateway Unit Feature
 
   #SUCCESS SCENARIOS
 
-  @Unit_AuthServiceGateway_Scenario1
+  @Unit_AuthServiceGateway_Scenario1 @B4 @M1 @M2 @M3
   Scenario Outline: Get validation from Auth Service Gateway
     Given there is an admin such as "<admin>"
     When "<gateway_function>" is invoked with "<data_chunk>"
@@ -15,7 +15,7 @@ Feature: Auth Service Gateway Unit Feature
 
   #FAIL SCENARIOS
 
-  @Unit_AuthServiceGateway_Scenario2
+  @Unit_AuthServiceGateway_Scenario2 @B4 @M1 @M2 @M3
   Scenario Outline: Get validation from Auth Service Gateway failure
     Given there is an admin such as "<admin>"
     When "<gateway_function>" is invoked with "<data_chunk>"

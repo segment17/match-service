@@ -1,7 +1,7 @@
 @Unit @Repository @MatchRepository
 Feature: Match Repository Unit Feature
 
-  @Unit_Repository_Scenario1
+  @Unit_Repository_Scenario1 @H1 @H2
   Scenario Outline: Get all matches
     Given there are matches such as "<matches>"
     When "<repository_function>" is invoked
@@ -11,7 +11,7 @@ Feature: Match Repository Unit Feature
       | matches                           | repository_function | expected_data                           |
       | Unit_Repository_Scenario1.matches | getAllMatches       | Unit_Repository_Scenario1.expected_data |
 
-  @Unit_Repository_Scenario2
+  @Unit_Repository_Scenario2 @B1
   Scenario Outline: Get matches of boxer
     Given there are matches such as "<matches>"
     When "<repository_function>" is invoked with "<boxer_id>"
@@ -22,7 +22,7 @@ Feature: Match Repository Unit Feature
       | Unit_Repository_Scenario2.matches       | getMatchesOfBoxer   | Unit_Repository_Scenario2.boxer_id       | Unit_Repository_Scenario2.expected_data       |
       | Unit_Repository_Scenario2_Fail1.matches | getMatchesOfBoxer   | Unit_Repository_Scenario2_Fail1.boxer_id | Unit_Repository_Scenario2_Fail1.expected_data |
 
-  @Unit_Repository_Scenario3
+  @Unit_Repository_Scenario3 @M1
   Scenario Outline: Add a new match to DB
     Given the latest match in DB is such as "<existing_match>"
     When "<repository_function>" is invoked with "<data_chunk>"
@@ -43,7 +43,7 @@ Feature: Match Repository Unit Feature
       | Unit_Repository_Scenario4.match       | getMatchById        | Unit_Repository_Scenario4.match_id       | Unit_Repository_Scenario4.expected_data       |
       | Unit_Repository_Scenario4_Fail1.match | getMatchById        | Unit_Repository_Scenario4_Fail1.match_id | Unit_Repository_Scenario4_Fail1.expected_data |
 
-  @Unit_Repository_Scenario5
+  @Unit_Repository_Scenario5 @M2
   Scenario Outline: Remove match by id
     Given there are matches such as "<matches>"
     When "<repository_function>" is invoked with "<match_id>"
@@ -55,7 +55,7 @@ Feature: Match Repository Unit Feature
       | Unit_Repository_Scenario5_Fail1.matches | removeMatchById     | Unit_Repository_Scenario5_Fail1.match_id | Unit_Repository_Scenario5_Fail1.expected_data |
       | Unit_Repository_Scenario5_Fail2.matches | removeMatchById     | Unit_Repository_Scenario5_Fail2.match_id | Unit_Repository_Scenario5_Fail2.expected_data |
 
-  @Unit_Repository_Scenario6
+  @Unit_Repository_Scenario6 @B4
   Scenario Outline: Remove matches of boxer
     Given there are matches such as "<matches>"
     When "<repository_function>" is invoked with "<boxer_id>"
@@ -66,7 +66,7 @@ Feature: Match Repository Unit Feature
       | Unit_Repository_Scenario6.matches       | removeMatchesOfBoxer | Unit_Repository_Scenario6.boxer_id       | Unit_Repository_Scenario6.expected_data       |
       | Unit_Repository_Scenario6_Fail1.matches | removeMatchesOfBoxer | Unit_Repository_Scenario6_Fail1.boxer_id | Unit_Repository_Scenario6_Fail1.expected_data |
 
-  @Unit_Repository_Scenario7
+  @Unit_Repository_Scenario7 @M3
   Scenario Outline: Update match
     Given there are matches such as "<matches>"
     When "<repository_function>" is invoked with "<match>"
@@ -76,7 +76,7 @@ Feature: Match Repository Unit Feature
       | matches                                 | repository_function | match                                 | expected_data                                 |
       | Unit_Repository_Scenario7.matches       | updateMatch         | Unit_Repository_Scenario7.match       | Unit_Repository_Scenario7.expected_data       |
 
-  @Unit_Repository_Scenario3 @Fail
+  @Unit_Repository_Scenario3 @Fail @M1
   Scenario Outline: Add a new match to DB - Faulty
     When "<repository_function>" is invoked with "<data_chunk>"
     Then returned data is as "<expected_data>"
@@ -85,7 +85,7 @@ Feature: Match Repository Unit Feature
       | repository_function   | data_chunk                                 | expected_data                                 |
       | addMatchWithGivenData | Unit_Repository_Scenario3_Fail1.data_chunk | Unit_Repository_Scenario3_Fail1.expected_data |
 
-  @Unit_Repository_Scenario7
+  @Unit_Repository_Scenario7 @M3
   Scenario Outline: Update match
     Given there are matches such as "<matches>"
     When "<repository_function>" is invoked with "<match>"

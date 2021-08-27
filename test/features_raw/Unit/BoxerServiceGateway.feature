@@ -3,7 +3,7 @@ Feature: Boxer Service Gateway Unit Feature
 
   #SUCCESS SCENARIOS
 
-  @Unit_BoxerServiceGateway_Scenario1
+  @Unit_BoxerServiceGateway_Scenario1 @B1 @B4
   Scenario Outline: Get boxer from Boxer Service Gateway
     Given there are boxers such as "<boxers>"
     When "<gateway_function>" is invoked with "<boxer_id>"
@@ -15,7 +15,7 @@ Feature: Boxer Service Gateway Unit Feature
 
   #FAIL SCENARIOS
 
-  @Unit_BoxerServiceGateway_Scenario1_Fail
+  @Unit_BoxerServiceGateway_Scenario1_Fail @B1 @B4
   Scenario Outline: Get boxer from Boxer Service Gateway - Fail
     Given there are boxers such as "<boxers>"
     When "<gateway_function>" is invoked with "<boxer_id>"
