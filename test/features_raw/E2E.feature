@@ -28,7 +28,7 @@ Feature: Match Service E2E Features
       | B4_Scenario1_Fail2.matches      | B4_Scenario1_Fail2.boxers      | B4_Scenario1_Fail2.admin      | RemoveMatchesOfBoxer | B4_Scenario1_Fail2.request_body      | B4_Scenario1_Fail2.expected_response      |
       | B4_Scenario1_Fail3.matches      | B4_Scenario1_Fail3.boxers      | B4_Scenario1_Fail3.admin      | RemoveMatchesOfBoxer | B4_Scenario1_Fail3.request_body      | B4_Scenario1_Fail3.expected_response      |
 
-  @H1 @H1_Scenario1
+  @H1 @H1_Scenario1 @H2
   Scenario Outline: Get All Matches
     Given there are matches such as "<matches>"
     When "<endpoint>" is called
